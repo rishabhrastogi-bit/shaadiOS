@@ -501,6 +501,7 @@ input[type=range]{
     <div class="nav-item" data-tab="product"><span class="icon">📱</span> App Features</div>
     <div class="nav-item" data-tab="subscription"><span class="icon">🔑</span> Subscription</div>
     <div class="nav-item" data-tab="insurance"><span class="icon">🛡️</span> Insurance</div>
+    <div class="nav-item" data-tab="technology"><span class="icon">⚙️</span> Technology</div>
 
     <div class="nav-section-label" style="margin-top:8px">Workspace</div>
     <div class="nav-item" data-tab="ai"><span class="icon">✨</span> AI Advisor</div>
@@ -1754,6 +1755,260 @@ input[type=range]{
       <div class="timeline-title">Launch India's first marriage insurance product.</div>
       <div class="timeline-body">IRDAI approval via insurer partner's license. Behavioural score feeds premium calculation. Pre-signup waitlist converts to founding policyholders. Category defined. No one can claim first-mover again.</div>
     </div>
+  </div>
+</div>
+
+<!-- ══════════════ TAB: TECHNOLOGY ══════════════ -->
+<div class="tab-content" id="tab-technology">
+  <div class="page-eyebrow">Build stack</div>
+  <h1 class="page-title">Technology</h1>
+  <p class="page-subtitle">How to build MarriageOS — a beautiful, lifetime-companion app like Flo — using an AI-assisted stack. iOS + Android from day one. Full code ownership. ~10x cheaper than hiring a developer, with your time as the trade.</p>
+
+  <div class="vision-block">
+    <h2>"Design in AI. Generate real code. Own everything."</h2>
+    <p>The 2026 AI tooling is genuinely good enough to take a non-developer founder from idea to a working, ownable mobile app. No single tool does it all — the winning approach is a chain: AI design → AI code generation → AI-assisted custom logic → managed backend. React Native (what Flo itself uses) is the right foundation because it ships to both app stores from one codebase and every feature MarriageOS needs already exists as standard components.</p>
+  </div>
+
+  <!-- RECOMMENDED STACK -->
+  <div class="section-title">Recommended stack</div>
+  <div class="grid-2">
+    <div class="card" style="border-left:3px solid var(--sage)">
+      <div class="card-title">📱 Framework — React Native + Expo</div>
+      <div class="card-body">Same framework that powers Flo, Discord, Shopify. One codebase → iOS + Android. Expo removes painful native setup, handles app store submission, push notifications, camera, storage, and over-the-air updates. Deep developer talent pool in India if you ever hire. Every MarriageOS feature — calendar, toggle chips, dual login, vault, health tracker — is a standard component. You are building a beautiful consumer app, not anything exotic.</div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--sky)">
+      <div class="card-title">🗄️ Backend — Supabase</div>
+      <div class="card-body">Postgres database + built-in auth (OTP for KYC) + row-level security (keeps each partner's private entries invisible to the other) + file storage (document vault) + edge functions (health score calc, SOS routing). Free tier covers first 500+ users. Indian data residency available for compliance. No AI needed here — it just works out of the box.</div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--rose)">
+      <div class="card-title">🔐 KYC & Auth — Supabase Auth + Signzy/Hyperverge</div>
+      <div class="card-body">Supabase Auth handles free-tier OTP login. Layer Signzy or Hyperverge for Aadhaar e-KYC at subscription upgrade (~60 sec, fully digital). For international tier: passport + selfie verification via IDFY. All have React Native SDKs. Cost: ₹10–25 per verification. Keep free tier to OTP-only to maximise top-of-funnel conversion.</div>
+    </div>
+    <div class="card" style="border-left:3px solid #B5860A">
+      <div class="card-title">📊 Analytics + Notifications</div>
+      <div class="card-body">Mixpanel tracks which features users open, drop-off points, DAU/WAU — essential for validating the daily-use hypothesis. Expo Notifications for basic push; upgrade to OneSignal for segmented campaigns. Documents in vault need AES-256 encryption at rest — non-negotiable for a trust product.</div>
+    </div>
+  </div>
+
+  <!-- AI TOOLCHAIN -->
+  <div class="divider"></div>
+  <div class="section-title">The AI toolchain — build it yourself, guided by AI</div>
+  <div style="overflow-x:auto;margin-bottom:24px">
+  <table style="width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border-light);border-radius:12px;overflow:hidden">
+    <thead>
+      <tr style="background:var(--bg2)">
+        <th style="text-align:left;padding:12px 16px;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.07em;text-transform:uppercase;border-bottom:2px solid var(--border-light)">Job</th>
+        <th style="text-align:left;padding:12px 16px;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.07em;text-transform:uppercase;border-bottom:2px solid var(--border-light)">Tool</th>
+        <th style="text-align:left;padding:12px 16px;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.07em;text-transform:uppercase;border-bottom:2px solid var(--border-light)">Cost</th>
+        <th style="text-align:left;padding:12px 16px;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.07em;text-transform:uppercase;border-bottom:2px solid var(--border-light)">What it does</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid var(--border-light)">
+        <td style="padding:12px 16px;font-size:13px;font-weight:600;color:var(--ink)">UI/UX Design</td>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">UX Pilot → Figma</td>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">$12/mo (free tier available)</td>
+        <td style="padding:12px 16px;font-size:12px;color:var(--muted)">Describe each screen in plain language → polished UI in seconds. Chat-based editing. Pixel-perfect, theme-aware. Exports to Figma. Trained specifically for UX/UI.</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border-light)">
+        <td style="padding:12px 16px;font-size:13px;font-weight:600;color:var(--ink)">Design alternative</td>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">Google Stitch</td>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">Free to try</td>
+        <td style="padding:12px 16px;font-size:12px;color:var(--muted)">Gemini-powered. Text/image → UI + frontend code. Up to 350 screens/mo. Direct Figma export with editable layers. Worth testing alongside UX Pilot.</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border-light)">
+        <td style="padding:12px 16px;font-size:13px;font-weight:600;color:var(--ink)">Mobile code generation</td>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">RapidNative</td>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">$20/mo (20 free req/mo)</td>
+        <td style="padding:12px 16px;font-size:12px;color:var(--muted)">Figma/sketch → production React Native code (Expo, TypeScript, NativeWind). You own it, export to GitHub, no lock-in. Chat-based iteration on both UI and code.</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border-light)">
+        <td style="padding:12px 16px;font-size:13px;font-weight:600;color:var(--ink)">Code alternative</td>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">FlutterFlow</td>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">$39/mo</td>
+        <td style="padding:12px 16px;font-size:12px;color:var(--muted)">Flutter/Dart output. Slightly more beautiful UIs out of the box. Exportable code. Trade-off: fewer Flutter devs in India than React Native.</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border-light)">
+        <td style="padding:12px 16px;font-size:13px;font-weight:600;color:var(--ink)">Custom logic + bug fixing</td>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">Claude Code</td>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">Claude subscription</td>
+        <td style="padding:12px 16px;font-size:12px;color:var(--muted)">Your ongoing AI developer. Reads your codebase, writes features in plain English: Supabase auth, dual-login privacy model, health score logic, SOS routing, KYC integration. The 20–30% AI builders can't do from a prompt.</td>
+      </tr>
+      <tr>
+        <td style="padding:12px 16px;font-size:13px;font-weight:600;color:var(--ink)">Backend/database</td>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">Supabase</td>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">Free → scales with users</td>
+        <td style="padding:12px 16px;font-size:12px;color:var(--muted)">Auth, database, storage, edge functions, row-level security. Connect your generated code to it via API.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--rose);margin-bottom:24px">
+    <div class="card-title">⚠️ Critical distinction — most AI builders make WEB apps, not mobile</div>
+    <div class="card-body">Lovable, Bolt.new, Base44, v0 — these are excellent but generate <strong>web apps</strong>, not native iOS/Android. MarriageOS lives on phones. Only React Native or Flutter output (RapidNative, FlutterFlow) gives you real app store apps. Do not build MarriageOS on a web-only generator or a no-code platform like Adalo/Bubble — the dual-login privacy model, encrypted vault, KYC, and health data model will hit their ceiling right when you have 200 users and need to scale.</div>
+  </div>
+
+  <!-- WORKFLOW -->
+  <div class="divider"></div>
+  <div class="section-title">The build workflow — step by step</div>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-year">Week 1 · Design</div>
+      <div class="timeline-title">Design every screen in UX Pilot</div>
+      <div class="timeline-body">Describe your palette (warm white, sage, dusty rose, sky blue) and tone (Headspace meets legal protection). Generate: home calendar, quick-toggle chips, couple profile setup, health tracker check-in, document vault, professional booking, SOS activation. Refine each in chat. Export to Figma. Cost: ~$12.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">Week 2 · Prototype</div>
+      <div class="timeline-title">Link screens into a clickable Figma prototype</div>
+      <div class="timeline-body">Share with your 20 beta / discovery-call participants. Get design feedback BEFORE any code is written. This single step saves ₹2–3L in developer revision cycles. Cost: free.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">Weeks 3–4 · Generate</div>
+      <div class="timeline-title">Feed Figma designs into RapidNative</div>
+      <div class="timeline-body">Generate React Native screens. Download the code to GitHub. You now have the visual skeleton of the app in real, ownable code. Cost: ~$20.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">Weeks 5–10 · Build logic</div>
+      <div class="timeline-title">Use Claude Code to build the brains</div>
+      <div class="timeline-body">Install Claude Code on desktop. Open your codebase. Describe each feature in plain English: Supabase auth setup, dual-couple privacy model, health tracker scoring, professional booking flow, SOS country-detection, KYC API integration. Claude writes it, you review and test.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-year">Weeks 11–12 · Ship</div>
+      <div class="timeline-title">Compile with Expo EAS Build → submit to stores</div>
+      <div class="timeline-body">Expo's build service compiles the app for both stores. Apple review takes 1–2 weeks first time. Google Play is faster. You are live on iOS and Android.</div>
+    </div>
+  </div>
+
+  <!-- COST COMPARISON -->
+  <div class="divider"></div>
+  <div class="section-title">Cost comparison — AI stack vs hiring</div>
+  <div style="overflow-x:auto;margin-bottom:24px">
+  <table style="width:100%;border-collapse:collapse;background:var(--white);border:1px solid var(--border-light);border-radius:12px;overflow:hidden">
+    <thead>
+      <tr style="background:var(--bg2)">
+        <th style="text-align:left;padding:12px 16px;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.07em;text-transform:uppercase;border-bottom:2px solid var(--border-light)">Approach</th>
+        <th style="text-align:left;padding:12px 16px;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.07em;text-transform:uppercase;border-bottom:2px solid var(--border-light)">Timeline</th>
+        <th style="text-align:left;padding:12px 16px;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.07em;text-transform:uppercase;border-bottom:2px solid var(--border-light)">Cost</th>
+        <th style="text-align:left;padding:12px 16px;font-size:11px;font-weight:600;color:var(--muted);letter-spacing:0.07em;text-transform:uppercase;border-bottom:2px solid var(--border-light)">Code ownership</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid var(--border-light);background:var(--sage-pale)">
+        <td style="padding:12px 16px;font-size:13px;font-weight:600;color:var(--ink)">AI stack (UX Pilot + RapidNative + Claude Code)</td>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">10–14 weeks</td>
+        <td style="padding:12px 16px;font-size:13px;font-weight:600;color:var(--sage)">₹15,000–25,000</td>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">Full — you own everything</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border-light)">
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">Freelance React Native developer</td>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">10–14 weeks</td>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">₹1.5–3L</td>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">Full</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border-light)">
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">Gurugram agency (3–4 person team)</td>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">8–12 weeks</td>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">₹3–6L</td>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">Full</td>
+      </tr>
+      <tr>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">No-code (Adalo, Bubble)</td>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">4–6 weeks</td>
+        <td style="padding:12px 16px;font-size:13px;color:var(--ink-light)">₹50K–1.5L</td>
+        <td style="padding:12px 16px;font-size:13px;color:#C45A4A">Locked to platform ✗</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--sage)">
+    <div class="card-title">💡 The honest verdict for a full-time solo founder</div>
+    <div class="card-body">The AI stack costs ~10x less than hiring and gives identical code ownership. The trade is your time — you become the developer, guided by AI. For a full-time founder with a 6–12 month runway, this is feasible and smart for the MVP. Budget 20–30% of build time for custom logic (the privacy model, health-score divergence math) that AI generators can't produce from a prompt alone — that's where Claude Code earns its place. When you raise your angel round and have budget, hire a real React Native developer to harden and scale what you built. The AI-built MVP is what proves the model and gets you funded in the first place.</div>
+  </div>
+
+  <!-- DESIGN REFERENCES -->
+  <div class="divider"></div>
+  <div class="section-title">Design reference points — study before briefing anyone</div>
+  <div class="grid-3">
+    <div class="card"><div class="card-title">Flo</div><div class="card-body">Calendar-as-home-screen, toggle-chip logging, health score visualisation, passive data collection. The single most important reference — copy its architecture, not its content.</div></div>
+    <div class="card"><div class="card-title">Headspace</div><div class="card-body">Warm palette, calm onboarding, non-alarming UI for a sensitive topic. How to make protection feel like self-care.</div></div>
+    <div class="card"><div class="card-title">Calm</div><div class="card-body">How to make a daily-use habit feel like a gift to yourself, not an obligation.</div></div>
+    <div class="card"><div class="card-title">Notion</div><div class="card-body">Clean document and vault interface. How to hold a lot of information without feeling heavy.</div></div>
+    <div class="card"><div class="card-title">Peanut</div><div class="card-body">Community app for a sensitive life stage (motherhood). How to keep warmth and safety in a social feature. Reference for the Layer 3 community feature.</div></div>
+    <div class="card"><div class="card-title">Your aesthetic</div><div class="card-body">Warm, pastel, breathing space, no sharp edges, no alarming red — except the SOS button, which is subtly placed but unmissable when needed.</div></div>
+  </div>
+
+  <!-- FLO ARCHITECTURE LESSONS -->
+  <div class="divider"></div>
+  <div class="section-title">Three things to copy from Flo architecturally</div>
+  <div class="grid-3">
+    <div class="card" style="border-top:3px solid var(--sage)">
+      <div class="card-title">The log IS the home screen</div>
+      <div class="card-body">Open Flo → you're already on today's date with toggle chips visible. No navigation to logging. MarriageOS home = calendar + today + quick-toggle chips. Not a dashboard. Not a feed. The log. This is the daily habit trigger.</div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--sky)">
+      <div class="card-title">Passive data collection</div>
+      <div class="card-body">Flo builds the picture over months by asking one small thing at a time. The health check-in should feel like 3 minutes — 8 questions max, each partner answers alone, divergence surfaces automatically. Never a survey.</div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--rose)">
+      <div class="card-title">Contextual, not generic content</div>
+      <div class="card-body">Flo shows content relevant to your cycle stage. MarriageOS shows content relevant to your relationship stage — newlyweds see different Journal content than couples in year 7. Tag content by stage, filter by profile. Build this from day one even with a small library.</div>
+    </div>
+  </div>
+
+  <!-- FOUNDER DESIGN VISION -->
+  <div class="divider"></div>
+  <div class="section-title">Founder design vision — the MarriageOS feeling</div>
+  <div style="background:linear-gradient(135deg,var(--rose-pale) 0%,var(--sage-pale) 100%);border:1px solid var(--rose);border-radius:16px;padding:28px 32px;margin-bottom:20px">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--ink);margin-bottom:8px;font-style:italic;line-height:1.3">"Indian tradition, held in pastel. Peace and love as a couple — from the very first screen."</div>
+    <div style="font-size:13px;color:var(--ink-light);font-weight:300;line-height:1.7">The visual identity should root itself in the warmth and sacredness of Indian marriage tradition — but rendered in soft, modern pastels rather than loud, saturated festival colours. The feeling is not a wedding invitation. It is the calm, enduring love of two people who chose each other. Traditional soul, contemporary calm.</div>
+  </div>
+
+  <div class="grid-2">
+    <div class="card" style="border-left:3px solid var(--rose)">
+      <div class="card-title">🎨 Palette — Indian tradition in pastel</div>
+      <div class="card-body">
+        Draw from the traditional Indian marriage palette but soften every colour to a pastel:<br><br>
+        • <strong>Haldi yellow → soft buttermilk</strong> (warmth, auspicious beginnings)<br>
+        • <strong>Sindoor red → dusty rose</strong> (love, union — never alarming red)<br>
+        • <strong>Mehendi green → sage</strong> (growth, life together)<br>
+        • <strong>Sky/turquoise → soft powder blue</strong> (trust, calm, the divine)<br>
+        • <strong>Gold accents → matte champagne</strong> (sacredness, used sparingly as highlights)<br><br>
+        The existing MarriageOS palette (sage, rose, sky, warm white) already aligns — extend it with buttermilk and champagne-gold accents to complete the traditional-in-pastel feel.
+      </div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--sage)">
+      <div class="card-title">💑 Welcome screen — the eternal couple</div>
+      <div class="card-body">
+        The first thing a couple sees on opening the app: a warm, illustrated (not photographic) Indian bride and groom — expressing an eternal, tender bond. Style: soft, minimal line-art or gentle watercolour, not ornate or busy. Think a modern, elegant illustration — not a clip-art wedding card.<br><br>
+        The imagery should feel inclusive across regions and communities (avoid over-indexing on one specific regional wedding style). Convey partnership and devotion — two people turned slightly toward each other, calm, whole. Pair with a gentle welcome line that sets the tone of the entire product.
+      </div>
+    </div>
+    <div class="card" style="border-left:3px solid var(--sky)">
+      <div class="card-title">🌸 Design elements — peace & love motifs</div>
+      <div class="card-body">
+        Weave in subtle, culturally resonant design elements that signal peace and devotion without clutter:<br><br>
+        • Soft mandala or rangoli-inspired geometry as gentle background texture (very low opacity)<br>
+        • Lotus motif — peace, purity, unfolding love — as a recurring quiet symbol<br>
+        • Intertwined / paired elements (two diyas, two birds, two lotuses) reinforcing the couple as a unit<br>
+        • Flowing, rounded forms — no sharp corners anywhere<br><br>
+        Restraint is key. One or two motifs used consistently, not a festival of ornament. The tradition should whisper, not shout.
+      </div>
+    </div>
+    <div class="card" style="border-left:3px solid #B5860A">
+      <div class="card-title">💛 Daily love thought — the returning ritual</div>
+      <div class="card-body">
+        Each day, greet the couple with a simple, warm relationship thought — a single line that makes them pause and feel their bond. Not advice. Not a task. A gentle daily touch.<br><br>
+        Examples of tone: <em>"The smallest 'I noticed you' can mean more than the grandest gift."</em> · <em>"Today, remember one reason you chose each other."</em><br><br>
+        This is the emotional equivalent of Flo's daily open — a reason to return that feels like care, not obligation. Rotate from a curated library; eventually personalise by relationship stage. Position it on the home/log screen so it's the first warm thing they read each day.
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--rose);margin-top:16px">
+    <div class="card-title">📌 Note for the designer brief</div>
+    <div class="card-body">When briefing a designer or generating screens in UX Pilot, lead with this feeling — not a feature list. Prompt language to use: "Warm, modern Indian marriage aesthetic in soft pastels. Traditional soul (lotus, subtle rangoli geometry, paired motifs, champagne-gold accents) rendered with contemporary calm and lots of breathing space. Illustrated bride-and-groom welcome expressing eternal, tender partnership. Daily love thought on the home screen. No sharp edges, no loud saturation, no alarming red." This one paragraph will shape every screen more than any spec sheet.</div>
   </div>
 </div>
 
