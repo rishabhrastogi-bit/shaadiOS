@@ -1,0 +1,12 @@
+{
+  // Static site: only ./public is published. Everything else in the repo stays private.
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "shaadios",
+  "compatibility_date": "2026-10-19",
+  "observability": { "enabled": true },
+  "assets": {
+    "directory": "./public",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  }
+}
