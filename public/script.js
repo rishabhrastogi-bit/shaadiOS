@@ -81,6 +81,20 @@
     });
   });
 
+  // Waitlist forms post to the Google Sheet endpoint, then go to the thank-you page.
+  // Without JavaScript the form posts directly and the endpoint redirects to /thanks.
+  document.querySelectorAll('form[data-waitlist]').forEach(function (f) {
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn = f.querySelector('button[type=submit]');
+      if (btn) { btn.disabled = true; btn.textContent = 'Joining…'; }
+      f.querySelector('input[name=page]').value = location.pathname;
+      fetch(f.action, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(new FormData(f)) })
+        .then(function () { location.href = '/thanks'; })
+        .catch(function () { f.submit(); });
+    });
+  });
+
   // Mini check-in: scores stay in the browser, nothing is sent.
   var ci = document.getElementById('checkin');
   if (ci) {
