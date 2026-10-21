@@ -54,7 +54,7 @@ details p{margin:.8em 0 0;color:var(--muted)}
 footer{border-top:1px solid var(--line);padding:44px 0;font-size:.92rem;color:var(--muted)}
 footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px}
 footer a{color:var(--muted);display:block;margin-bottom:6px}
-footer img{height:44px;width:auto;margin-bottom:12px}
+footer img{height:72px;width:auto;margin-bottom:12px}
 .legal{padding:56px 0 80px;max-width:760px}
 .legal h2{font-size:1.7rem;margin-top:1.6em}
 .legal li{margin-bottom:.4em}
