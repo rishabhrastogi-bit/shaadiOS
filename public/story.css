@@ -97,6 +97,34 @@ form.waitlist select{flex:1 1 200px;padding:14px 18px;border-radius:999px;border
 .shots img{border-radius:16px;border:1px solid var(--line)}
 .shots figcaption{font-size:.85rem;color:var(--muted);margin-top:6px;text-align:center}
 
+/* Founding-member pledges */
+.uses{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:8px 0 30px}
+.uses div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;font-size:.95rem;display:flex;gap:10px;align-items:center}
+.uses span{font-size:1.4rem}
+.pledge{max-width:960px;margin:0 auto}
+.tiers{border:0;padding:0;margin:0 0 22px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.sr{position:absolute;left:-9999px}
+.tier{position:relative;display:block;background:var(--card);border:2px solid var(--line);border-radius:22px;padding:24px 22px 18px;cursor:pointer;transition:border-color .2s,transform .2s}
+.tier:hover{transform:translateY(-2px)}
+.tier input{position:absolute;opacity:0;pointer-events:none}
+.tier:has(input:checked){border-color:var(--sage);box-shadow:0 10px 30px rgba(80,110,90,.15)}
+.tier:has(input:focus-visible){outline:3px solid var(--gold);outline-offset:2px}
+.tier .t-name{display:block;font-weight:700}
+.tier .t-price{display:block;font-family:'Cormorant Garamond',Georgia,serif;font-size:2.4rem;font-weight:700;color:var(--accent);line-height:1.2;margin:4px 0 8px}
+.tier ul{margin:0;padding-left:1.1em;color:var(--muted);font-size:.93rem}
+.tier li{margin-bottom:4px}
+.tier.featured{border-color:color-mix(in srgb,var(--sage) 50%,var(--line))}
+.t-flag{position:absolute;top:-12px;left:20px;background:var(--sage);color:#fff;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+.pledge-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.pledge-fields input{padding:14px 18px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;min-width:0}
+.consent{display:flex;gap:10px;align-items:flex-start;font-size:.92rem;margin-bottom:16px}
+.consent input{margin-top:4px;flex:none}
+.pledge button{padding:14px 28px;border-radius:999px;border:0;background:var(--accent);color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.pledge .fine{margin-top:12px}
+@media(max-width:860px){
+  .uses,.tiers,.pledge-fields{grid-template-columns:1fr}
+}
+
 /* Trademark mark */
 sup.tm{font-size:.45em;vertical-align:super;line-height:0;font-weight:400;margin-left:.05em}
 

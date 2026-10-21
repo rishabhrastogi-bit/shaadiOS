@@ -90,7 +90,7 @@
       if (btn) { btn.disabled = true; btn.textContent = 'Joining…'; }
       f.querySelector('input[name=page]').value = location.pathname;
       fetch(f.action, { method: 'POST', mode: 'no-cors', body: new URLSearchParams(new FormData(f)) })
-        .then(function () { location.href = '/thanks'; })
+        .then(function () { location.href = f.dataset.next || '/thanks'; })
         .catch(function () { f.submit(); });
     });
   });
