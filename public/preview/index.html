@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>ShaadiOS — Two rings</title>
-<meta name="description" content="A scroll story about two lives, one relationship, and how ShaadiOS helps catch the drift early.">
+<title>ShaadiOS — Inside the ring</title>
+<meta name="description" content="Relationships rarely break in a day. They drift. ShaadiOS helps Indian couples and parents catch the drift early.">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -23,60 +23,127 @@
 
 <header class="bar">
   <a href="https://shaadios.app/" class="brand"><img src="logo-horizontal-cream.svg" alt="ShaadiOS" width="150" height="35"></a>
-  <a class="pill" href="https://shaadios.app/#join">Join the waitlist</a>
+  <nav><a href="#what">What it does</a><a href="#screens">The app</a><a class="pill" href="#join">Join the waitlist</a></nav>
 </header>
 
-<!-- Scene 2 overlay: two perspectives, driven by scroll progress in immersive.js -->
-<div class="split" aria-label="Two perspectives of the same day">
-  <div class="side her">
-    <p class="who">Ananya&rsquo;s day</p>
-    <ol>
-      <li data-at="0.43"><time>7:10</time> Packed two tiffins. Ate nothing.</li>
-      <li data-at="0.48"><time>9:30</time> Deadline moved up. Again.</li>
-      <li data-at="0.53"><time>1:00</time> Mum&rsquo;s BP report. Didn&rsquo;t mention it.</li>
-      <li data-at="0.58"><time>4:30</time> PTM reminder. Who&rsquo;s going?</li>
-      <li data-at="0.63" class="thought"><time>10:40</time> &ldquo;Did he even notice?&rdquo;</li>
-    </ol>
+<!-- Story captions: shown and hidden from immersive.js as the camera travels.
+     data-z = the camera z where the caption is at its strongest; data-side = where it sits. -->
+<div class="captions" aria-live="polite">
+  <div class="cap hero" data-z="7" data-span="2.6">
+    <p class="eyebrow">ShaadiOS&trade;</p>
+    <h1>Every relationship<br>starts <em>here.</em></h1>
+    <p class="lead">Two lives. One promise.</p>
+    <p class="cue">Scroll to step inside <span>↓</span></p>
   </div>
-  <div class="side his">
-    <p class="who">Rohan&rsquo;s day</p>
-    <ol>
-      <li data-at="0.455"><time>7:30</time> Skipped the gym. Again.</li>
-      <li data-at="0.505"><time>10:00</time> Client call ran over.</li>
-      <li data-at="0.555"><time>2:15</time> EMI auto-debit. Tight month.</li>
-      <li data-at="0.605"><time>6:00</time> Parents visiting Sunday. Haven&rsquo;t told her.</li>
-      <li data-at="0.655" class="thought"><time>10:45</time> &ldquo;She looked tired. I didn&rsquo;t ask.&rdquo;</li>
-    </ol>
-  </div>
-  <p class="same" data-at="0.71">Same house. Two different days.</p>
+  <div class="cap mid" data-z="2.6" data-span="1.8"><p class="eyebrow">Step inside</p><h2>Every marriage is<br>two stories at <em>once.</em></h2></div>
+
+  <div class="cap" data-z="-2.5" data-side="right"><p class="eyebrow">It begins</p><h2>With a promise.</h2><p class="lead">Saat phere. Two families. One future.</p></div>
+  <div class="cap" data-z="-9" data-side="left"><p class="eyebrow">Then</p><h2>Life gets busy.</h2><p class="lead">Jobs, EMIs, school runs, in-laws. Two calendars, one house.</p></div>
+  <div class="cap" data-z="-16" data-side="right"><p class="eyebrow">Slowly</p><h2>Talk becomes<br>logistics.</h2><p class="lead">Groceries. Bills. Whose parents visit next.</p></div>
+  <div class="cap" data-z="-23" data-side="left"><p class="eyebrow">Quietly</p><h2>Stress nobody sees.</h2><p class="lead">Each carrying something the other never hears about.</p></div>
+  <div class="cap" data-z="-30" data-side="right"><p class="eyebrow">Everyone says</p><h2>&ldquo;Adjust kar lo.&rdquo;</h2><p class="lead">So we stay quiet. For years.</p></div>
+  <div class="cap stat" data-z="-37" data-side="center"><p class="eyebrow">On average</p><p class="big">6<small> years</small></p><p class="lead">is how long unhappy couples wait before getting help.</p><p class="src">The Gottman Institute</p></div>
+  <div class="cap" data-z="-44" data-side="left"><p class="eyebrow">And when help comes</p><h2>It comes late.</h2><p class="lead">Usually as a lawyer&rsquo;s notice.</p></div>
+  <div class="cap stat" data-z="-51" data-side="center"><p class="eyebrow">Right now</p><p class="big">11.5<small> lakh</small></p><p class="lead">cases are pending in India&rsquo;s family courts.</p><p class="src">Law Minister in Parliament, May 2022 data</p></div>
+  <div class="cap" data-z="-58" data-side="right"><p class="eyebrow">And the children</p><h2>Carry the weight.</h2><p class="lead">Two homes. One child in the middle.</p></div>
+  <div class="cap end" data-z="-73.5" data-span="3.2"><p class="eyebrow">There&rsquo;s a gentler way</p><h2>Catch the drift <em>early.</em></h2><p class="lead">ShaadiOS: one app for every chapter of a relationship.</p></div>
 </div>
 
-<main id="story">
-  <section class="beat hero" data-beat="0">
-    <div class="copy center">
-      <p class="eyebrow">ShaadiOS&trade;</p>
-      <h1>Every relationship<br>starts <em>here.</em></h1>
-      <p class="lead">Two lives. One promise.</p>
-      <p class="cue">Scroll to step inside <span>↓</span></p>
-    </div>
-  </section>
+<main id="wrap">
+  <section id="story" aria-label="The story"></section>
 
-  <section class="beat" data-beat="1">
-    <div class="copy center">
-      <p class="eyebrow">Step inside</p>
-      <h2>Every marriage is two stories<br>happening <em>at once.</em></h2>
-    </div>
-  </section>
+  <div id="content">
+    <section class="block" id="what">
+      <p class="eyebrow">What ShaadiOS really does</p>
+      <h2>Three quiet tools that change the story.</h2>
+      <div class="uses">
+        <article class="use">
+          <div class="ic">📒</div>
+          <h3>The relationship log book</h3>
+          <p>Log good days, hard days and what actually happened, in one tap. Over time it becomes a private, dated timeline of your relationship, and our AI turns it into plain-language summaries you can read together.</p>
+        </article>
+        <article class="use">
+          <div class="ic">🪜</div>
+          <h3>The help ladder</h3>
+          <p>Get the right help long before lawyers: a conversation, then a mediator or counsellor, mental-health support, and advocates or emergency services only if needed.</p>
+          <ol class="ladder"><li>Talk together</li><li>Mediator</li><li>Counsellor</li><li>Mental health</li><li>Advocate</li><li>Emergency</li></ol>
+        </article>
+        <article class="use">
+          <div class="ic">🧒</div>
+          <h3>Co-parenting, organised</h3>
+          <p>School pickups, custody schedules, vaccinations and expenses on one shared calendar. Export everything as a clear, factual report whenever you need it.</p>
+        </article>
+      </div>
+      <p class="fine">AI features give general guidance and summaries, not legal, medical or therapeutic advice.</p>
+    </section>
 
-  <section class="beat spacer" aria-hidden="true"></section>
+    <section class="block tint" id="screens">
+      <p class="eyebrow">A look inside the app</p>
+      <h2>It changes with your chapter.</h2>
+      <div class="screens">
+        <figure><img src="img/status-picker.png" alt="Choose your chapter screen" loading="lazy"><figcaption>Where are you right now?</figcaption></figure>
+        <figure><img src="img/home-married.png" alt="Married home screen" loading="lazy"><figcaption>Married</figcaption></figure>
+        <figure><img src="img/home-unmarried.png" alt="Engaged home screen" loading="lazy"><figcaption>Engaged</figcaption></figure>
+        <figure><img src="img/home-divorced.png" alt="New chapter home screen" loading="lazy"><figcaption>New chapter</figcaption></figure>
+        <figure><img src="img/home-divorcedparent.png" alt="Co-parenting home screen" loading="lazy"><figcaption>Co-parenting</figcaption></figure>
+      </div>
+      <p><a class="more" href="https://shaadios.app/features">See every feature →</a></p>
+    </section>
 
-  <section class="beat end" data-beat="3">
-    <div class="copy center">
-      <p class="eyebrow">Preview</p>
-      <h2>Next: the drift.</h2>
-      <p class="lead">Coming in the next scenes: the shrinking conversation, the relationship log book, the help ladder, and calm co-parenting.</p>
-    </div>
-  </section>
+    <section class="block" id="world">
+      <div class="two">
+        <div>
+          <p class="eyebrow">In India and abroad</p>
+          <h2>Built for Indian families, wherever they live.</h2>
+          <p class="lead dark">Dubai or Delhi, London or Lucknow. Different time zones, the same relationship.</p>
+        </div>
+        <div>
+          <p class="eyebrow">Private by design</p>
+          <h2>Yours, not ours.</h2>
+          <p class="lead dark">No ads, no data selling. Face ID lock, encrypted storage, and a journal you can keep private from your partner.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block tint" id="join">
+      <p class="eyebrow">Launching soon</p>
+      <h2>Be among the first.</h2>
+      <form class="waitlist" name="waitlist" method="POST" action="https://script.google.com/macros/s/AKfycbybhKTXFi7Ju0TZFBFlDC4nnWaLPBV82GdY9VlpF7AeraF3_fqKkfc2HArds2QwUuum/exec" data-waitlist>
+        <input type="hidden" name="page" value="">
+        <p class="hp"><label>Leave empty <input name="bot-field"></label></p>
+        <input type="email" name="email" placeholder="Your email address" required aria-label="Email address">
+        <select name="chapter" aria-label="Where are you right now?">
+          <option value="">Where are you right now? (optional)</option>
+          <option value="married">Married</option><option value="engaged">Engaged or together</option>
+          <option value="separated">Separated or divorced</option><option value="coparenting">Co-parenting</option>
+          <option value="prefer-not">Prefer not to say</option>
+        </select>
+        <select name="country" aria-label="Where do you live?">
+          <option value="">Where do you live?</option>
+          <option value="india">India</option><option value="uae">UAE</option><option value="saudi">Saudi Arabia</option>
+          <option value="gulf-other">Qatar, Kuwait, Oman or Bahrain</option><option value="usa">USA</option><option value="uk">UK</option>
+          <option value="canada">Canada</option><option value="australia">Australia</option><option value="singapore">Singapore</option>
+          <option value="europe">Europe</option><option value="other">Somewhere else</option>
+        </select>
+        <button type="submit">Join the waitlist</button>
+      </form>
+      <p class="fine">Free to join. We&rsquo;ll email you once at launch. Want to help fund the pilot? <a href="https://shaadios.app/#pilot">Become a founding member</a>.</p>
+    </section>
+
+    <footer class="foot">
+      <img src="logo-horizontal.svg" alt="ShaadiOS" width="160" height="37">
+      <div class="social">
+        <a href="https://www.instagram.com/shaadios.app/" target="_blank" rel="noopener me" aria-label="ShaadiOS on Instagram" style="--i:url(icons/instagram.svg)"></a>
+        <a href="https://www.facebook.com/profile.php?id=1288207277718615" target="_blank" rel="noopener me" aria-label="ShaadiOS on Facebook" style="--i:url(icons/facebook.svg)"></a>
+        <a href="https://www.threads.com/@shaadios.app" target="_blank" rel="noopener me" aria-label="ShaadiOS on Threads" style="--i:url(icons/threads.svg)"></a>
+        <a href="https://www.linkedin.com/company/shaadios-app/" target="_blank" rel="noopener me" aria-label="ShaadiOS on LinkedIn" style="--i:url(icons/linkedin.svg)"></a>
+        <a href="https://x.com/ShaadiOS" target="_blank" rel="noopener me" aria-label="ShaadiOS on X" style="--i:url(icons/x.svg)"></a>
+      </div>
+      <nav class="legal"><a href="https://shaadios.app/privacy">Privacy</a><a href="https://shaadios.app/terms">Terms</a><a href="https://shaadios.app/refund">Refunds</a><a href="https://shaadios.app/contact">Contact</a><a href="https://shaadios.app/delete-account">Delete account</a></nav>
+      <p class="help">In danger? Call 112 &middot; Women Helpline 181 &middot; Childline 1098 &middot; Tele-MANAS 14416 &middot; Outside India, your local emergency number. ShaadiOS&trade; is not a law firm, a medical provider or an emergency service.</p>
+      <p class="copy-r">&copy; 2026 ShaadiOS&trade;. All rights reserved. Photos: Unsplash; people shown are models.</p>
+    </footer>
+  </div>
 </main>
 
 <div class="progress" aria-hidden="true"><span></span></div>
