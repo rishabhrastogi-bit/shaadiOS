@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>ShaadiOS — Two rings</title>
+<meta name="description" content="A scroll story about two lives, one relationship, and how ShaadiOS helps catch the drift early.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="immersive.css">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<canvas id="scene" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
+
+<header class="bar">
+  <a href="https://shaadios.app/" class="brand"><img src="logo-horizontal-cream.svg" alt="ShaadiOS" width="150" height="35"></a>
+  <a class="pill" href="https://shaadios.app/#join">Join the waitlist</a>
+</header>
+
+<!-- Scene 2 overlay: two perspectives, driven by scroll progress in immersive.js -->
+<div class="split" aria-label="Two perspectives of the same day">
+  <div class="side her">
+    <p class="who">Ananya&rsquo;s day</p>
+    <ol>
+      <li data-at="0.43"><time>7:10</time> Packed two tiffins. Ate nothing.</li>
+      <li data-at="0.48"><time>9:30</time> Deadline moved up. Again.</li>
+      <li data-at="0.53"><time>1:00</time> Mum&rsquo;s BP report. Didn&rsquo;t mention it.</li>
+      <li data-at="0.58"><time>4:30</time> PTM reminder. Who&rsquo;s going?</li>
+      <li data-at="0.63" class="thought"><time>10:40</time> &ldquo;Did he even notice?&rdquo;</li>
+    </ol>
+  </div>
+  <div class="side his">
+    <p class="who">Rohan&rsquo;s day</p>
+    <ol>
+      <li data-at="0.455"><time>7:30</time> Skipped the gym. Again.</li>
+      <li data-at="0.505"><time>10:00</time> Client call ran over.</li>
+      <li data-at="0.555"><time>2:15</time> EMI auto-debit. Tight month.</li>
+      <li data-at="0.605"><time>6:00</time> Parents visiting Sunday. Haven&rsquo;t told her.</li>
+      <li data-at="0.655" class="thought"><time>10:45</time> &ldquo;She looked tired. I didn&rsquo;t ask.&rdquo;</li>
+    </ol>
+  </div>
+  <p class="same" data-at="0.71">Same house. Two different days.</p>
+</div>
+
+<main id="story">
+  <section class="beat hero" data-beat="0">
+    <div class="copy center">
+      <p class="eyebrow">ShaadiOS&trade;</p>
+      <h1>Every relationship<br>starts <em>here.</em></h1>
+      <p class="lead">Two lives. One promise.</p>
+      <p class="cue">Scroll to step inside <span>↓</span></p>
+    </div>
+  </section>
+
+  <section class="beat" data-beat="1">
+    <div class="copy center">
+      <p class="eyebrow">Step inside</p>
+      <h2>Every marriage is two stories<br>happening <em>at once.</em></h2>
+    </div>
+  </section>
+
+  <section class="beat spacer" aria-hidden="true"></section>
+
+  <section class="beat end" data-beat="3">
+    <div class="copy center">
+      <p class="eyebrow">Preview</p>
+      <h2>Next: the drift.</h2>
+      <p class="lead">Coming in the next scenes: the shrinking conversation, the relationship log book, the help ladder, and calm co-parenting.</p>
+    </div>
+  </section>
+</main>
+
+<div class="progress" aria-hidden="true"><span></span></div>
+<script type="module" src="immersive.js"></script>
+</body>
+</html>
