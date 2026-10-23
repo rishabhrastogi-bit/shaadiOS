@@ -26,12 +26,12 @@ body{overflow-x:hidden}
 .cap[data-side="left"]{left:clamp(20px,6vw,96px)}
 .cap[data-side="right"]{right:clamp(20px,6vw,96px)}
 .cap[data-side="center"],.cap.hero,.cap.mid,.cap.end{left:50%;width:min(780px,90vw);text-align:center;transform:translate(-50%,calc(-50% + var(--dy,0px)))}
-.cap.hero{top:34%}
+.cap.hero{top:25%}
 .cap.end{top:30%}
 .eyebrow{letter-spacing:.2em;text-transform:uppercase;font-size:.76rem;font-weight:700;color:#D9CFC2;opacity:.85;margin:0 0 16px}
 h1,h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;line-height:1.02;margin:0 0 16px}
 .cap h1,.cap h2,.cap .big{text-shadow:0 4px 40px rgba(0,0,0,.65)}
-h1{font-size:clamp(3rem,9vw,7rem)}
+h1{font-size:clamp(2.4rem,5.4vw,4.6rem)}
 h2{font-size:clamp(2.2rem,5vw,4.2rem)}
 h1 em,h2 em{font-style:italic;color:#E9D2B8}
 .lead{font-size:clamp(1.02rem,1.8vw,1.25rem);line-height:1.6;color:var(--muted);margin:0 0 10px;text-shadow:0 2px 20px rgba(0,0,0,.8)}
@@ -46,7 +46,7 @@ h1 em,h2 em{font-style:italic;color:#E9D2B8}
 .cap.end h2 em{color:var(--rose-deep)}
 
 /* scroll space for the 3D story */
-#story{height:1150vh}
+#story{height:1000vh}
 
 /* content after the story */
 #content{position:relative;z-index:10;background:var(--cream);color:var(--dark)}
@@ -130,3 +130,40 @@ form.waitlist button{padding:14px 26px;border-radius:999px;border:0;background:v
 }
 .cap.stat[data-side="left"]{text-align:left}
 @media(max-width:860px){.logo-reveal{top:63%}.cap.turn{top:12%!important}}
+
+.cap.hero{width:min(1000px,92vw)}
+
+/* ---- v5: full-screen photo chapters for the road */
+.road-scenes{position:fixed;inset:0;z-index:3;pointer-events:none;opacity:0}
+.scene{position:absolute;inset:0;margin:0;opacity:0;overflow:hidden;background:#0B0A0C}
+.scene img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(var(--zoom,1.08));will-change:transform,filter}
+.scene::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,10,12,.82) 0%,rgba(11,10,12,.35) 45%,rgba(11,10,12,.1) 70%)}
+.scene:has(figcaption.right)::after{background:linear-gradient(270deg,rgba(11,10,12,.82) 0%,rgba(11,10,12,.35) 45%,rgba(11,10,12,.1) 70%)}
+.scene figcaption{position:absolute;z-index:1;top:50%;width:min(520px,42vw);transform:translateY(calc(-50% + var(--dy,0px)))}
+.scene figcaption.left{left:clamp(20px,7vw,110px)}
+.scene figcaption.right{right:clamp(20px,7vw,110px)}
+.scene figcaption.center{left:50%;width:min(780px,90vw);text-align:center;transform:translate(-50%,calc(-50% + var(--dy,0px)))}
+.scene h2{text-shadow:0 4px 30px rgba(0,0,0,.6)}
+.scene.stat{background:radial-gradient(60% 60% at 50% 60%,#1a1512,#0B0A0C)}
+.road{position:absolute;right:clamp(14px,2.4vw,34px);top:50%;transform:translateY(-50%);list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px;z-index:2}
+.road li{position:relative;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(244,239,234,.35);padding-right:18px;text-align:right;transition:color .3s}
+.road li::after{content:"";position:absolute;right:0;top:50%;width:7px;height:7px;margin-top:-3.5px;border-radius:50%;background:rgba(244,239,234,.3)}
+.road li.on{color:rgba(244,239,234,.95)}.road li.on::after{background:#F4EFEA}
+.road li.gold{color:#E8C875}.road li.gold::after{background:#E8C875;box-shadow:0 0 12px 3px rgba(232,200,117,.7)}
+@media(max-width:860px){
+  .scene figcaption,.scene figcaption.left,.scene figcaption.right{left:20px;right:20px;width:auto;top:auto;bottom:10vh;transform:translateY(var(--dy,0px))}
+  .scene figcaption.center{left:20px;right:20px;width:auto;transform:translateY(calc(-50% + var(--dy,0px)));top:50%;bottom:auto}
+  .scene::after,.scene:has(figcaption.right)::after{background:linear-gradient(0deg,rgba(11,10,12,.88) 0%,rgba(11,10,12,.4) 45%,rgba(11,10,12,.05) 75%)}
+  .road{display:none}
+}
+.cap.turn{top:12%!important;transform:translate(-50%,var(--dy,0px))!important}
+.cap.final{bottom:8vh!important}
+.mark-reveal{position:fixed;z-index:4;opacity:0;pointer-events:none;height:auto}
+.logo-reveal{transform:translateX(-50%)!important}
+.cap.cue-cap{top:auto!important;bottom:5vh;transform:translateX(-50%)!important}
+.cap.cue-cap .cue{margin:0}
+@media(max-width:860px){
+  .cap.turn,.cap.final,.cap.cue-cap{left:20px!important;right:20px!important;width:auto!important;transform:translateY(var(--dy,0px))!important;text-align:center}
+}
+@media(max-width:860px){.cap.hero:not(.cue-cap){top:14%!important}}
+@media(max-width:860px){.cap h1 br,.cap h2 br{display:none}.cap.cue-cap{bottom:4vh!important;top:auto!important}}
