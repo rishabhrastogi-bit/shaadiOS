@@ -288,4 +288,18 @@ function frame() {
   requestAnimationFrame(frame);
 }
 
+// ---------- app showcase: which screen is on depends on how far the pinned section has scrolled
+const show = document.getElementById('screens');
+if (show) {
+  const steps = [...show.querySelectorAll('.sc-steps li')], shots = [...show.querySelectorAll('.sc-phone img')], dots = [...show.querySelectorAll('.sc-dots i')];
+  let cur = -1;
+  const pick = () => {
+    const r = show.getBoundingClientRect(), span = show.offsetHeight - innerHeight;
+    const k = Math.min(shots.length - 1, Math.max(0, Math.floor((-r.top / Math.max(span, 1)) * shots.length)));
+    if (k === cur) return; cur = k;
+    [steps, shots, dots].forEach((list) => list.forEach((el, n) => el.classList.toggle('on', n === k)));
+  };
+  addEventListener('scroll', pick, { passive: true }); pick();
+}
+
 frame();
