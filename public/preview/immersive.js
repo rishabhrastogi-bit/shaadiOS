@@ -76,16 +76,13 @@ const starTex = (() => {
 function crystals() {
   // one round crystal: clear glass with a warm gold heart, like the dot in the logo
   const g = new THREE.Group();
-  const mat = new THREE.MeshPhysicalMaterial({ color: 0xFFF6E2, metalness: 0, roughness: 0.02, transmission: 1, thickness: 0.35, ior: 1.6,
-    clearcoat: 1, clearcoatRoughness: 0, iridescence: 0.35, iridescenceIOR: 1.5, attenuationColor: 0xF4E2BC, attenuationDistance: 2.0,
-    specularIntensity: 1, envMapIntensity: 2.6, emissive: 0xE8C878, emissiveIntensity: 0.32 });
+  const mat = new THREE.MeshPhysicalMaterial({ color: 0xF7F8FA, metalness: 0.85, roughness: 0.06, clearcoat: 1, clearcoatRoughness: 0.02,
+    iridescence: 0.25, iridescenceIOR: 1.4, envMapIntensity: 2.4, emissive: 0xFFFFFF, emissiveIntensity: 0.12 });   // silver-white, polished
   const main = new THREE.Mesh(new THREE.SphereGeometry(0.15, 64, 64), mat); g.add(main);
-  const core = new THREE.Mesh(new THREE.SphereGeometry(0.07, 32, 32), new THREE.MeshBasicMaterial({ color: 0xFFF1CF, transparent: true, opacity: 0.85 }));
-  g.add(core);
   const orbit = new THREE.Group(); g.add(orbit);
   const sparks = [0].map(() => { const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: starTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: 0 })); g.add(sp); return sp; });
   const spark = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: 0.35 }));
-  spark.scale.setScalar(0.7); g.add(spark);
+  spark.scale.setScalar(0.7); spark.material.color.set(0xFFFFFF); g.add(spark);
   g.userData = { mat, spark, main, orbit, sparks }; return g;
 }
 function animateGems(g, t) {
@@ -172,8 +169,8 @@ function update(p, t) {
   start.a.rotation.set(spin * 0.35, spin, 0); start.b.rotation.set(Math.PI / 2 + spin * 0.3, -spin * 0.9, 0);
   start.g.rotation.set((1 - fly) * 0.2, (1 - fly) * (0.42 + Math.sin(t * 0.25) * 0.05) * intro, 0);
   start.g.position.y = lerp(restY, 0, smooth(0.08, 0.13, p));
-  gemStart.position.set((start.a.position.x + start.b.position.x) / 2, (start.a.position.y + start.b.position.y) / 2 + 0.52 * lock + Math.sin(t * 1.1) * 0.03, 0.1 * lock);
-  gemStart.rotation.set(0, 0, 0); animateGems(gemStart, t); gemStart.scale.setScalar(intro * (1.9 + 0.5 * (1 - lock)));
+  gemStart.position.set((start.a.position.x + start.b.position.x) / 2, (start.a.position.y + start.b.position.y) / 2 + Math.sin(t * 1.1) * 0.02, 0);
+  gemStart.rotation.set(0, 0, 0); animateGems(gemStart, t); gemStart.scale.setScalar(intro * (1.5 + 0.4 * (1 - lock)));
   gemStart.userData.spark.material.opacity = 0.35 + 0.25 * Math.abs(Math.sin(t * 1.7)) + 0.4 * Math.exp(-Math.pow((p - 0.068) / 0.01, 2));
 
   // ---- 3. ending: the same locked platinum rings dissolve into light; the real logo emerges from it
@@ -186,11 +183,11 @@ function update(p, t) {
   const logoW = Math.min(380, innerWidth * 0.62, innerHeight * 0.52) * (3004 / 3184);
   const endD = (4.08 / (logoW / innerWidth)) / (2 * tanH * camera.aspect), endY = screenYToWorld(endD, 0.46);
   fin.g.position.y = endY;
-  fin.g.rotation.set(lerp(0.2, 0.06, front), lerp(0.42 + Math.sin(t * 0.3) * 0.05, 0.1, front), 0);
+  fin.g.rotation.set(lerp(0.2, 0.32, front), lerp(0.42 + Math.sin(t * 0.3) * 0.05, 0.18, front), 0);   // keep a tilt so the centre stays visible
   fin.a.position.set(-0.6, 0, 0); fin.b.position.set(0.6, 0, 0);
   fin.a.rotation.set(0, 0, 0); fin.b.rotation.set(Math.PI / 2, 0, 0);
   fin.g.scale.setScalar(1 + bloom * 0.04);
-  gemEnd.position.set(0, 0.52 + Math.sin(t * 1.1) * 0.03, 0.1); gemEnd.scale.setScalar(1.9); animateGems(gemEnd, t);
+  gemEnd.position.set(0, Math.sin(t * 1.1) * 0.02, 0); gemEnd.scale.setScalar(1.5); animateGems(gemEnd, t);
   gemEnd.userData.mat.emissiveIntensity = 0.35 + smooth(0.84, 0.875, p) * 2.2;          // the crystals glow into the logo's gold
   gemEnd.userData.spark.material.opacity = 0.3 + smooth(0.84, 0.875, p) * 0.7;
   gemEnd.userData.spark.scale.setScalar(0.9 + smooth(0.84, 0.875, p) * 0.8);
