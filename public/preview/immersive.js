@@ -200,8 +200,9 @@ function update(p, t) {
   marks.forEach((m, k) => m.classList.toggle('on', k <= Math.min(active, 5)));
 
   // ---- captions
-  const leave = frozenBeyond ? 1 : smooth(storyRange() - innerHeight * 0.1, storyRange() + innerHeight * 0.4, scrollPos);
+  const leave = frozenBeyond ? 0 : smooth(storyRange() + innerHeight * 0.9, storyRange() + innerHeight * 1.0, scrollPos);   // content slides up over the logo
   captions.style.opacity = (1 - leave).toFixed(3);
+  const stay = 1 - leave;
   const zNow = camera.position.z;
   caps.forEach((c) => {
     let o, dy;
@@ -209,7 +210,7 @@ function update(p, t) {
     else { o = 1 - Math.abs(zNow - c.z) / c.span; if (c.hero) o = 1 - smooth(0.04, 0.085, p); dy = (zNow - c.z) * 10; if (p > ROAD0) o = 0; }
     c.el.style.opacity = clamp(o).toFixed(3); c.el.style.setProperty('--dy', dy.toFixed(1) + 'px');
   });
-  reveal.style.opacity = logoIn.toFixed(3);
+  reveal.style.opacity = (logoIn * stay).toFixed(3); markImg.style.opacity = (real * stay).toFixed(3);
 
   // ---- header colours
   const light = open > 0.5 || bar.classList.contains('solid');

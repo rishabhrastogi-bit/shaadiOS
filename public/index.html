@@ -1,266 +1,181 @@
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ShaadiOS — for every chapter of a relationship</title>
-<meta name="description" content="Indian couples drift quietly for years before anyone asks for help. ShaadiOS helps couples and parents talk, plan, co-parent and find support early.">
-<meta property="og:title" content="ShaadiOS — for every chapter of a relationship"><meta property="og:description" content="Indian couples drift quietly for years before anyone asks for help. ShaadiOS helps couples and parents talk, plan, co-parent and find support early.">
-<meta property="og:image" content="https://shaadios.app/img/logo/logo-stacked.png"><meta property="og:type" content="website"><meta property="og:site_name" content="ShaadiOS"><meta property="og:image:width" content="2000"><meta property="og:image:height" content="1317"><meta property="og:image:alt" content="ShaadiOS logo: two interlocking rings in rose and sage"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="ShaadiOS — for every chapter of a relationship"><meta name="twitter:description" content="Indian couples drift quietly for years before anyone asks for help. ShaadiOS helps couples and parents talk, plan, co-parent and find support early."><meta name="twitter:image" content="https://shaadios.app/img/logo/logo-stacked.png">
-<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/img/logo/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ShaadiOS — Help, before it's too late</title>
+<meta name="description" content="Help for relationships arrives too late. ShaadiOS brings it to the start: relationship, family and mental-health tools, and early mediation and counselling in one place.">
+<link rel="icon" href="/favicon.ico" sizes="any"><meta property="og:title" content="ShaadiOS — Help, before it&rsquo;s too late"><meta property="og:type" content="website"><meta property="og:description" content="Relationship, family and mental-health tools for Indian couples and parents, with mediators and counsellors long before a courtroom."><meta property="og:image" content="https://shaadios.app/img/logo/logo-stacked.png"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="/img/logo/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="canonical" href="https://shaadios.app/">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/story.css">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ShaadiOS","url":"https://shaadios.app/","logo":"https://shaadios.app/img/logo/logo-stacked.png","email":"support@shaadios.app","sameAs":["https://www.instagram.com/shaadios.app/","https://www.facebook.com/profile.php?id=1288207277718615","https://www.threads.com/@shaadios.app","https://www.linkedin.com/company/shaadios-app/","https://x.com/ShaadiOS"]}</script>
-</head><body>
-<header class="site"><div class="wrap">
-<a href="/" aria-label="ShaadiOS home"><picture><source srcset="/img/logo/logo-horizontal-cream.svg" media="(prefers-color-scheme: dark)"><img src="/img/logo/logo-horizontal.svg" alt="ShaadiOS" width="173" height="40"></picture></a>
-<nav><a href="/#why">Why</a><a href="/#stories">Stories</a><a href="/features">Features</a><a href="/#pilot">Founding members</a><a href="/#faq">FAQ</a><a class="cta" href="/#join">Join the waitlist</a></nav>
-</div></header>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/immersive.css">
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<canvas id="scene" aria-hidden="true"></canvas>
+<div class="vignette" aria-hidden="true"></div>
+<img class="mark-reveal" src="/mark.svg" alt="" aria-hidden="true">
+<img class="logo-reveal" src="/wordmark.svg" alt="" aria-hidden="true">
 
-<main>
-<div class="wrap hero2">
-<div class="reveal">
-<div class="eyebrow">For Indian couples &amp; parents, worldwide &middot; Launching soon</div>
-<h1>Relationships rarely break in a day. They <em>drift</em>, quietly, for years.</h1>
-<p class="lead">ShaadiOS<sup class="tm">&trade;</sup> helps couples and co-parents catch the drift early: small daily rituals, honest check-ins, shared calendars and the right help long before anything reaches a courtroom.</p>
-
-<form class="waitlist" name="waitlist" method="POST" action="https://script.google.com/macros/s/AKfycbybhKTXFi7Ju0TZFBFlDC4nnWaLPBV82GdY9VlpF7AeraF3_fqKkfc2HArds2QwUuum/exec" data-waitlist>
-<input type="hidden" name="page" value="">
-<p class="hp"><label>Leave empty <input name="bot-field"></label></p>
-<input type="email" name="email" placeholder="Your email address" required aria-label="Email address">
-<select name="chapter" aria-label="Where are you right now?">
-<option value="">Where are you right now? (optional)</option>
-<option value="married">Married</option><option value="engaged">Engaged or together</option>
-<option value="separated">Separated or divorced</option><option value="coparenting">Co-parenting</option>
-<option value="prefer-not">Prefer not to say</option>
-</select>
-<select name="country" aria-label="Where do you live?"><option value="">Where do you live?</option><option value="india">India</option><option value="uae">UAE</option><option value="saudi">Saudi Arabia</option><option value="gulf-other">Qatar, Kuwait, Oman or Bahrain</option><option value="usa">USA</option><option value="uk">UK</option><option value="canada">Canada</option><option value="australia">Australia</option><option value="singapore">Singapore</option><option value="europe">Europe</option><option value="other">Somewhere else</option></select>
-<button type="submit">Join the waitlist</button>
-</form>
-<p class="small">Free to join. We&rsquo;ll email you once at launch. No spam, ever.</p>
-</div>
-<div class="photo reveal"><img src="/img/photos/hero-couple.jpg" alt="A young Indian couple, nose to nose, in golden sunlight" width="1200" height="1600">
-<div class="tag"><b>One app, every chapter.</b> Married, engaged, separated or co-parenting.</div></div>
+<!-- The road: full-screen photo chapters, cross-faded by immersive.js (data-sat drains the colour) -->
+<div class="road-scenes" aria-label="The road most marriages take">
+  <figure class="scene" data-sat="1"><img src="/img/story/promise.jpg" alt=""><figcaption class="right"><p class="eyebrow">It begins</p><h2>With a promise.</h2><p class="lead">Saat phere. Two families. One future.</p></figcaption></figure>
+  <figure class="scene" data-sat="0.8"><img src="/img/story/argument.jpg" alt=""><figcaption class="left"><p class="eyebrow">Then</p><h2>The first argument.</h2><p class="lead">Nobody talks about it afterwards.</p></figcaption></figure>
+  <figure class="scene" data-sat="0.6"><img src="/img/story/apart.jpg" alt=""><figcaption class="right"><p class="eyebrow">Then</p><h2>The silence.</h2><p class="lead">Talk becomes logistics. Bills, school runs, whose parents visit next.</p></figcaption></figure>
+  <figure class="scene" data-sat="0.42"><img src="/img/story/elders.jpg" alt=""><figcaption class="left"><p class="eyebrow">Then the family steps in</p><h2>&ldquo;Adjust kar lo.&rdquo;</h2><p class="lead">Elders, relatives, the panchayat. Well-meant, informal, and often taking sides.</p></figcaption></figure>
+  <figure class="scene" data-sat="0.25"><img src="/img/story/notice.jpg" alt=""><figcaption class="right"><p class="eyebrow">Then</p><h2>A lawyer&rsquo;s notice.</h2><p class="lead">The first time anyone outside the family is involved.</p></figcaption></figure>
+  <figure class="scene" data-sat="0.1"><img src="/img/story/court.jpg" alt=""><figcaption class="left"><p class="eyebrow">And finally</p><h2>Court-ordered mediation.</h2><p class="lead">Help arrives at last. By now it is part of a legal strategy, not a way back.</p></figcaption></figure>
+  <figure class="scene stat"><figcaption class="center"><p class="eyebrow">Right now</p><p class="big">11.5<small> lakh</small></p><p class="lead">cases are waiting in India&rsquo;s family courts.</p><p class="src">Law Minister in Parliament, May 2022 data</p></figcaption></figure>
+  <ol class="road" aria-hidden="true"><li>Promise</li><li>Argument</li><li>Silence</li><li>Family</li><li>Lawyer</li><li>Court</li><li class="gold">Help</li></ol>
 </div>
 
-<section class="tint" id="why"><div class="wrap pain">
-<div class="stack reveal">
-<img src="/img/photos/overwhelmed.jpg" alt="A man sits with his head in his hands" loading="lazy">
-<img src="/img/photos/apart.jpg" alt="A woman sits facing away from her partner in a café" loading="lazy">
-<img src="/img/photos/thinking.jpg" alt="A woman in a red kurta, lost in thought" loading="lazy">
-<img src="/img/photos/alone.jpg" alt="A person sitting alone by a window" loading="lazy">
+<header class="bar">
+  <a href="/" class="brand"><img src="/img/logo/logo-horizontal-cream.svg" alt="ShaadiOS" width="150" height="35"></a>
+  <nav><a href="#tools">The tools</a><a href="#help">Find help</a><a href="#screens">The app</a><a class="pill" href="#join">Join the waitlist</a></nav>
+</header>
+
+<!-- Story captions. data-z: the camera depth where a caption is strongest (the road);
+     data-p: the scroll point where it is strongest (the ending). Shown and hidden from immersive.js. -->
+<div class="captions" aria-live="polite">
+  <div class="cap hero" data-z="7" data-span="2.6">
+    <p class="eyebrow">ShaadiOS&trade;</p>
+    <h1>Every marriage needs care <br>long before it needs <em>a court.</em></h1>
+  </div>
+  <div class="cap hero cue-cap" data-z="7" data-span="2.6"><p class="cue">Scroll <span>↓</span></p></div>
+  <div class="cap mid" data-z="2.6" data-span="1.8"><p class="eyebrow">Step inside</p><h2>This is the road <br>most marriages <em>take.</em></h2></div>
+
+  <div class="cap turn" data-p="0.775" data-pspan="0.045"><p class="eyebrow">The help was always there</p><h2>What if it came <em>first?</em></h2></div>
+  <div class="cap turn" data-p="0.915" data-pspan="0.035"><h2>Two lives, held together <br>by the right help, <em>early.</em></h2></div>
+  <div class="cap final" data-p="1" data-pspan="0.06" data-hold><p class="lead">The gold at the centre of our logo is that help.</p></div>
 </div>
-<div class="reveal">
-<div class="eyebrow">Sound familiar?</div>
-<p class="quote" id="pain-quote" aria-live="polite" data-lines="[&quot;\u201cWe live in the same flat. We just don\u2019t live together any more.\u201d&quot;, &quot;\u201cEvery conversation is about EMIs, school fees or whose parents visit next.\u201d&quot;, &quot;\u201cEveryone keeps telling me to adjust. Nobody asks how I\u2019m doing.\u201d&quot;, &quot;\u201cEvery Sunday handoff turns into forty angry WhatsApp messages.\u201d&quot;, &quot;\u201cBy the time we called a lawyer, we had stopped calling each other.\u201d&quot;]">&ldquo;We live in the same flat. We just don&rsquo;t live together any more.&rdquo;</p>
-<div class="dots"></div>
-<p class="muted" style="margin-top:22px">Most couples don&rsquo;t fall out over one big thing. It&rsquo;s the unspoken stuff: money, chores, parents, time, that piles up until talking feels pointless. Indian research on dual-career couples finds the same everyday triggers: finances, household work, time, parenting and in-laws.<sup><a href="#s5">5</a></sup></p>
-</div>
-</div></section>
 
-<section><div class="wrap center">
-<div class="reveal"><div class="eyebrow">The numbers behind the silence</div>
-<h2>When help comes late, it comes as a court date.</h2>
-<p class="sub">India talks about marriage endlessly, and about struggling marriages almost never.</p></div>
-<div class="stats">
-<div class="stat reveal"><div class="num"><span class="count" data-to="1149907" data-format="lakh">11.5</span><small> lakh</small></div>
-<p>cases pending in India&rsquo;s 715 family courts.</p><cite><a href="#s1">Law Minister in Parliament, May 2022 data</a></cite></div>
-<div class="stat reveal"><div class="num"><span class="count" data-to="69464" data-format="in">69,464</span></div>
-<p>new family-court cases filed in a single month.</p><cite><a href="#s1">Same source, May 2022</a></cite></div>
-<div class="stat reveal"><div class="num"><span class="count" data-to="6" data-format="int">6</span><small> years</small></div>
-<p>is how long unhappy couples typically wait before getting help.</p><cite><a href="#s3">The Gottman Institute</a></cite></div>
-<div class="stat reveal"><div class="num"><span class="count" data-to="4897000" data-format="lakh">49</span><small> lakh</small></div>
-<p>Indians were divorced or separated at the last census.</p><cite><a href="#s2">Census of India 2011</a></cite></div>
-<div class="stat reveal"><div class="num"><span class="count" data-to="72" data-format="int">72</span><small>%</small></div>
-<p>of them were separated, not divorced. Most broken marriages never reach a court at all.</p><cite><a href="#s2">35.35 of 48.97 lakh, Census 2011</a></cite></div>
-<div class="stat reveal"><div class="num"><span class="count" data-to="67" data-format="int">67</span><small>%</small></div>
-<p>of divorced or separated Indians are women.</p><cite><a href="#s2">Census of India 2011</a></cite></div>
-</div>
-</div></section>
+<main id="wrap">
+  <section id="story" aria-label="The story"></section>
 
-<section class="tint"><div class="wrap">
-<div class="center reveal"><div class="eyebrow">How it usually goes</div>
-<h2>Help usually arrives at the very end.</h2>
-<p class="sub">ShaadiOS is built for the long stretch before that, when a conversation can still change things.</p></div>
-<div class="journey">
-<div class="track">
-<div class="step"><div class="dot">🌤️</div><div><h4>Drift</h4><p>&ldquo;We&rsquo;re just busy.&rdquo;</p></div></div>
-<div class="step"><div class="dot">🤐</div><div><h4>Silence</h4><p>&ldquo;No point bringing it up.&rdquo;</p></div></div>
-<div class="step"><div class="dot">⚡</div><div><h4>Conflict</h4><p>&ldquo;Every talk becomes a fight.&rdquo;</p></div></div>
-<div class="step"><div class="dot">👪</div><div><h4>Family steps in</h4><p>&ldquo;Adjust kar lo.&rdquo;</p></div></div>
-<div class="step"><div class="dot">📨</div><div><h4>Lawyers</h4><p>&ldquo;Notice sent.&rdquo;</p></div></div>
-<div class="step"><div class="dot">⚖️</div><div><h4>Court</h4><p>&ldquo;Next date in 4 months.&rdquo;</p></div></div>
-</div>
-<div class="bands"><div class="band us">🌱 Where ShaadiOS helps: check-ins, rituals, shared plans, counselling and mediation</div>
-<div class="band them">Where help usually starts today</div></div>
-</div>
-</div></section>
+  <div id="content">
+    <section class="block intro">
+      <p class="eyebrow">ShaadiOS</p>
+      <h2>Care for it early. Decide clearly if you must.</h2>
+      <p class="lead dark">Relationship, family and mental-health tools for Indian couples and parents, with mediators and counsellors available long before anyone needs a courtroom.</p>
+    </section>
 
-<section id="stories"><div class="wrap">
-<div class="center reveal"><div class="eyebrow">Real situations</div><h2>Four homes, four chapters.</h2>
-<p class="sub">These are everyday situations we designed ShaadiOS around.</p></div>
-<div class="stories">
-<article class="story reveal"><img src="/img/photos/apart.jpg" alt="" loading="lazy"><div class="body">
-<div class="who">Riya &amp; Karan &middot; 34 &amp; 36 &middot; Pune &middot; married 7 years</div><h3>The flatmates</h3>
-<p class="muted">Two jobs, two EMIs, one toddler. They talk every day about groceries, the maid and school fees. Neither remembers their last real conversation.</p>
-<div class="split"><div class="today"><b>Today</b>The distance grows until one big fight says it all.</div>
-<div class="with"><b>With ShaadiOS</b>A 2-minute quarterly check-in surfaces &ldquo;I don&rsquo;t feel heard&rdquo; early. A monthly money talk and date-night nudges follow.</div></div></div></article>
+    <section class="block" id="tools">
+      <div class="tool">
+        <img src="/img/story/married.jpg" alt="An Indian couple in festive clothes" loading="lazy">
+        <div><p class="eyebrow">Remember</p><h3>Keep the good visible.</h3>
+          <p>A shared calendar for the dates that matter, ideas for small surprises, and a quiet log of the effort each of you puts in, so it doesn&rsquo;t go unnoticed.</p></div>
+      </div>
+      <div class="tool flip">
+        <img src="/img/story/understand.jpg" alt="A couple looking at a tablet together" loading="lazy">
+        <div><p class="eyebrow">Understand</p><h3>See it from their side.</h3>
+          <p>Social feeds tend to show you more of what you already feel. ShaadiOS uses AI to do the opposite: it gently shares content that helps each of you understand what the other is going through, and closes the gaps that misunderstanding leaves.</p></div>
+      </div>
+      <div class="tool">
+        <img src="/img/story/counsel.jpg" alt="A couple talking with a counsellor" loading="lazy">
+        <div><p class="eyebrow">Get help early</p><h3>Talk to someone before it hardens.</h3>
+          <p>Book a mediator or relationship counsellor while things can still be repaired, with outcomes you can act on and the wider family kept intact.</p></div>
+      </div>
+      <div class="tool flip">
+        <img src="/img/story/family.jpg" alt="An Indian family together outdoors" loading="lazy">
+        <div><p class="eyebrow">Parent together</p><h3>One calendar for the children.</h3>
+          <p>School runs, classes, vaccinations and reminders, shared between both parents. If you live apart, schedules follow your own agreement or a court&rsquo;s order, with every handover kept on record.</p></div>
+      </div>
+      <div class="tool">
+        <img src="/img/story/clarity.jpg" alt="Two people talking across a table" loading="lazy">
+        <div><p class="eyebrow">Clarity</p><h3>Facts, when decisions are hard.</h3>
+          <p>A private, dated record of what happened, in your own words, from the very start. When a hard decision has to be made, you won&rsquo;t be relying on memory alone.</p></div>
+      </div>
+    </section>
 
-<article class="story reveal"><img src="/img/photos/coparent-mom.jpg" alt="" loading="lazy"><div class="body">
-<div class="who">Meera &middot; 38 &middot; Delhi &middot; separated, son aged 8</div><h3>The Sunday handoff</h3>
-<p class="muted">Every weekend handoff means dozens of messages, missed school notes and screenshots saved &ldquo;just in case&rdquo;.</p>
-<div class="split"><div class="today"><b>Today</b>Her son feels every argument. Protracted custody fights are linked to poorer child mental health.<sup><a href="#s4">4</a></sup></div>
-<div class="with"><b>With ShaadiOS</b>One shared calendar for visitation, school and vaccinations, with a calm factual log kept separate from each parent&rsquo;s private space.</div></div></div></article>
+    <section class="block tint" id="help">
+      <div class="two">
+        <div>
+          <p class="eyebrow">Find help, in one place</p>
+          <h2>Like booking a doctor. For your relationship.</h2>
+          <p class="lead dark">There&rsquo;s no single place today to find the right relationship professional. ShaadiOS brings them together: compare, explore your options, and book a consultation.</p>
+          <ul class="chips"><li>Mediators</li><li>Relationship counsellors</li><li>Therapists &amp; mental health</li><li>Family advocates</li><li>Child specialists</li></ul>
+        </div>
+        <img class="side-img" src="/img/story/mediation.jpg" alt="A couple in a mediation session" loading="lazy">
+      </div>
+      <ol class="ladder"><li>Talk together</li><li>Mediator</li><li>Counsellor</li><li>Mental health</li><li>Advocate</li><li>Emergency</li></ol>
+      <p class="fine">The earlier the step, the more there is to save. ShaadiOS connects you with independent professionals; it is not itself a law firm or a medical provider.</p>
+    </section>
 
-<article class="story reveal"><img src="/img/photos/thinking.jpg" alt="" loading="lazy"><div class="body">
-<div class="who">Sana &middot; 29 &middot; Lucknow &middot; married 3 years</div><h3>&ldquo;Adjust kar lo&rdquo;</h3>
-<p class="muted">Her family says every marriage has problems. Seeing a counsellor feels like admitting failure, so she says nothing.</p>
-<div class="split"><div class="today"><b>Today</b>Unhappy for years before anyone outside the family hears about it.</div>
-<div class="with"><b>With ShaadiOS</b>A confidential concierge to talk to first, then a counsellor or mediator, long before anyone mentions a lawyer.</div></div></div></article>
+    <section class="block" id="screens">
+      <p class="eyebrow">A look inside the app</p>
+      <h2>It changes with your chapter.</h2>
+      <div class="screens">
+        <figure><img src="/img/story/status-picker.png" alt="Choose your chapter screen" loading="lazy"><figcaption>Where are you right now?</figcaption></figure>
+        <figure><img src="/img/story/home-married.png" alt="Married home screen" loading="lazy"><figcaption>Married</figcaption></figure>
+        <figure><img src="/img/story/home-unmarried.png" alt="Engaged home screen" loading="lazy"><figcaption>Engaged</figcaption></figure>
+        <figure><img src="/img/story/home-divorced.png" alt="New chapter home screen" loading="lazy"><figcaption>New chapter</figcaption></figure>
+        <figure><img src="/img/story/home-divorcedparent.png" alt="Co-parenting home screen" loading="lazy"><figcaption>Co-parenting</figcaption></figure>
+      </div>
+      <p><a class="more" href="/features">See every feature →</a></p>
+    </section>
 
-<article class="story reveal"><img src="/img/photos/engaged.jpg" alt="" loading="lazy"><div class="body">
-<div class="who">Aditya &amp; Pooja &middot; 28 &amp; 27 &middot; Bengaluru &middot; wedding in 5 months</div><h3>Engaged, already arguing</h3>
-<p class="muted">The arguments aren&rsquo;t about the wedding. They&rsquo;re about money, whose city to live in and how involved the families will be.</p>
-<div class="split"><div class="today"><b>Today</b>Hard topics wait until after the wedding, when they&rsquo;re harder.</div>
-<div class="with"><b>With ShaadiOS</b>Guided pre-marriage check-ins on money, family and the future, and habits that start before the ceremony.</div></div></div></article>
-</div>
-<p class="disclaim">Illustrative scenarios based on common situations. Names and details are fictional.</p>
-</div></section>
+    <section class="block tint" id="world">
+      <div class="two">
+        <div>
+          <p class="eyebrow">In India and abroad</p>
+          <h2>Built for Indian families, wherever they live.</h2>
+          <p class="lead dark">Dubai or Delhi, London or Lucknow. Different time zones, the same relationship.</p>
+        </div>
+        <div>
+          <p class="eyebrow">Private by design</p>
+          <h2>Yours, not ours.</h2>
+          <p class="lead dark">No ads, no data selling. Face ID lock, encrypted storage, and entries you can keep private.</p>
+        </div>
+      </div>
+    </section>
 
-<section class="tint" id="chapters"><div class="wrap center" data-tabs>
-<div class="reveal"><div class="eyebrow">One app, four chapters</div><h2>Where are you right now?</h2>
-<p class="sub">Pick a chapter. ShaadiOS changes its tone, tools and content to fit, and your data stays when life changes.</p></div>
-<div class="tabs" role="tablist">
-<button role="tab" aria-selected="true" aria-controls="t-married">💍 Married</button>
-<button role="tab" aria-selected="false" aria-controls="t-engaged">🌿 Engaged</button>
-<button role="tab" aria-selected="false" aria-controls="t-new">🌱 New chapter</button>
-<button role="tab" aria-selected="false" aria-controls="t-co">👨‍👧 Co-parenting</button>
-</div>
-<div class="panel on" id="t-married" role="tabpanel"><div class="pic"><img src="/img/photos/married.jpg" alt="A smiling Indian couple in festive clothes" loading="lazy"></div>
-<div><h3>Stay close through the busy years</h3><ul><li>Quarterly check-ins with gentle, honest questions</li><li>&ldquo;How&rsquo;s today going?&rdquo; in one tap, building a shared history</li><li>Birthdays, anniversaries and date nights, remembered</li></ul><img class="screen" src="/img/home-married.png" alt="ShaadiOS married home screen" loading="lazy"></div></div>
-<div class="panel" id="t-engaged" role="tabpanel"><div class="pic"><img src="/img/photos/engaged.jpg" alt="Hennaed hands of a couple" loading="lazy"></div>
-<div><h3>Build the habits before the big day</h3><ul><li>Pre-marriage check-ins on money, families and the future</li><li>The same daily rituals, tuned for the run-up to the wedding</li><li>Countdown and shared plans in one place</li></ul><img class="screen" src="/img/home-unmarried.png" alt="ShaadiOS engaged home screen" loading="lazy"></div></div>
-<div class="panel" id="t-new" role="tabpanel"><div class="pic"><img src="/img/photos/alone.jpg" alt="A person sitting by a window" loading="lazy"></div>
-<div><h3>Gentle support for your next chapter</h3><ul><li>Recovery-focused check-ins and mood tracking, just for you</li><li>Legal and paperwork matters organised in a private vault</li><li>Counselling and next steps when you&rsquo;re ready</li></ul><img class="screen" src="/img/home-divorced.png" alt="ShaadiOS new-chapter home screen" loading="lazy"></div></div>
-<div class="panel" id="t-co" role="tabpanel"><div class="pic"><img src="/img/photos/coparent-dad.jpg" alt="A father lifting his laughing son" loading="lazy"></div>
-<div><h3>Co-parenting without the chaos</h3><ul><li>Shared custody and visitation calendar</li><li>School, vaccinations and expenses in one place</li><li>A calm, factual log kept separate from either parent&rsquo;s private space</li></ul><img class="screen" src="/img/home-divorcedparent.png" alt="ShaadiOS co-parenting home screen" loading="lazy"></div></div>
-<p style="margin-top:30px"><a class="btn alt" href="/features">See every feature &rarr;</a></p>
-</div></section>
+    <section class="block" id="join">
+      <p class="eyebrow">Launching soon</p>
+      <h2>Be among the first.</h2>
+      <form class="waitlist" name="waitlist" method="POST" action="https://script.google.com/macros/s/AKfycbybhKTXFi7Ju0TZFBFlDC4nnWaLPBV82GdY9VlpF7AeraF3_fqKkfc2HArds2QwUuum/exec" data-waitlist>
+        <input type="hidden" name="page" value="">
+        <p class="hp"><label>Leave empty <input name="bot-field"></label></p>
+        <input type="email" name="email" placeholder="Your email address" required aria-label="Email address">
+        <select name="chapter" aria-label="Where are you right now?">
+          <option value="">Where are you right now? (optional)</option>
+          <option value="married">Married</option><option value="engaged">Engaged or together</option>
+          <option value="separated">Separated or divorced</option><option value="coparenting">Co-parenting</option>
+          <option value="prefer-not">Prefer not to say</option>
+        </select>
+        <select name="country" aria-label="Where do you live?">
+          <option value="">Where do you live?</option>
+          <option value="india">India</option><option value="uae">UAE</option><option value="saudi">Saudi Arabia</option>
+          <option value="gulf-other">Qatar, Kuwait, Oman or Bahrain</option><option value="usa">USA</option><option value="uk">UK</option>
+          <option value="canada">Canada</option><option value="australia">Australia</option><option value="singapore">Singapore</option>
+          <option value="europe">Europe</option><option value="other">Somewhere else</option>
+        </select>
+        <button type="submit">Join the waitlist</button>
+      </form>
+      <p class="fine">Free to join. We&rsquo;ll email you once at launch. Want to help fund the pilot? <a href="/founding.html#pilot">Become a founding member</a>.</p>
+    </section>
 
-<section><div class="wrap">
-<div class="center reveal"><div class="eyebrow">Try it now</div><h2>A 20-second check-in.</h2>
-<p class="sub">This is the kind of quick, honest question ShaadiOS asks. Nothing you tap here is saved or sent.</p></div>
-<div class="checkin reveal" id="checkin">
-<div class="q"><p>When something bothers you, how easily can you bring it up?</p><div class="opts" data-q="a"><button data-v="1">Struggling</button><button data-v="2">Wobbly</button><button data-v="3">Good</button><button data-v="4">Great</button></div></div>
-<div class="q"><p>When you disagree, how kind are the arguments?</p><div class="opts" data-q="b"><button data-v="1">Struggling</button><button data-v="2">Wobbly</button><button data-v="3">Good</button><button data-v="4">Great</button></div></div>
-<div class="q"><p>When you think about the next few months, how hopeful do you feel?</p><div class="opts" data-q="c"><button data-v="1">Struggling</button><button data-v="2">Wobbly</button><button data-v="3">Good</button><button data-v="4">Great</button></div></div>
-<div class="result" aria-live="polite"></div>
-</div>
-</div></section>
-
-<section class="tint" id="pilot"><div class="wrap">
-<div class="center reveal"><div class="eyebrow">Founding members</div>
-<h2>Help us bring ShaadiOS to its first families.</h2>
-<p class="sub">We&rsquo;re building ShaadiOS independently, and preparing a pilot with Indian couples and co-parents, in India and abroad. Founding members help fund that pilot, and get something real in return when we launch.</p></div>
-<div class="uses reveal">
-<div><span>📱</span>Building the iOS &amp; Android apps</div>
-<div><span>🤝</span>A trusted network of counsellors &amp; mediators</div>
-<div><span>🔒</span>Independent privacy &amp; security reviews</div>
-<div><span>👪</span>Hands-on support for pilot families</div>
-</div>
-<form class="pledge reveal" name="pledge" method="POST" action="https://script.google.com/macros/s/AKfycbybhKTXFi7Ju0TZFBFlDC4nnWaLPBV82GdY9VlpF7AeraF3_fqKkfc2HArds2QwUuum/exec" data-waitlist data-next="/pledged">
-<input type="hidden" name="type" value="pledge"><input type="hidden" name="page" value="">
-<p class="hp"><label>Leave empty <input name="bot-field"></label></p>
-<fieldset class="tiers"><legend class="sr">Choose a founding tier</legend>
-<label class="tier"><input type="radio" name="tier" value="supporter" required>
-<span class="t-name">Supporter</span><span class="t-price">&#8377;499</span>
-<ul><li>Early access before public launch</li><li>Founding member badge in the app</li></ul></label>
-<label class="tier featured"><input type="radio" name="tier" value="family" checked>
-<span class="t-flag">Best value</span><span class="t-name">Founding family</span><span class="t-price">&#8377;1,999</span>
-<ul><li>1 year of premium features at launch</li><li>Everything in Supporter</li></ul></label>
-<label class="tier"><input type="radio" name="tier" value="partner">
-<span class="t-name">Pilot partner</span><span class="t-price">&#8377;4,999</span>
-<ul><li>One concierge session: counselling or mediation</li><li>Everything in Founding family</li></ul></label>
-</fieldset>
-<div class="pledge-fields">
-<input type="text" name="name" placeholder="Your name" required aria-label="Your name" autocomplete="name">
-<input type="email" name="email" placeholder="Email address" required aria-label="Email address" autocomplete="email">
-<input type="tel" name="phone" placeholder="Phone (optional)" aria-label="Phone (optional)" autocomplete="tel">
-<select name="country" aria-label="Where do you live?"><option value="">Where do you live?</option><option value="india">India</option><option value="uae">UAE</option><option value="saudi">Saudi Arabia</option><option value="gulf-other">Qatar, Kuwait, Oman or Bahrain</option><option value="usa">USA</option><option value="uk">UK</option><option value="canada">Canada</option><option value="australia">Australia</option><option value="singapore">Singapore</option><option value="europe">Europe</option><option value="other">Somewhere else</option></select>
-</div>
-<label class="consent"><input type="checkbox" name="consent" value="yes" required> I understand this is a pledge, not a payment. I&rsquo;ll be invited to complete it when founding memberships open.</label>
-<button type="submit">Pledge my support</button>
-<p class="small fine">Pledging is free and doesn&rsquo;t charge you. Founding memberships are purchases of future services, not an investment or a donation. Full terms are shown before you pay.</p>
-</form>
-</div></section>
-
-<section class="tint" id="privacy"><div class="wrap center">
-<div class="reveal"><h2>Private by design. Calm by default.</h2>
-<p class="sub">ShaadiOS holds some of the most personal information in your life, and we treat it that way.</p></div>
-<div class="trust">
-<div><h3>Yours, not ours</h3><p class="muted">We never sell your data or show ads. Export or delete everything at any time.</p></div>
-<div><h3>Locked down</h3><p class="muted">Face ID lock, encrypted storage, and a journal you can hide from your partner.</p></div>
-<div><h3>Built for Indian families</h3><p class="muted">In India or abroad. Consent-first and minimal by design, built around India&rsquo;s Digital Personal Data Protection Act.</p></div>
-</div>
-<div class="notice" style="max-width:760px;margin:36px auto 0;text-align:left">
-<strong>If you are in danger, please reach out now.</strong> Emergency: <strong>112</strong> &middot; Women Helpline: <strong>181</strong> &middot; Childline: <strong>1098</strong> &middot; Tele-MANAS (mental health): <strong>14416</strong>. Outside India? Call your local emergency number. ShaadiOS is not an emergency service.</div>
-</div></section>
-
-<section id="faq"><div class="wrap" style="max-width:760px">
-<h2 class="center">Questions</h2>
-<details><summary>When does ShaadiOS launch?</summary><p>We&rsquo;re launching on iOS and Android in India first. Join the waitlist and we&rsquo;ll email you when it&rsquo;s live.</p></details>
-<details><summary>I live outside India. Is ShaadiOS for me?</summary><p>Yes. ShaadiOS is built for Indian couples and parents wherever they live, including long-distance and across time zones. Join the waitlist and tell us where you live: it decides which countries we launch in next.</p></details>
-<details><summary>Is it free?</summary><p>The essentials are free. Optional concierge services such as counselling or mediation sessions are priced clearly before you book, and you only pay for what you choose.</p></details>
-<details><summary>Can my partner see everything I add?</summary><p>No. You choose what is shared. Private journal entries and personal check-ins stay private unless you decide otherwise.</p></details>
-<details><summary>Do we both need the app?</summary><p>No. ShaadiOS works for one person on their own. Inviting a partner or co-parent is optional.</p></details>
-<details><summary>Is ShaadiOS a law firm or therapy service?</summary><p>No. ShaadiOS is a software tool. Concierge services connect you with independent professionals; ShaadiOS itself does not give legal advice or clinical treatment.</p></details>
-<details><summary>How do I delete my account?</summary><p>Follow the steps on our <a href="/delete-account">account deletion page</a>. We delete your data within 30 days.</p></details>
-</div></section>
-
-<section class="tint" id="join"><div class="wrap center reveal" style="max-width:720px">
-<img src="/img/photos/promise.jpg" alt="Hands holding, wearing a gold ring" loading="lazy" style="border-radius:24px;margin:0 auto 28px;aspect-ratio:16/7;object-fit:cover;width:100%">
-<h2>Start the conversation before it gets hard.</h2>
-<p class="sub">Join the waitlist and be among the first to use ShaadiOS.</p>
-<div style="display:flex;justify-content:center"><div style="max-width:640px;width:100%">
-<form class="waitlist" name="waitlist" method="POST" action="https://script.google.com/macros/s/AKfycbybhKTXFi7Ju0TZFBFlDC4nnWaLPBV82GdY9VlpF7AeraF3_fqKkfc2HArds2QwUuum/exec" data-waitlist>
-<input type="hidden" name="page" value="">
-<p class="hp"><label>Leave empty <input name="bot-field"></label></p>
-<input type="email" name="email" placeholder="Your email address" required aria-label="Email address">
-<select name="chapter" aria-label="Where are you right now?">
-<option value="">Where are you right now? (optional)</option>
-<option value="married">Married</option><option value="engaged">Engaged or together</option>
-<option value="separated">Separated or divorced</option><option value="coparenting">Co-parenting</option>
-<option value="prefer-not">Prefer not to say</option>
-</select>
-<select name="country" aria-label="Where do you live?"><option value="">Where do you live?</option><option value="india">India</option><option value="uae">UAE</option><option value="saudi">Saudi Arabia</option><option value="gulf-other">Qatar, Kuwait, Oman or Bahrain</option><option value="usa">USA</option><option value="uk">UK</option><option value="canada">Canada</option><option value="australia">Australia</option><option value="singapore">Singapore</option><option value="europe">Europe</option><option value="other">Somewhere else</option></select>
-<button type="submit">Join the waitlist</button>
-</form>
-<p class="small">Free to join. We&rsquo;ll email you once at launch. No spam, ever.</p></div></div>
-<p class="small" style="margin-top:28px">Follow along while we build</p>
-<div class="follow"><div class="social"><a href="https://www.instagram.com/shaadios.app/" target="_blank" rel="noopener me" aria-label="ShaadiOS on Instagram" title="Instagram"><svg aria-hidden="true" focusable="false" fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></a><a href="https://www.facebook.com/profile.php?id=1288207277718615" target="_blank" rel="noopener me" aria-label="ShaadiOS on Facebook" title="Facebook"><svg aria-hidden="true" focusable="false" fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg></a><a href="https://www.threads.com/@shaadios.app" target="_blank" rel="noopener me" aria-label="ShaadiOS on Threads" title="Threads"><svg aria-hidden="true" focusable="false" fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.263 11.097c-.03-3.486-1.92-5.586-5.111-5.586-2.13 0-3.922.963-4.863 2.499l2.062 1.438c.535-.843 1.272-1.543 2.628-1.543 1.528 0 2.318.85 2.544 2.431a15 15 0 0 0-2.236-.173c-4.125 0-6.068 1.867-6.068 4.336s1.943 3.99 4.804 3.99c3.139 0 5.013-2.115 5.781-4.735.798.361 1.348 1.204 1.348 2.47 0 3.387-3.907 5.232-7.22 5.232-4.885 0-8.077-3.207-8.077-8.424 0-6.392 4.223-10.487 9.9-10.487 3.808 0 5.69 1.671 6.97 3.914l2.108-1.475C21.44 2.078 18.331 0 13.663 0 6.227 0 1.168 5.277 1.168 12.934c0 7 4.953 11.066 10.856 11.066 4.878 0 9.809-2.846 9.809-7.716 0-2.545-1.46-4.231-3.569-5.187m-6.33 4.855c-1.077 0-2.026-.512-2.026-1.453 0-1.483 1.822-1.934 3.606-1.934.678 0 1.34.045 1.927.173-.422 1.927-1.671 3.215-3.508 3.214Z"/></svg></a><a href="https://www.linkedin.com/company/shaadios-app/" target="_blank" rel="noopener me" aria-label="ShaadiOS on LinkedIn" title="LinkedIn"><svg aria-hidden="true" focusable="false" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><mask id="li-cut-14"><rect width="24" height="24" fill="#fff"/><circle cx="6.3" cy="6.4" r="1.65" fill="#000"/><rect x="4.9" y="9.2" width="2.8" height="9.8" fill="#000"/><path fill="#000" d="M9.6 9.2h2.7v1.4c.5-.9 1.7-1.7 3.4-1.7 2.9 0 3.6 1.9 3.6 4.4V19h-2.8v-5.2c0-1.3-.3-2.4-1.7-2.4-1.5 0-2.4 1-2.4 2.5V19H9.6z"/></mask></defs><rect width="24" height="24" rx="3.5" mask="url(#li-cut-14)"/></svg>
-</a><a href="https://x.com/ShaadiOS" target="_blank" rel="noopener me" aria-label="ShaadiOS on X" title="X"><svg aria-hidden="true" focusable="false" fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/></svg></a></div></div>
-</div></section>
-
-<section><div class="wrap" style="max-width:860px">
-<h3>Sources</h3>
-<ol class="sources">
-<li id="s1">Family courts: 715 courts, 11,49,907 cases pending and 69,464 new cases in May 2022, stated by the Law Minister in Parliament. <a href="https://www.theweek.in/news/india/2022/07/26/will-request-state-govts-to-set-up-family-courts-in-every-district-rijiju.amp.html" rel="noopener" target="_blank">The Week, 26 July 2022</a>.</li>
-<li id="s2">Census of India 2011: 48.97 lakh people divorced or separated (35.35 lakh separated, 13.62 lakh divorced; 67% women). <a href="https://www.shethepeople.tv/news/more-women-divorcees-in-india-than-men-census-report" rel="noopener" target="_blank">SheThePeople, 19 Aug 2016</a>, reporting Census tables.</li>
-<li id="s3">&ldquo;Couples wait an average of six years of being unhappy before getting help.&rdquo; <a href="https://www.gottman.com/blog/timing-is-everything/" rel="noopener" target="_blank">The Gottman Institute</a>.</li>
-<li id="s4">Professionals in urban India report that children&rsquo;s mental health suffers in protracted custody disputes. <a href="https://journals.sagepub.com/doi/10.1177/02537176241254515" rel="noopener" target="_blank">Indian Journal of Psychological Medicine, 2024</a>.</li>
-<li id="s5">Common triggers of marital arguments among dual-career couples in Bengaluru. <a href="https://www.isec.ac.in/marital-disharmony-among-working-couples-in-urban-india-a-sociological-inquiry/" rel="noopener" target="_blank">ISEC, Bengaluru</a>.</li>
-</ol>
-<p class="small">Photos from <a href="https://unsplash.com/license" rel="noopener" target="_blank">Unsplash</a> (free licence). People shown are models, not ShaadiOS users.</p>
-</div></section>
+    <footer class="foot">
+      <img src="/img/logo/logo-horizontal.svg" alt="ShaadiOS" width="160" height="37">
+      <div class="social">
+        <a href="https://www.instagram.com/shaadios.app/" target="_blank" rel="noopener me" aria-label="ShaadiOS on Instagram" style="--i:url(/img/icons/instagram.svg)"></a>
+        <a href="https://www.facebook.com/profile.php?id=1288207277718615" target="_blank" rel="noopener me" aria-label="ShaadiOS on Facebook" style="--i:url(/img/icons/facebook.svg)"></a>
+        <a href="https://www.threads.com/@shaadios.app" target="_blank" rel="noopener me" aria-label="ShaadiOS on Threads" style="--i:url(/img/icons/threads.svg)"></a>
+        <a href="https://www.linkedin.com/company/shaadios-app/" target="_blank" rel="noopener me" aria-label="ShaadiOS on LinkedIn" style="--i:url(/img/icons/linkedin.svg)"></a>
+        <a href="https://x.com/ShaadiOS" target="_blank" rel="noopener me" aria-label="ShaadiOS on X" style="--i:url(/img/icons/x.svg)"></a>
+      </div>
+      <nav class="legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="/refund">Refunds</a><a href="/contact">Contact</a><a href="/delete-account">Delete account</a></nav>
+      <p class="help">In danger? Call 112 &middot; Women Helpline 181 &middot; Childline 1098 &middot; Tele-MANAS 14416 &middot; Outside India, your local emergency number. ShaadiOS&trade; is not a law firm, a medical provider or an emergency service. AI features give general guidance, not legal, medical or therapeutic advice.</p>
+      <p class="copy-r">&copy; 2026 ShaadiOS&trade;. All rights reserved. Photos: Unsplash; people shown are models.</p>
+    </footer>
+  </div>
 </main>
 
-<footer><div class="wrap cols">
-<div><picture><source srcset="/img/logo/logo-stacked-cream.svg" media="(prefers-color-scheme: dark)"><img src="/img/logo/logo-stacked.svg" alt="ShaadiOS" width="108" height="70"></picture>
-<p>One app for every chapter of a relationship.</p>
-<p class="small">ShaadiOS is not a law firm, a medical provider or a substitute for therapy. In an emergency call 112.</p></div>
-<div><strong>Explore</strong><br><a href="/#why">Why ShaadiOS</a><a href="/features">Features</a><a href="/contact">Contact</a><a href="mailto:support@shaadios.app">support@shaadios.app</a></div>
-<div><strong>Legal</strong><br><a href="/privacy">Privacy policy</a><a href="/terms">Terms of service</a><a href="/refund">Refund &amp; cancellation</a><a href="/delete-account">Delete your account</a></div>
-<div><strong>Follow us</strong><br><div class="social"><a href="https://www.instagram.com/shaadios.app/" target="_blank" rel="noopener me" aria-label="ShaadiOS on Instagram" title="Instagram"><svg aria-hidden="true" focusable="false" fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></a><a href="https://www.facebook.com/profile.php?id=1288207277718615" target="_blank" rel="noopener me" aria-label="ShaadiOS on Facebook" title="Facebook"><svg aria-hidden="true" focusable="false" fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg></a><a href="https://www.threads.com/@shaadios.app" target="_blank" rel="noopener me" aria-label="ShaadiOS on Threads" title="Threads"><svg aria-hidden="true" focusable="false" fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.263 11.097c-.03-3.486-1.92-5.586-5.111-5.586-2.13 0-3.922.963-4.863 2.499l2.062 1.438c.535-.843 1.272-1.543 2.628-1.543 1.528 0 2.318.85 2.544 2.431a15 15 0 0 0-2.236-.173c-4.125 0-6.068 1.867-6.068 4.336s1.943 3.99 4.804 3.99c3.139 0 5.013-2.115 5.781-4.735.798.361 1.348 1.204 1.348 2.47 0 3.387-3.907 5.232-7.22 5.232-4.885 0-8.077-3.207-8.077-8.424 0-6.392 4.223-10.487 9.9-10.487 3.808 0 5.69 1.671 6.97 3.914l2.108-1.475C21.44 2.078 18.331 0 13.663 0 6.227 0 1.168 5.277 1.168 12.934c0 7 4.953 11.066 10.856 11.066 4.878 0 9.809-2.846 9.809-7.716 0-2.545-1.46-4.231-3.569-5.187m-6.33 4.855c-1.077 0-2.026-.512-2.026-1.453 0-1.483 1.822-1.934 3.606-1.934.678 0 1.34.045 1.927.173-.422 1.927-1.671 3.215-3.508 3.214Z"/></svg></a><a href="https://www.linkedin.com/company/shaadios-app/" target="_blank" rel="noopener me" aria-label="ShaadiOS on LinkedIn" title="LinkedIn"><svg aria-hidden="true" focusable="false" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><mask id="li-cut-4"><rect width="24" height="24" fill="#fff"/><circle cx="6.3" cy="6.4" r="1.65" fill="#000"/><rect x="4.9" y="9.2" width="2.8" height="9.8" fill="#000"/><path fill="#000" d="M9.6 9.2h2.7v1.4c.5-.9 1.7-1.7 3.4-1.7 2.9 0 3.6 1.9 3.6 4.4V19h-2.8v-5.2c0-1.3-.3-2.4-1.7-2.4-1.5 0-2.4 1-2.4 2.5V19H9.6z"/></mask></defs><rect width="24" height="24" rx="3.5" mask="url(#li-cut-4)"/></svg>
-</a><a href="https://x.com/ShaadiOS" target="_blank" rel="noopener me" aria-label="ShaadiOS on X" title="X"><svg aria-hidden="true" focusable="false" fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/></svg></a></div></div>
-</div>
-<div class="wrap small" style="margin-top:24px">&copy; 2026 ShaadiOS&trade;. All rights reserved. ShaadiOS&trade; is a trademark (application pending).</div>
-</footer><script src="/script.js" defer></script></body></html>
+<div class="progress" aria-hidden="true"><span></span></div>
+<script type="module" src="/immersive.js"></script>
+</body>
+</html>
