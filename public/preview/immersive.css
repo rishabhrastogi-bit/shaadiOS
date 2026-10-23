@@ -167,3 +167,7 @@ form.waitlist button{padding:14px 26px;border-radius:999px;border:0;background:v
 }
 @media(max-width:860px){.cap.hero:not(.cue-cap){top:14%!important}}
 @media(max-width:860px){.cap h1 br,.cap h2 br{display:none}.cap.cue-cap{bottom:4vh!important;top:auto!important}}
+
+.mark-anim{position:fixed;left:50%;top:50%;width:min(380px,62vw,52vh);transform:translate(-50%,-50%);z-index:4;opacity:0;pointer-events:none}
+.mark-anim svg{width:100%;height:auto;display:block;overflow:visible}
+.logo-reveal{top:71%!important;width:min(300px,50vw,42vh)!important;left:50%!important}

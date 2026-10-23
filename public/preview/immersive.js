@@ -75,7 +75,7 @@ function screenYToWorld(dist, frac) { return (0.5 - frac) * 2 * dist * tanH; }  
 const story = document.getElementById('story'), wrap = document.getElementById('wrap'), bar = document.querySelector('.bar');
 const prog = document.querySelector('.progress span'), vignette = document.querySelector('.vignette');
 const road = document.querySelector('.road-scenes'), scenes = [...road.querySelectorAll('.scene')], marks = [...road.querySelectorAll('.road li')];
-const captions = document.querySelector('.captions'), reveal = document.querySelector('.logo-reveal'), markImg = document.querySelector('.mark-reveal'), logo = document.querySelector('.brand img');
+const captions = document.querySelector('.captions'), reveal = document.querySelector('.logo-reveal'),  logo = document.querySelector('.brand img');
 const caps = [...document.querySelectorAll('.cap')].map((el) => ({ el,
   z: el.dataset.z !== undefined ? +el.dataset.z : null, span: +(el.dataset.span || 3),
   p: el.dataset.p !== undefined ? +el.dataset.p : null, pspan: +(el.dataset.pspan || 0.05),
@@ -187,24 +187,7 @@ function update(p, t) {
     else { o = 1 - Math.abs(zNow - c.z) / c.span; if (c.hero) o = 1 - smooth(0.04, 0.085, p); dy = (zNow - c.z) * 10; if (p > ROAD0) o = 0; }
     c.el.style.opacity = clamp(o).toFixed(3); c.el.style.setProperty('--dy', dy.toFixed(1) + 'px');
   });
-  // the real logo takes over from the 3D rings, at the same place and size on screen
-  const swap = smooth(0.938, 0.946, p);                 // quick: rings and logo now look alike
-  fin.g.visible = join > 0.001 && swap < 0.98;
-  helpMat.opacity = grow; help.visible = grow > 0.001 && swap < 0.98;
-  helpMat.emissiveIntensity = lerp(0.55, 0.9, flat); helpMat.roughness = lerp(0.25, 0.7, flat); helpMat.metalness = lerp(0.85, 0.1, flat); helpGlow.material.opacity *= (1 - swap * 0.7);
-  if (swap > 0) {
-    fin.g.updateMatrixWorld(); box.setFromObject(fin.g, true);
-    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
-    for (let i = 0; i < 8; i++) {
-      corner.set(i & 1 ? box.max.x : box.min.x, i & 2 ? box.max.y : box.min.y, i & 4 ? box.max.z : box.min.z).project(camera);
-      const sx = (corner.x + 1) / 2 * innerWidth, sy = (1 - corner.y) / 2 * innerHeight;
-      x0 = Math.min(x0, sx); x1 = Math.max(x1, sx); y0 = Math.min(y0, sy); y1 = Math.max(y1, sy);
-    }
-    const w = (x1 - x0) * 1.1, cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;   // the svg has a small margin
-    Object.assign(markImg.style, { width: w + 'px', left: (cx - w / 2) + 'px', top: (cy - w * 0.328) + 'px' });
-    Object.assign(reveal.style, { width: Math.min(w * 0.8, innerWidth * 0.62) + 'px', left: '50%', top: (y1 + (y1 - y0) * 0.12) + 'px' });
-  }
-  markImg.style.opacity = swap.toFixed(3);
+  ending(p);
   reveal.style.opacity = logoIn.toFixed(3);
 
   // ---- header colours
@@ -212,6 +195,7 @@ function update(p, t) {
   const want = light ? 'logo-horizontal.svg' : 'logo-horizontal-cream.svg';
   if (!logo.src.endsWith(want)) logo.src = want;
   bar.style.color = light ? '#2F2622' : '';
+  fin.g.visible = false; help.visible = false; helpGlow.visible = false;
   return roadOn > 0.999 && open === 0;                                    // the photos fully cover the canvas
 }
 
@@ -240,4 +224,45 @@ function frame() {
   if (frozen || scrollPos < storyRange() + innerHeight) { const covered = update(p, t); if (!covered) renderer.render(scene, camera); }
   requestAnimationFrame(frame);
 }
+
+// ---------- the ending, drawn with the real logo artwork (no 3D intersections)
+const markBox = document.querySelector('.mark-anim');
+let markParts = null;
+fetch('mark.svg').then((r) => r.text()).then((txt) => {
+  markBox.innerHTML = txt;
+  const svg = markBox.querySelector('svg'); svg.removeAttribute('width'); svg.removeAttribute('height');
+  const paths = [...svg.querySelectorAll('path')];
+  const by = (c) => paths.filter((x) => (x.getAttribute('fill') || '').toUpperCase() === c);
+  const g = (list) => { const e = document.createElementNS('http://www.w3.org/2000/svg', 'g'); list.forEach((x) => e.appendChild(x)); svg.appendChild(e); return e; };
+  const sage = g(by('#9CAF88')), rose = g(by('#D98A94').slice(0, 1)), gold = g(by('#C9A24B')), arc = g(by('#D98A94').slice(1));
+  // keep the logo's drawing order: sage, rose, gold, rose arc over sage
+  [sage, rose, gold, arc].forEach((e) => svg.appendChild(e));
+  const NS = 'http://www.w3.org/2000/svg';
+  const ring = (cx) => { const c = document.createElementNS(NS, 'circle'); c.setAttribute('cx', cx); c.setAttribute('cy', 1044); c.setAttribute('r', 732); c.setAttribute('fill', 'none'); c.setAttribute('stroke-width', 432); return c; };
+  const full = document.createElementNS(NS, 'g'), fs = ring(2148), fr = ring(1040);
+  full.append(fs, fr); svg.insertBefore(full, sage);
+  const woven = document.createElementNS(NS, 'g'); [sage, rose, arc].forEach((e) => woven.appendChild(e)); svg.insertBefore(woven, gold);
+  markParts = { sage, rose, gold, arc, full, fs, fr, woven };
+});
+const mix = (c1, c2, t) => '#' + [0, 2, 4].map((i) => Math.round(lerp(parseInt(c1.substr(i + 1, 2), 16), parseInt(c2.substr(i + 1, 2), 16), t)).toString(16).padStart(2, '0')).join('');
+function ending(p) {
+  const appear = smooth(0.72, 0.75, p), join = smooth(0.735, 0.83, p), tint = smooth(0.78, 0.86, p);
+  const gold = smooth(0.88, 0.91, p);
+  markBox.style.opacity = appear.toFixed(3);
+  if (!markParts) return;
+  const off = (1 - join) * 900;                              // svg units (mark is 3184 wide)
+  markParts.fr.setAttribute('transform', `translate(${-off} 0)`);
+  markParts.fs.setAttribute('transform', `translate(${off} 0)`);
+  const weave = p >= 0.83 ? 1 : 0;                            // the logo's over-under weave forms once locked
+  markParts.full.style.opacity = (1 - weave).toFixed(3); markParts.woven.style.opacity = weave.toFixed(3);
+  const plat = '#CFCAC4';
+  markParts.rose.querySelectorAll('path').forEach((x) => x.setAttribute('fill', mix(plat, '#D98A94', tint)));
+  markParts.arc.querySelectorAll('path').forEach((x) => x.setAttribute('fill', mix(plat, '#D98A94', tint)));
+  markParts.sage.querySelectorAll('path').forEach((x) => x.setAttribute('fill', mix('#BDB8B2', '#9CAF88', tint)));
+  markParts.fr.setAttribute('stroke', mix(plat, '#D98A94', tint)); markParts.fs.setAttribute('stroke', mix('#BDB8B2', '#9CAF88', tint));
+  markParts.gold.style.opacity = gold.toFixed(3);
+  markParts.gold.style.transformOrigin = '50% 50%'; markParts.gold.style.transformBox = 'fill-box';
+  markParts.gold.style.transform = `scale(${lerp(0.4, 1, gold)})`;
+}
+
 frame();
