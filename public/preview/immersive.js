@@ -33,6 +33,10 @@ const key = new THREE.DirectionalLight(0xffffff, 2.2); key.position.set(4, 5, 6)
 // ---------- rings
 const R = 1.25, TUBE = 0.19;
 const ringGeo = new THREE.TorusGeometry(R, TUBE, 96, 260);
+// morph target: the same ring with the logo's band thickness (tube = 0.31 x radius, measured from the logo)
+const thick = new THREE.TorusGeometry(R, R * 0.31, 96, 260);
+ringGeo.morphAttributes.position = [thick.attributes.position];
+ringGeo.morphAttributes.normal = [thick.attributes.normal];
 const platinum = () => new THREE.MeshPhysicalMaterial({ color: 0xE6E4E1, metalness: 1, roughness: 0.17, clearcoat: 0.6, clearcoatRoughness: 0.1 });
 function ringPair(z) {
   const a = new THREE.Mesh(ringGeo, platinum()), b = new THREE.Mesh(ringGeo, platinum());
@@ -41,7 +45,7 @@ function ringPair(z) {
 const start = ringPair(0);          // opening pair, the camera flies through ring a
 const fin = ringPair(-40);          // ending pair, far away from the opening
 const ROSE = new THREE.Color(0xD98A94), SAGE = new THREE.Color(0x9CAF88), PLAT = new THREE.Color(0xE6E4E1);
-for (const m of [fin.a.material, fin.b.material]) m.transparent = true;
+
 const box = new THREE.Box3(), corner = new THREE.Vector3();
 
 // the help: gold sphere plus a soft additive glow
@@ -52,7 +56,7 @@ const glowTex = (() => {
   g.fillStyle = gr; g.fillRect(0, 0, 256, 256); const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
 })();
 const helpMat = new THREE.MeshPhysicalMaterial({ color: 0xC9A24B, metalness: 0.85, roughness: 0.25, emissive: 0xC9A24B, emissiveIntensity: 0.55, transparent: true, opacity: 0 });
-const help = new THREE.Mesh(new THREE.SphereGeometry(0.35, 48, 48), helpMat); scene.add(help);
+const help = new THREE.Mesh(new THREE.SphereGeometry(0.4, 48, 48), helpMat); scene.add(help);
 const helpGlow = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, transparent: true, depthWrite: false, opacity: 0 })); scene.add(helpGlow);
 
 // faint dust for the opening
@@ -108,19 +112,28 @@ function update(p, t) {
 
   // ---- 3. ending: help glow -> sphere -> rings glide in -> logo
   const dawn = smooth(0.675, 0.685, p), join = smooth(0.735, 0.805, p), morph = smooth(0.8, 0.87, p);
-  const grow = smooth(0.875, 0.91, p), logoIn = smooth(0.93, 0.985, p);   // the help arrives only once the rings are together
-  const endD = fitDistance(3.8, 3.1, 0.62, lerp(0.42, 0.34, logoIn));                 // rings fit below the captions
-  const endY = screenYToWorld(endD, lerp(0.6, 0.47, logoIn));
+  const grow = smooth(0.875, 0.91, p), settle = smooth(0.905, 0.935, p), logoIn = smooth(0.95, 0.985, p);   // the help arrives only once the rings are together
+  const endD = fitDistance(lerp(3.8, 5.3, morph), lerp(3.1, 3.3, morph), 0.62, lerp(0.42, 0.34, settle));                 // rings fit below the captions
+  const endY = screenYToWorld(endD, lerp(0.6, 0.47, settle));
   fin.g.position.y = endY;
   fin.g.rotation.set((1 - morph) * 0.16, (1 - morph) * (0.4 + Math.sin(t * 0.3) * 0.05), 0);
-  fin.a.position.set(lerp(-4.2, lerp(-0.6, -0.835, morph), join), 0, lerp(0, 0.09, morph));
-  fin.b.position.set(lerp(4.2, lerp(0.6, 0.835, morph), join), 0, lerp(0, -0.09, morph));
-  fin.b.rotation.x = lerp(Math.PI / 2, 0, morph);
+  fin.a.position.set(lerp(-4.2, lerp(-0.6, -1.0, morph), join), 0, lerp(0, 0.05, morph));
+  fin.b.position.set(lerp(4.2, lerp(0.6, 1.0, morph), join), 0, lerp(0, -0.05, morph));
+  fin.b.rotation.x = lerp(Math.PI / 2, 0.14, morph);            // slight opposite tilts give the logo's over-under weave
+  fin.a.rotation.x = lerp(0, -0.14, morph);
+  fin.a.morphTargetInfluences[0] = fin.b.morphTargetInfluences[0] = morph;
   fin.a.material.color.copy(PLAT).lerp(ROSE, morph); fin.b.material.color.copy(PLAT).lerp(SAGE, morph);
-  for (const m of [fin.a.material, fin.b.material]) { m.metalness = lerp(1, 0.25, morph); m.roughness = lerp(0.17, 0.42, morph); }
+  // shiny platinum -> the logo's flat, matte colour
+  const flat = smooth(0.84, 0.92, p);
+  key.intensity = lerp(2.2, 0.7, flat);
+  [[fin.a.material, ROSE], [fin.b.material, SAGE]].forEach(([m, c]) => {
+    m.metalness = lerp(1, 0, morph); m.roughness = lerp(0.17, 0.85, morph); m.clearcoat = lerp(0.6, 0, morph);
+    m.envMapIntensity = lerp(1, 0.15, flat); m.emissive.copy(c).multiplyScalar(0.7 * flat);
+  });
   fin.g.visible = join > 0.001;
   help.position.set(0, endY, -40);
   help.scale.setScalar(lerp(0.2, 1, grow));
+  help.position.z = -40 + 0.2;                                   // just in front of the ring overlap
   helpMat.opacity = grow;
   helpGlow.position.set(0, endY, -40.2);
   helpGlow.scale.setScalar(lerp(0.6, 1.5, grow) + Math.sin(t * 2) * 0.04);
@@ -175,18 +188,19 @@ function update(p, t) {
     c.el.style.opacity = clamp(o).toFixed(3); c.el.style.setProperty('--dy', dy.toFixed(1) + 'px');
   });
   // the real logo takes over from the 3D rings, at the same place and size on screen
-  const swap = smooth(0.925, 0.955, p);
-  for (const m of [fin.a.material, fin.b.material]) m.opacity = 1 - swap;
-  helpMat.opacity = grow * (1 - swap); helpGlow.material.opacity *= (1 - swap * 0.7);
+  const swap = smooth(0.938, 0.946, p);                 // quick: rings and logo now look alike
+  fin.g.visible = join > 0.001 && swap < 0.98;
+  helpMat.opacity = grow; help.visible = grow > 0.001 && swap < 0.98;
+  helpMat.emissiveIntensity = lerp(0.55, 0.9, flat); helpMat.roughness = lerp(0.25, 0.7, flat); helpMat.metalness = lerp(0.85, 0.1, flat); helpGlow.material.opacity *= (1 - swap * 0.7);
   if (swap > 0) {
-    fin.g.updateMatrixWorld(); box.setFromObject(fin.g);
+    fin.g.updateMatrixWorld(); box.setFromObject(fin.g, true);
     let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
     for (let i = 0; i < 8; i++) {
       corner.set(i & 1 ? box.max.x : box.min.x, i & 2 ? box.max.y : box.min.y, i & 4 ? box.max.z : box.min.z).project(camera);
       const sx = (corner.x + 1) / 2 * innerWidth, sy = (1 - corner.y) / 2 * innerHeight;
       x0 = Math.min(x0, sx); x1 = Math.max(x1, sx); y0 = Math.min(y0, sy); y1 = Math.max(y1, sy);
     }
-    const w = (x1 - x0) * 1.06, cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;   // the svg has a small margin
+    const w = (x1 - x0) * 1.1, cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;   // the svg has a small margin
     Object.assign(markImg.style, { width: w + 'px', left: (cx - w / 2) + 'px', top: (cy - w * 0.328) + 'px' });
     Object.assign(reveal.style, { width: Math.min(w * 0.8, innerWidth * 0.62) + 'px', left: '50%', top: (y1 + (y1 - y0) * 0.12) + 'px' });
   }
