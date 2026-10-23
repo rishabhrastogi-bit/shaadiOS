@@ -59,6 +59,44 @@ const roseTop = new THREE.Mesh(ringGeo, fin.a.material.clone()); roseTop.materia
 fin.g.add(sageHalo, roseHalo, roseTop);
 const layers = [fin.a, sageHalo, fin.b, roseHalo, roseTop];
 
+// ---------- the help, from the start: a small cluster of champagne-gold crystals suspended between the rings
+function diamondGeo(r) {
+  // a brilliant-cut silhouette: table, crown, girdle, pavilion; few segments so facets catch the light
+  const pts = [[0, -1.0], [0.98, -0.05], [1.0, 0], [0.62, 0.38], [0, 0.38]].map(([x, y]) => new THREE.Vector2(x * r, y * r));
+  const g = new THREE.LatheGeometry(pts, 8); g.computeVertexNormals(); return g;
+}
+const starTex = (() => {
+  const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d');
+  const gr = g.createRadialGradient(64, 64, 0, 64, 64, 64); gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(0.15, 'rgba(255,245,220,.5)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
+  g.fillStyle = gr; g.fillRect(0, 0, 128, 128);
+  g.globalCompositeOperation = 'lighter'; g.fillStyle = 'rgba(255,255,255,.9)';
+  g.beginPath(); g.moveTo(64, 4); g.lineTo(67, 61); g.lineTo(124, 64); g.lineTo(67, 67); g.lineTo(64, 124); g.lineTo(61, 67); g.lineTo(4, 64); g.lineTo(61, 61); g.closePath(); g.fill();
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+})();
+function crystals() {
+  const g = new THREE.Group();
+  const mat = new THREE.MeshPhysicalMaterial({ color: 0xF6E6BE, metalness: 0.15, roughness: 0.02, clearcoat: 1, clearcoatRoughness: 0,
+    iridescence: 0.8, iridescenceIOR: 1.8, emissive: 0xC9A24B, emissiveIntensity: 0.3, flatShading: true, envMapIntensity: 2.6 });
+  const main = new THREE.Mesh(diamondGeo(0.15), mat); main.rotation.x = 0.35; g.add(main);
+  const orbit = new THREE.Group(); g.add(orbit);
+  [[0.27, 0.05, 0.045], [-0.25, -0.07, 0.04], [0.05, 0.26, 0.035], [-0.08, -0.24, 0.03]].forEach(([x, y, r], k) => {
+    const m = new THREE.Mesh(diamondGeo(r), mat); m.position.set(x, y, k % 2 ? 0.05 : -0.05); m.rotation.set(k, k * 2, 0); orbit.add(m);
+  });
+  const sparks = [0, 1, 2].map((k) => { const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: starTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: 0 })); sp.scale.setScalar(0.22); g.add(sp); return sp; });
+  const spark = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: 0.35 }));
+  spark.scale.setScalar(0.9); g.add(spark);
+  g.userData = { mat, spark, main, orbit, sparks }; return g;
+}
+function animateGems(g, t) {
+  const u = g.userData;
+  u.main.rotation.y = t * 0.5; u.orbit.rotation.z = t * 0.25; u.orbit.rotation.y = Math.sin(t * 0.3) * 0.4;
+  u.sparks.forEach((sp, k) => {
+    const ph = (t * 0.45 + k / 3) % 1, a = k * 2.1 + Math.floor(t * 0.45 + k / 3) * 1.3;   // each twinkle appears at a new facet
+    sp.position.set(Math.cos(a) * 0.11, Math.sin(a) * 0.09, 0.16);
+    sp.material.opacity = Math.pow(Math.sin(ph * Math.PI), 6); sp.material.rotation = t * 0.6;
+    sp.scale.setScalar(0.12 + 0.16 * Math.sin(ph * Math.PI));
+  });
+}
 const ROSE = new THREE.Color(0xD98A94), SAGE = new THREE.Color(0x9CAF88), PLAT = new THREE.Color(0xE6E4E1);
 
 const box = new THREE.Box3(), corner = new THREE.Vector3();
@@ -74,6 +112,9 @@ const helpMat = new THREE.MeshPhysicalMaterial({ color: 0xC9A24B, metalness: 0.8
 const help = new THREE.Mesh(new THREE.SphereGeometry(0.4, 48, 48), helpMat); scene.add(help);
 help.renderOrder = 20; help.onBeforeRender = (rd) => rd.clearDepth();
 const helpGlow = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, transparent: true, depthWrite: false, opacity: 0 })); scene.add(helpGlow);
+const gemStart = crystals(); start.g.add(gemStart);
+const gemEnd = crystals(); fin.g.add(gemEnd);
+
 
 // faint dust for the opening
 const N = 600, pos = new Float32Array(N * 3);
@@ -130,6 +171,9 @@ function update(p, t) {
   start.a.rotation.set(spin * 0.35, spin, 0); start.b.rotation.set(Math.PI / 2 + spin * 0.3, -spin * 0.9, 0);
   start.g.rotation.set((1 - fly) * 0.2, (1 - fly) * (0.42 + Math.sin(t * 0.25) * 0.05) * intro, 0);
   start.g.position.y = lerp(restY, 0, smooth(0.08, 0.13, p));
+  gemStart.position.set((start.a.position.x + start.b.position.x) / 2, (start.a.position.y + start.b.position.y) / 2 + 0.52 * lock + Math.sin(t * 1.1) * 0.03, 0.1 * lock);
+  gemStart.rotation.set(0, 0, 0); animateGems(gemStart, t); gemStart.scale.setScalar(intro * (1.9 + 0.5 * (1 - lock)));
+  gemStart.userData.spark.material.opacity = 0.35 + 0.25 * Math.abs(Math.sin(t * 1.7)) + 0.4 * Math.exp(-Math.pow((p - 0.068) / 0.01, 2));
 
   // ---- 3. ending: the same locked platinum rings dissolve into light; the real logo emerges from it
   const dawn = smooth(0.675, 0.685, p);
@@ -145,6 +189,10 @@ function update(p, t) {
   fin.a.position.set(-0.6, 0, 0); fin.b.position.set(0.6, 0, 0);
   fin.a.rotation.set(0, 0, 0); fin.b.rotation.set(Math.PI / 2, 0, 0);
   fin.g.scale.setScalar(1 + bloom * 0.04);
+  gemEnd.position.set(0, 0.52 + Math.sin(t * 1.1) * 0.03, 0.1); gemEnd.scale.setScalar(1.9); animateGems(gemEnd, t);
+  gemEnd.userData.mat.emissiveIntensity = 0.35 + smooth(0.84, 0.875, p) * 2.2;          // the crystals glow into the logo's gold
+  gemEnd.userData.spark.material.opacity = 0.3 + smooth(0.84, 0.875, p) * 0.7;
+  gemEnd.userData.spark.scale.setScalar(0.9 + smooth(0.84, 0.875, p) * 0.8);
   const melt = smooth(0.85, 0.875, p);                       // platinum glows into the light it sits in
   for (const m of [fin.a.material, fin.b.material]) {
     m.emissive.set(0xF6F0EA).multiplyScalar(melt * 1.1); m.color.copy(PLAT).multiplyScalar(1 - melt);
