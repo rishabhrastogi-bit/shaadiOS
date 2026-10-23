@@ -130,7 +130,7 @@ function screenYToWorld(dist, frac) { return (0.5 - frac) * 2 * dist * tanH; }  
 const story = document.getElementById('story'), wrap = document.getElementById('wrap'), bar = document.querySelector('.bar');
 const prog = document.querySelector('.progress span'), vignette = document.querySelector('.vignette');
 const road = document.querySelector('.road-scenes'), scenes = [...road.querySelectorAll('.scene')], marks = [...road.querySelectorAll('.road li')];
-const captions = document.querySelector('.captions'), reveal = document.querySelector('.logo-reveal'), markImg = document.querySelector('.mark-reveal'),  logo = document.querySelector('.brand img');
+const veil = document.querySelector('.light-veil'), captions = document.querySelector('.captions'), reveal = document.querySelector('.logo-reveal'), markImg = document.querySelector('.mark-reveal'),  logo = document.querySelector('.brand img');
 const caps = [...document.querySelectorAll('.cap')].map((el) => ({ el,
   z: el.dataset.z !== undefined ? +el.dataset.z : null, span: +(el.dataset.span || 3),
   p: el.dataset.p !== undefined ? +el.dataset.p : null, pspan: +(el.dataset.pspan || 0.05),
@@ -177,7 +177,7 @@ function update(p, t) {
   const dawn = smooth(0.675, 0.685, p);
   const front = smooth(0.76, 0.85, p);
   const bloom = smooth(0.85, 0.875, p) * (1 - smooth(0.875, 0.905, p));   // light rises, then settles
-  const gone = p > 0.875;                                    // rings vanish at the peak of the light
+  const gone = p > 0.879;                                    // rings vanish at the peak of the light
   const real = smooth(0.875, 0.905, p);
   // rings fitted to the logo's on-screen size (CSS: width min(380px, 62vw, 52vh), centred at 46%)
   const logoW = Math.min(380, innerWidth * 0.62, innerHeight * 0.52) * (3004 / 3184);
@@ -188,18 +188,14 @@ function update(p, t) {
   fin.a.rotation.set(0, 0, 0); fin.b.rotation.set(Math.PI / 2, 0, 0);
   fin.g.scale.setScalar(1 + bloom * 0.04);
   gemEnd.position.set(0, Math.sin(t * 1.1) * 0.02, 0); gemEnd.scale.setScalar(1.5); animateGems(gemEnd, t);
-  gemEnd.userData.mat.emissiveIntensity = 0.35 + smooth(0.84, 0.875, p) * 2.2;          // the crystals glow into the logo's gold
+            // the crystals glow into the logo's gold
   gemEnd.userData.spark.material.opacity = 0.3 + smooth(0.84, 0.875, p) * 0.7;
   gemEnd.userData.spark.scale.setScalar(0.9 + smooth(0.84, 0.875, p) * 0.8);
-  const melt = smooth(0.85, 0.875, p);                       // platinum glows into the light it sits in
-  for (const m of [fin.a.material, fin.b.material]) {
-    m.emissive.set(0xF6F0EA).multiplyScalar(melt * 1.1); m.color.copy(PLAT).multiplyScalar(1 - melt);
-    m.envMapIntensity = 1 - melt; m.clearcoat = 0.6 * (1 - melt); m.toneMapped = melt < 0.5;
-  }
   for (const m of [sageHalo, roseHalo, roseTop]) m.visible = false;
   fin.g.visible = p > 0.6 && !gone;
   help.visible = false;
-  helpGlow.visible = bloom > 0.001;
+  helpGlow.visible = false;
+  veil.style.opacity = smooth(0.85, 0.878, p).toFixed(3);   // soft light rises over the rings
   helpGlow.position.set(0, endY, -39.5);
   helpGlow.scale.setScalar(lerp(2, 9, bloom));
   helpGlow.material.opacity = bloom; helpGlow.material.color.set(0xFFFBF2);
@@ -218,7 +214,7 @@ function update(p, t) {
 
   // ---- background + overlays
   const bg = NIGHT.clone().lerp(CREAM, dawn); renderer.setClearColor(bg);
-  renderer.toneMappingExposure = 1 + smooth(0.85, 0.875, p) * (1 - smooth(0.875, 0.9, p)) * 0.9 + Math.exp(-Math.pow((p - 0.15) / 0.015, 2)) * 0.6 + Math.exp(-Math.pow((p - 0.068) / 0.01, 2)) * 0.45 * (1 - fly);
+  renderer.toneMappingExposure = 1 + Math.exp(-Math.pow((p - 0.15) / 0.015, 2)) * 0.6 + Math.exp(-Math.pow((p - 0.068) / 0.01, 2)) * 0.45 * (1 - fly);
   vignette.style.opacity = (1 - dawn).toFixed(3);
   dust.material.opacity = 0.6 * (1 - dawn);
 
