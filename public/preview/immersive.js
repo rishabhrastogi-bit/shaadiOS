@@ -50,7 +50,9 @@ const fin = ringPair(-40);          // ending pair, far away from the opening
 const haloGeo = new THREE.TorusGeometry(R, TUBE + 0.07, 64, 220);
 const haloThick = new THREE.TorusGeometry(R, R * 0.31 + 0.07, 64, 220);
 haloGeo.morphAttributes.position = [haloThick.attributes.position];
-const topClip = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), topClip2 = new THREE.Plane(new THREE.Vector3(0, 1, 0), 0), botClip = new THREE.Plane(new THREE.Vector3(0, -1, 0), 0);
+// the logo's weave: rose crosses over at the top and lower-right, sage at the bottom and upper-left
+const WN = new THREE.Vector3(0, 1, 0);
+const topClip = new THREE.Plane(WN.clone(), 0), topClip2 = new THREE.Plane(WN.clone(), 0), botClip = new THREE.Plane(WN.clone().negate(), 0);
 const creamMat = (clip) => new THREE.MeshBasicMaterial({ color: 0xF6F0EA, toneMapped: false, transparent: true, opacity: 0, clippingPlanes: [clip] });
 const sageHalo = new THREE.Mesh(haloGeo, creamMat(botClip)), roseHalo = new THREE.Mesh(haloGeo, creamMat(topClip));
 const roseTop = new THREE.Mesh(ringGeo, fin.a.material.clone()); roseTop.material.clippingPlanes = [topClip2];   // a hair lower than the gap layer, so no seam line
@@ -89,7 +91,7 @@ function screenYToWorld(dist, frac) { return (0.5 - frac) * 2 * dist * tanH; }  
 const story = document.getElementById('story'), wrap = document.getElementById('wrap'), bar = document.querySelector('.bar');
 const prog = document.querySelector('.progress span'), vignette = document.querySelector('.vignette');
 const road = document.querySelector('.road-scenes'), scenes = [...road.querySelectorAll('.scene')], marks = [...road.querySelectorAll('.road li')];
-const captions = document.querySelector('.captions'), reveal = document.querySelector('.logo-reveal'),  logo = document.querySelector('.brand img');
+const captions = document.querySelector('.captions'), reveal = document.querySelector('.logo-reveal'), markImg = document.querySelector('.mark-reveal'),  logo = document.querySelector('.brand img');
 const caps = [...document.querySelectorAll('.cap')].map((el) => ({ el,
   z: el.dataset.z !== undefined ? +el.dataset.z : null, span: +(el.dataset.span || 3),
   p: el.dataset.p !== undefined ? +el.dataset.p : null, pspan: +(el.dataset.pspan || 0.05),
@@ -143,7 +145,7 @@ function update(p, t) {
   fin.a.rotation.set(0, 0, 0); fin.b.rotation.set(lerp(Math.PI / 2, 0, unfold), 0, 0);
   for (const m of [sageHalo, roseHalo, roseTop]) { m.position.copy(m === sageHalo ? fin.b.position : fin.a.position); m.rotation.copy(m === sageHalo ? fin.b.rotation : fin.a.rotation); }
   for (const m of [fin.a, fin.b, sageHalo, roseHalo, roseTop]) m.morphTargetInfluences[0] = unfold;
-  topClip.constant = -endY; topClip2.constant = -(endY - 0.015); botClip.constant = endY;
+  topClip.constant = -WN.y * endY; topClip2.constant = -WN.y * endY + 0.015; botClip.constant = WN.y * endY;
   // shiny platinum -> rose and sage -> the logo's flat colour
   [[fin.a.material, ROSE], [roseTop.material, ROSE], [fin.b.material, SAGE]].forEach(([m, c]) => {
     m.color.copy(PLAT).lerp(c, tint).multiplyScalar(1 - flat);
@@ -160,6 +162,13 @@ function update(p, t) {
   helpMat.color.setScalar(0); helpMat.emissive.set(0xC9A24B); helpMat.emissiveIntensity = 1; helpMat.envMapIntensity = 0;
   helpGlow.visible = false;
   const logoIn = smooth(0.95, 0.985, p);
+  // the real logo artwork fades in exactly over the settled 3D rings (ring box in mark.svg: x 92-3096, y 96-1992)
+  const real = smooth(0.942, 0.958, p);
+  const ext = 0.945 + R * 1.31, top = new THREE.Vector3(-ext, endY + R * 1.31, -40).project(camera), bot = new THREE.Vector3(ext, endY - R * 1.31, -40).project(camera);
+  const bx0 = (top.x + 1) / 2 * innerWidth, by0 = (1 - top.y) / 2 * innerHeight, bx1 = (bot.x + 1) / 2 * innerWidth;
+  const k = (bx1 - bx0) / 3004;
+  Object.assign(markImg.style, { width: (3184 * k) + 'px', left: (bx0 - 92 * k) + 'px', top: (by0 - 96 * k) + 'px', opacity: real.toFixed(3) });
+  fin.g.visible = p > 0.6 && real < 1; help.visible = help.visible && real < 1;
 
   // ---- camera: opening path, then a fixed, fitted view of the ending
   if (p < 0.5) {
