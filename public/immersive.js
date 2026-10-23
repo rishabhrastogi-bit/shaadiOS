@@ -59,6 +59,42 @@ const roseTop = new THREE.Mesh(ringGeo, fin.a.material.clone()); roseTop.materia
 fin.g.add(sageHalo, roseHalo, roseTop);
 const layers = [fin.a, sageHalo, fin.b, roseHalo, roseTop];
 
+// ---------- the help, from the start: a small cluster of champagne-gold crystals suspended between the rings
+function diamondGeo(r) {
+  // a brilliant-cut silhouette: table, crown, girdle, pavilion; few segments so facets catch the light
+  const pts = [[0, -1.0], [0.98, -0.05], [1.0, 0], [0.62, 0.38], [0, 0.38]].map(([x, y]) => new THREE.Vector2(x * r, y * r));
+  const g = new THREE.LatheGeometry(pts, 8); g.computeVertexNormals(); return g;
+}
+const starTex = (() => {
+  const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d');
+  const gr = g.createRadialGradient(64, 64, 0, 64, 64, 64); gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(0.15, 'rgba(255,245,220,.5)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
+  g.fillStyle = gr; g.fillRect(0, 0, 128, 128);
+  g.globalCompositeOperation = 'lighter'; g.fillStyle = 'rgba(255,255,255,.9)';
+  g.beginPath(); g.moveTo(64, 4); g.lineTo(67, 61); g.lineTo(124, 64); g.lineTo(67, 67); g.lineTo(64, 124); g.lineTo(61, 67); g.lineTo(4, 64); g.lineTo(61, 61); g.closePath(); g.fill();
+  const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
+})();
+function crystals() {
+  // one round crystal: clear glass with a warm gold heart, like the dot in the logo
+  const g = new THREE.Group();
+  const mat = new THREE.MeshPhysicalMaterial({ color: 0xF7F8FA, metalness: 0.85, roughness: 0.06, clearcoat: 1, clearcoatRoughness: 0.02,
+    iridescence: 0.25, iridescenceIOR: 1.4, envMapIntensity: 2.4, emissive: 0xFFFFFF, emissiveIntensity: 0.12 });   // silver-white, polished
+  const main = new THREE.Mesh(new THREE.SphereGeometry(0.15, 64, 64), mat); g.add(main);
+  const orbit = new THREE.Group(); g.add(orbit);
+  const sparks = [0].map(() => { const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: starTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: 0 })); g.add(sp); return sp; });
+  const spark = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: 0.35 }));
+  spark.scale.setScalar(0.7); spark.material.color.set(0xFFFFFF); g.add(spark);
+  g.userData = { mat, spark, main, orbit, sparks }; return g;
+}
+function animateGems(g, t) {
+  const u = g.userData;
+  u.main.rotation.y = t * 0.5; u.orbit.rotation.z = t * 0.25; u.orbit.rotation.y = Math.sin(t * 0.3) * 0.4;
+  u.sparks.forEach((sp, k) => {
+    const ph = (t * 0.45 + k / 3) % 1, a = k * 2.1 + Math.floor(t * 0.45 + k / 3) * 1.3;   // each twinkle appears at a new facet
+    sp.position.set(-0.05, 0.06, 0.16);                    // a highlight glint on the sphere
+    sp.material.opacity = Math.pow(Math.sin(ph * Math.PI), 6); sp.material.rotation = t * 0.6;
+    sp.scale.setScalar(0.12 + 0.16 * Math.sin(ph * Math.PI));
+  });
+}
 const ROSE = new THREE.Color(0xD98A94), SAGE = new THREE.Color(0x9CAF88), PLAT = new THREE.Color(0xE6E4E1);
 
 const box = new THREE.Box3(), corner = new THREE.Vector3();
@@ -74,6 +110,9 @@ const helpMat = new THREE.MeshPhysicalMaterial({ color: 0xC9A24B, metalness: 0.8
 const help = new THREE.Mesh(new THREE.SphereGeometry(0.4, 48, 48), helpMat); scene.add(help);
 help.renderOrder = 20; help.onBeforeRender = (rd) => rd.clearDepth();
 const helpGlow = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, transparent: true, depthWrite: false, opacity: 0 })); scene.add(helpGlow);
+const gemStart = crystals(); start.g.add(gemStart);
+const gemEnd = crystals(); fin.g.add(gemEnd);
+
 
 // faint dust for the opening
 const N = 600, pos = new Float32Array(N * 3);
@@ -91,7 +130,7 @@ function screenYToWorld(dist, frac) { return (0.5 - frac) * 2 * dist * tanH; }  
 const story = document.getElementById('story'), wrap = document.getElementById('wrap'), bar = document.querySelector('.bar');
 const prog = document.querySelector('.progress span'), vignette = document.querySelector('.vignette');
 const road = document.querySelector('.road-scenes'), scenes = [...road.querySelectorAll('.scene')], marks = [...road.querySelectorAll('.road li')];
-const captions = document.querySelector('.captions'), reveal = document.querySelector('.logo-reveal'), markImg = document.querySelector('.mark-reveal'),  logo = document.querySelector('.brand img');
+const veil = document.querySelector('.light-veil'), captions = document.querySelector('.captions'), reveal = document.querySelector('.logo-reveal'), markImg = document.querySelector('.mark-reveal'),  logo = document.querySelector('.brand img');
 const caps = [...document.querySelectorAll('.cap')].map((el) => ({ el,
   z: el.dataset.z !== undefined ? +el.dataset.z : null, span: +(el.dataset.span || 3),
   p: el.dataset.p !== undefined ? +el.dataset.p : null, pspan: +(el.dataset.pspan || 0.05),
@@ -130,30 +169,33 @@ function update(p, t) {
   start.a.rotation.set(spin * 0.35, spin, 0); start.b.rotation.set(Math.PI / 2 + spin * 0.3, -spin * 0.9, 0);
   start.g.rotation.set((1 - fly) * 0.2, (1 - fly) * (0.42 + Math.sin(t * 0.25) * 0.05) * intro, 0);
   start.g.position.y = lerp(restY, 0, smooth(0.08, 0.13, p));
+  gemStart.position.set((start.a.position.x + start.b.position.x) / 2, (start.a.position.y + start.b.position.y) / 2 + Math.sin(t * 1.1) * 0.02, 0);
+  gemStart.rotation.set(0, 0, 0); animateGems(gemStart, t); gemStart.scale.setScalar(intro * (1.5 + 0.4 * (1 - lock)));
+  gemStart.userData.spark.material.opacity = 0.35 + 0.25 * Math.abs(Math.sin(t * 1.7)) + 0.4 * Math.exp(-Math.pow((p - 0.068) / 0.01, 2));
 
   // ---- 3. ending: the same locked platinum rings dissolve into light; the real logo emerges from it
   const dawn = smooth(0.675, 0.685, p);
   const front = smooth(0.76, 0.85, p);
   const bloom = smooth(0.85, 0.875, p) * (1 - smooth(0.875, 0.905, p));   // light rises, then settles
-  const gone = p > 0.875;                                    // rings vanish at the peak of the light
+  const gone = p > 0.879;                                    // rings vanish at the peak of the light
   const real = smooth(0.875, 0.905, p);
   // rings fitted to the logo's on-screen size (CSS: width min(380px, 62vw, 52vh), centred at 46%)
   const logoW = Math.min(380, innerWidth * 0.62, innerHeight * 0.52) * (3004 / 3184);
   const endD = (4.08 / (logoW / innerWidth)) / (2 * tanH * camera.aspect), endY = screenYToWorld(endD, 0.46);
   fin.g.position.y = endY;
-  fin.g.rotation.set(lerp(0.2, 0.06, front), lerp(0.42 + Math.sin(t * 0.3) * 0.05, 0.1, front), 0);
+  fin.g.rotation.set(lerp(0.2, 0.32, front), lerp(0.42 + Math.sin(t * 0.3) * 0.05, 0.18, front), 0);   // keep a tilt so the centre stays visible
   fin.a.position.set(-0.6, 0, 0); fin.b.position.set(0.6, 0, 0);
   fin.a.rotation.set(0, 0, 0); fin.b.rotation.set(Math.PI / 2, 0, 0);
   fin.g.scale.setScalar(1 + bloom * 0.04);
-  const melt = smooth(0.85, 0.875, p);                       // platinum glows into the light it sits in
-  for (const m of [fin.a.material, fin.b.material]) {
-    m.emissive.set(0xF6F0EA).multiplyScalar(melt * 1.1); m.color.copy(PLAT).multiplyScalar(1 - melt);
-    m.envMapIntensity = 1 - melt; m.clearcoat = 0.6 * (1 - melt); m.toneMapped = melt < 0.5;
-  }
+  gemEnd.position.set(0, Math.sin(t * 1.1) * 0.02, 0); gemEnd.scale.setScalar(1.5); animateGems(gemEnd, t);
+            // the crystals glow into the logo's gold
+  gemEnd.userData.spark.material.opacity = 0.3 + smooth(0.84, 0.875, p) * 0.7;
+  gemEnd.userData.spark.scale.setScalar(0.9 + smooth(0.84, 0.875, p) * 0.8);
   for (const m of [sageHalo, roseHalo, roseTop]) m.visible = false;
   fin.g.visible = p > 0.6 && !gone;
   help.visible = false;
-  helpGlow.visible = bloom > 0.001;
+  helpGlow.visible = false;
+  veil.style.opacity = smooth(0.85, 0.878, p).toFixed(3);   // soft light rises over the rings
   helpGlow.position.set(0, endY, -39.5);
   helpGlow.scale.setScalar(lerp(2, 9, bloom));
   helpGlow.material.opacity = bloom; helpGlow.material.color.set(0xFFFBF2);
@@ -172,7 +214,7 @@ function update(p, t) {
 
   // ---- background + overlays
   const bg = NIGHT.clone().lerp(CREAM, dawn); renderer.setClearColor(bg);
-  renderer.toneMappingExposure = 1 + smooth(0.85, 0.875, p) * (1 - smooth(0.875, 0.9, p)) * 0.9 + Math.exp(-Math.pow((p - 0.15) / 0.015, 2)) * 0.6 + Math.exp(-Math.pow((p - 0.068) / 0.01, 2)) * 0.45 * (1 - fly);
+  renderer.toneMappingExposure = 1 + Math.exp(-Math.pow((p - 0.15) / 0.015, 2)) * 0.6 + Math.exp(-Math.pow((p - 0.068) / 0.01, 2)) * 0.45 * (1 - fly);
   vignette.style.opacity = (1 - dawn).toFixed(3);
   dust.material.opacity = 0.6 * (1 - dawn);
 
