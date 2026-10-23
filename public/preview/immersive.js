@@ -107,8 +107,8 @@ function update(p, t) {
   start.g.position.y = lerp(restY, 0, smooth(0.08, 0.13, p));
 
   // ---- 3. ending: help glow -> sphere -> rings glide in -> logo
-  const dawn = smooth(0.685, 0.72, p), grow = smooth(0.7, 0.76, p), join = smooth(0.76, 0.85, p);
-  const morph = smooth(0.85, 0.92, p), logoIn = smooth(0.93, 0.985, p);
+  const dawn = smooth(0.675, 0.685, p), join = smooth(0.735, 0.805, p), morph = smooth(0.8, 0.87, p);
+  const grow = smooth(0.875, 0.91, p), logoIn = smooth(0.93, 0.985, p);   // the help arrives only once the rings are together
   const endD = fitDistance(3.8, 3.1, 0.62, lerp(0.42, 0.34, logoIn));                 // rings fit below the captions
   const endY = screenYToWorld(endD, lerp(0.6, 0.47, logoIn));
   fin.g.position.y = endY;
@@ -123,8 +123,8 @@ function update(p, t) {
   help.scale.setScalar(lerp(0.2, 1, grow));
   helpMat.opacity = grow;
   helpGlow.position.set(0, endY, -40.2);
-  helpGlow.scale.setScalar(lerp(1.2, 2.1, smooth(0.66, 0.72, p)) * (1 - join * 0.3) + Math.sin(t * 2) * 0.05);
-  helpGlow.material.opacity = smooth(0.66, 0.7, p) * (1 - morph * 0.4);
+  helpGlow.scale.setScalar(lerp(0.6, 1.5, grow) + Math.sin(t * 2) * 0.04);
+  helpGlow.material.opacity = grow * 0.85;
 
   // ---- camera: opening path, then a fixed, fitted view of the ending
   if (p < 0.5) {
@@ -142,8 +142,12 @@ function update(p, t) {
   dust.material.opacity = 0.6 * (1 - dawn);
 
   // ---- 2. the road (photo chapters)
-  const roadOn = smooth(0.145, 0.17, p) * (1 - smooth(0.67, 0.7, p));
+  const roadOn = smooth(0.145, 0.17, p);
   road.style.opacity = roadOn.toFixed(3);
+  const open = smooth(0.69, 0.73, p);                    // light opens from the centre of the screen
+  if (open > 0) { const r0 = open * 120, m = `radial-gradient(circle at 50% 50%, transparent ${r0}%, #000 ${r0 + 18}%)`; road.style.maskImage = road.style.webkitMaskImage = m; }
+  else road.style.maskImage = road.style.webkitMaskImage = '';
+  road.style.visibility = open >= 1 ? 'hidden' : '';
   let active = -1;
   scenes.forEach((s, k) => {
     const c = ROAD0 + (k + 0.5) * W;
@@ -190,11 +194,11 @@ function update(p, t) {
   reveal.style.opacity = logoIn.toFixed(3);
 
   // ---- header colours
-  const light = dawn > 0.5 || bar.classList.contains('solid');
+  const light = open > 0.5 || bar.classList.contains('solid');
   const want = light ? 'logo-horizontal.svg' : 'logo-horizontal-cream.svg';
   if (!logo.src.endsWith(want)) logo.src = want;
   bar.style.color = light ? '#2F2622' : '';
-  return roadOn > 0.999;                                    // the photos fully cover the canvas
+  return roadOn > 0.999 && open === 0;                                    // the photos fully cover the canvas
 }
 
 // ---------- waitlist form (posts to the Google Sheet, then the thank-you page)
