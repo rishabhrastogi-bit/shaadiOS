@@ -74,17 +74,18 @@ const starTex = (() => {
   const t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; return t;
 })();
 function crystals() {
+  // one round crystal: clear glass with a warm gold heart, like the dot in the logo
   const g = new THREE.Group();
-  const mat = new THREE.MeshPhysicalMaterial({ color: 0xF6E6BE, metalness: 0.15, roughness: 0.02, clearcoat: 1, clearcoatRoughness: 0,
-    iridescence: 0.8, iridescenceIOR: 1.8, emissive: 0xC9A24B, emissiveIntensity: 0.3, flatShading: true, envMapIntensity: 2.6 });
-  const main = new THREE.Mesh(diamondGeo(0.15), mat); main.rotation.x = 0.35; g.add(main);
+  const mat = new THREE.MeshPhysicalMaterial({ color: 0xFFF6E2, metalness: 0, roughness: 0.02, transmission: 1, thickness: 0.35, ior: 1.6,
+    clearcoat: 1, clearcoatRoughness: 0, iridescence: 0.35, iridescenceIOR: 1.5, attenuationColor: 0xF4E2BC, attenuationDistance: 2.0,
+    specularIntensity: 1, envMapIntensity: 2.6, emissive: 0xE8C878, emissiveIntensity: 0.32 });
+  const main = new THREE.Mesh(new THREE.SphereGeometry(0.15, 64, 64), mat); g.add(main);
+  const core = new THREE.Mesh(new THREE.SphereGeometry(0.07, 32, 32), new THREE.MeshBasicMaterial({ color: 0xFFF1CF, transparent: true, opacity: 0.85 }));
+  g.add(core);
   const orbit = new THREE.Group(); g.add(orbit);
-  [[0.27, 0.05, 0.045], [-0.25, -0.07, 0.04], [0.05, 0.26, 0.035], [-0.08, -0.24, 0.03]].forEach(([x, y, r], k) => {
-    const m = new THREE.Mesh(diamondGeo(r), mat); m.position.set(x, y, k % 2 ? 0.05 : -0.05); m.rotation.set(k, k * 2, 0); orbit.add(m);
-  });
-  const sparks = [0, 1, 2].map((k) => { const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: starTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: 0 })); sp.scale.setScalar(0.22); g.add(sp); return sp; });
+  const sparks = [0].map(() => { const sp = new THREE.Sprite(new THREE.SpriteMaterial({ map: starTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: 0 })); g.add(sp); return sp; });
   const spark = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTex, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending, opacity: 0.35 }));
-  spark.scale.setScalar(0.9); g.add(spark);
+  spark.scale.setScalar(0.7); g.add(spark);
   g.userData = { mat, spark, main, orbit, sparks }; return g;
 }
 function animateGems(g, t) {
@@ -92,7 +93,7 @@ function animateGems(g, t) {
   u.main.rotation.y = t * 0.5; u.orbit.rotation.z = t * 0.25; u.orbit.rotation.y = Math.sin(t * 0.3) * 0.4;
   u.sparks.forEach((sp, k) => {
     const ph = (t * 0.45 + k / 3) % 1, a = k * 2.1 + Math.floor(t * 0.45 + k / 3) * 1.3;   // each twinkle appears at a new facet
-    sp.position.set(Math.cos(a) * 0.11, Math.sin(a) * 0.09, 0.16);
+    sp.position.set(-0.05, 0.06, 0.16);                    // a highlight glint on the sphere
     sp.material.opacity = Math.pow(Math.sin(ph * Math.PI), 6); sp.material.rotation = t * 0.6;
     sp.scale.setScalar(0.12 + 0.16 * Math.sin(ph * Math.PI));
   });
