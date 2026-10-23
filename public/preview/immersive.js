@@ -58,7 +58,7 @@ const sageHalo = new THREE.Mesh(haloGeo, creamMat(botClip)), roseHalo = new THRE
 const roseTop = new THREE.Mesh(ringGeo, fin.a.material.clone()); roseTop.material.clippingPlanes = [topClip2];   // a hair lower than the gap layer, so no seam line
 fin.g.add(sageHalo, roseHalo, roseTop);
 const layers = [fin.a, sageHalo, fin.b, roseHalo, roseTop];
-layers.forEach((m, k) => { m.renderOrder = 10 + k; m.material.transparent = true; m.onBeforeRender = (rd) => rd.clearDepth(); });
+
 const ROSE = new THREE.Color(0xD98A94), SAGE = new THREE.Color(0x9CAF88), PLAT = new THREE.Color(0xE6E4E1);
 
 const box = new THREE.Box3(), corner = new THREE.Vector3();
@@ -131,44 +131,35 @@ function update(p, t) {
   start.g.rotation.set((1 - fly) * 0.2, (1 - fly) * (0.42 + Math.sin(t * 0.25) * 0.05) * intro, 0);
   start.g.position.y = lerp(restY, 0, smooth(0.08, 0.13, p));
 
-  // ---- 3. ending: the same locked platinum rings, seen front-on, become the logo
+  // ---- 3. ending: the same locked platinum rings dissolve into light; the real logo emerges from it
   const dawn = smooth(0.675, 0.685, p);
-  const unfold = smooth(0.745, 0.84, p);                     // rings turn flat into the logo's layout
-  const tint = smooth(0.77, 0.86, p), flat = smooth(0.83, 0.9, p);
-  const grow = smooth(0.885, 0.915, p), settle = smooth(0.905, 0.94, p);
-  const endD = fitDistance(lerp(3.8, 5.3, unfold), lerp(3.1, 3.3, unfold), 0.62, lerp(0.42, 0.34, settle));
-  const endY = screenYToWorld(endD, lerp(0.58, 0.47, settle));
+  const front = smooth(0.76, 0.85, p);
+  const bloom = smooth(0.85, 0.875, p) * (1 - smooth(0.875, 0.905, p));   // light rises, then settles
+  const gone = p > 0.875;                                    // rings vanish at the peak of the light
+  const real = smooth(0.875, 0.905, p);
+  // rings fitted to the logo's on-screen size (CSS: width min(380px, 62vw, 52vh), centred at 46%)
+  const logoW = Math.min(380, innerWidth * 0.62, innerHeight * 0.52) * (3004 / 3184);
+  const endD = (4.08 / (logoW / innerWidth)) / (2 * tanH * camera.aspect), endY = screenYToWorld(endD, 0.46);
   fin.g.position.y = endY;
-  fin.g.rotation.set((1 - unfold) * 0.18, (1 - unfold) * (0.4 + Math.sin(t * 0.3) * 0.04), 0);
-  const cx = lerp(0.6, 0.945, unfold);                       // logo spacing: centres 1.89 apart for radius 1.25
-  fin.a.position.set(-cx, 0, 0); fin.b.position.set(cx, 0, 0);
-  fin.a.rotation.set(0, 0, 0); fin.b.rotation.set(lerp(Math.PI / 2, 0, unfold), 0, 0);
-  for (const m of [sageHalo, roseHalo, roseTop]) { m.position.copy(m === sageHalo ? fin.b.position : fin.a.position); m.rotation.copy(m === sageHalo ? fin.b.rotation : fin.a.rotation); }
-  for (const m of [fin.a, fin.b, sageHalo, roseHalo, roseTop]) m.morphTargetInfluences[0] = unfold;
-  topClip.constant = -WN.y * endY; topClip2.constant = -WN.y * endY + 0.015; botClip.constant = WN.y * endY;
-  // shiny platinum -> rose and sage -> the logo's flat colour
-  [[fin.a.material, ROSE], [roseTop.material, ROSE], [fin.b.material, SAGE]].forEach(([m, c]) => {
-    m.color.copy(PLAT).lerp(c, tint).multiplyScalar(1 - flat);
-    m.emissive.copy(c).multiplyScalar(flat);
-    m.metalness = lerp(1, 0, tint); m.roughness = lerp(0.17, 0.7, tint); m.clearcoat = lerp(0.6, 0, tint);
-    m.envMapIntensity = 1 - flat;
-  });
-  // the weave (rose over sage at the top, cream gaps) forms together with the gold, which covers the turning point
-  sageHalo.material.opacity = roseHalo.material.opacity = flat; roseTop.material.opacity = 1;
-  key.intensity = 2.2;
-  fin.g.visible = p > 0.6;
-  help.position.set(0, endY, -39.6); help.scale.setScalar(lerp(0.3, 1, grow));
-  helpMat.opacity = grow; help.visible = grow > 0.001;
-  helpMat.color.setScalar(0); helpMat.emissive.set(0xC9A24B); helpMat.emissiveIntensity = 1; helpMat.envMapIntensity = 0;
-  helpGlow.visible = false;
+  fin.g.rotation.set(lerp(0.2, 0.06, front), lerp(0.42 + Math.sin(t * 0.3) * 0.05, 0.1, front), 0);
+  fin.a.position.set(-0.6, 0, 0); fin.b.position.set(0.6, 0, 0);
+  fin.a.rotation.set(0, 0, 0); fin.b.rotation.set(Math.PI / 2, 0, 0);
+  fin.g.scale.setScalar(1 + bloom * 0.04);
+  const melt = smooth(0.85, 0.875, p);                       // platinum glows into the light it sits in
+  for (const m of [fin.a.material, fin.b.material]) {
+    m.emissive.set(0xF6F0EA).multiplyScalar(melt * 1.1); m.color.copy(PLAT).multiplyScalar(1 - melt);
+    m.envMapIntensity = 1 - melt; m.clearcoat = 0.6 * (1 - melt); m.toneMapped = melt < 0.5;
+  }
+  for (const m of [sageHalo, roseHalo, roseTop]) m.visible = false;
+  fin.g.visible = p > 0.6 && !gone;
+  help.visible = false;
+  helpGlow.visible = bloom > 0.001;
+  helpGlow.position.set(0, endY, -39.5);
+  helpGlow.scale.setScalar(lerp(2, 9, bloom));
+  helpGlow.material.opacity = bloom; helpGlow.material.color.set(0xFFFBF2);
+  markImg.style.opacity = real.toFixed(3);
+  markImg.style.transform = `translate(-50%, -50%) scale(${lerp(0.94, 1, real).toFixed(4)})`;
   const logoIn = smooth(0.95, 0.985, p);
-  // the real logo artwork fades in exactly over the settled 3D rings (ring box in mark.svg: x 92-3096, y 96-1992)
-  const real = smooth(0.942, 0.958, p);
-  const ext = 0.945 + R * 1.31, top = new THREE.Vector3(-ext, endY + R * 1.31, -40).project(camera), bot = new THREE.Vector3(ext, endY - R * 1.31, -40).project(camera);
-  const bx0 = (top.x + 1) / 2 * innerWidth, by0 = (1 - top.y) / 2 * innerHeight, bx1 = (bot.x + 1) / 2 * innerWidth;
-  const k = (bx1 - bx0) / 3004;
-  Object.assign(markImg.style, { width: (3184 * k) + 'px', left: (bx0 - 92 * k) + 'px', top: (by0 - 96 * k) + 'px', opacity: real.toFixed(3) });
-  fin.g.visible = p > 0.6 && real < 1; help.visible = help.visible && real < 1;
 
   // ---- camera: opening path, then a fixed, fitted view of the ending
   if (p < 0.5) {
@@ -181,7 +172,7 @@ function update(p, t) {
 
   // ---- background + overlays
   const bg = NIGHT.clone().lerp(CREAM, dawn); renderer.setClearColor(bg);
-  renderer.toneMappingExposure = 1 + Math.exp(-Math.pow((p - 0.15) / 0.015, 2)) * 0.6 + Math.exp(-Math.pow((p - 0.068) / 0.01, 2)) * 0.45 * (1 - fly);
+  renderer.toneMappingExposure = 1 + smooth(0.85, 0.875, p) * (1 - smooth(0.875, 0.9, p)) * 0.9 + Math.exp(-Math.pow((p - 0.15) / 0.015, 2)) * 0.6 + Math.exp(-Math.pow((p - 0.068) / 0.01, 2)) * 0.45 * (1 - fly);
   vignette.style.opacity = (1 - dawn).toFixed(3);
   dust.material.opacity = 0.6 * (1 - dawn);
 
