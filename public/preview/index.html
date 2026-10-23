@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
-<title>ShaadiOS — Inside the ring</title>
-<meta name="description" content="Relationships rarely break in a day. They drift. ShaadiOS helps Indian couples and parents catch the drift early.">
+<title>ShaadiOS — Help, before it's too late</title>
+<meta name="description" content="Help for relationships arrives too late. ShaadiOS brings it to the start: relationship, family and mental-health tools, and early mediation and counselling in one place.">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
@@ -20,64 +20,89 @@
 <body>
 <canvas id="scene" aria-hidden="true"></canvas>
 <div class="vignette" aria-hidden="true"></div>
+<img class="logo-reveal" src="wordmark.svg" alt="" aria-hidden="true">
 
 <header class="bar">
   <a href="https://shaadios.app/" class="brand"><img src="logo-horizontal-cream.svg" alt="ShaadiOS" width="150" height="35"></a>
-  <nav><a href="#what">What it does</a><a href="#screens">The app</a><a class="pill" href="#join">Join the waitlist</a></nav>
+  <nav><a href="#tools">The tools</a><a href="#help">Find help</a><a href="#screens">The app</a><a class="pill" href="#join">Join the waitlist</a></nav>
 </header>
 
-<!-- Story captions: shown and hidden from immersive.js as the camera travels.
-     data-z = the camera z where the caption is at its strongest; data-side = where it sits. -->
+<!-- Story captions. data-z: the camera depth where a caption is strongest (the road);
+     data-p: the scroll point where it is strongest (the ending). Shown and hidden from immersive.js. -->
 <div class="captions" aria-live="polite">
   <div class="cap hero" data-z="7" data-span="2.6">
     <p class="eyebrow">ShaadiOS&trade;</p>
-    <h1>Every relationship<br>starts <em>here.</em></h1>
-    <p class="lead">Two lives. One promise.</p>
-    <p class="cue">Scroll to step inside <span>↓</span></p>
+    <h1>Every marriage needs care<br>long before it needs <em>a court.</em></h1>
+    <p class="cue">Scroll <span>↓</span></p>
   </div>
-  <div class="cap mid" data-z="2.6" data-span="1.8"><p class="eyebrow">Step inside</p><h2>Every marriage is<br>two stories at <em>once.</em></h2></div>
+  <div class="cap mid" data-z="2.6" data-span="1.8"><p class="eyebrow">Step inside</p><h2>This is the road<br>most marriages <em>take.</em></h2></div>
 
   <div class="cap" data-z="-2.5" data-side="right"><p class="eyebrow">It begins</p><h2>With a promise.</h2><p class="lead">Saat phere. Two families. One future.</p></div>
-  <div class="cap" data-z="-9" data-side="left"><p class="eyebrow">Then</p><h2>Life gets busy.</h2><p class="lead">Jobs, EMIs, school runs, in-laws. Two calendars, one house.</p></div>
-  <div class="cap" data-z="-16" data-side="right"><p class="eyebrow">Slowly</p><h2>Talk becomes<br>logistics.</h2><p class="lead">Groceries. Bills. Whose parents visit next.</p></div>
-  <div class="cap" data-z="-23" data-side="left"><p class="eyebrow">Quietly</p><h2>Stress nobody sees.</h2><p class="lead">Each carrying something the other never hears about.</p></div>
-  <div class="cap" data-z="-30" data-side="right"><p class="eyebrow">Everyone says</p><h2>&ldquo;Adjust kar lo.&rdquo;</h2><p class="lead">So we stay quiet. For years.</p></div>
-  <div class="cap stat" data-z="-37" data-side="center"><p class="eyebrow">On average</p><p class="big">6<small> years</small></p><p class="lead">is how long unhappy couples wait before getting help.</p><p class="src">The Gottman Institute</p></div>
-  <div class="cap" data-z="-44" data-side="left"><p class="eyebrow">And when help comes</p><h2>It comes late.</h2><p class="lead">Usually as a lawyer&rsquo;s notice.</p></div>
-  <div class="cap stat" data-z="-51" data-side="center"><p class="eyebrow">Right now</p><p class="big">11.5<small> lakh</small></p><p class="lead">cases are pending in India&rsquo;s family courts.</p><p class="src">Law Minister in Parliament, May 2022 data</p></div>
-  <div class="cap" data-z="-58" data-side="right"><p class="eyebrow">And the children</p><h2>Carry the weight.</h2><p class="lead">Two homes. One child in the middle.</p></div>
-  <div class="cap end" data-z="-73.5" data-span="3.2"><p class="eyebrow">There&rsquo;s a gentler way</p><h2>Catch the drift <em>early.</em></h2><p class="lead">ShaadiOS: one app for every chapter of a relationship.</p></div>
+  <div class="cap" data-z="-9" data-side="left"><p class="eyebrow">Then</p><h2>The first argument.</h2><p class="lead">Nobody talks about it afterwards.</p></div>
+  <div class="cap" data-z="-16" data-side="right"><p class="eyebrow">Then</p><h2>The silence.</h2><p class="lead">Talk becomes logistics. Bills, school runs, whose parents visit next.</p></div>
+  <div class="cap" data-z="-23" data-side="left"><p class="eyebrow">Then the family steps in</p><h2>&ldquo;Adjust kar lo.&rdquo;</h2><p class="lead">Elders, relatives, the panchayat. Well-meant, informal, and often taking sides.</p></div>
+  <div class="cap" data-z="-30" data-side="right"><p class="eyebrow">Then</p><h2>A lawyer&rsquo;s notice.</h2><p class="lead">The first time anyone outside the family is involved.</p></div>
+  <div class="cap" data-z="-37" data-side="left"><p class="eyebrow">And finally</p><h2>Court-ordered mediation.</h2><p class="lead">Help arrives at last. By now it is part of a legal strategy, not a way back.</p></div>
+  <div class="cap stat" data-z="-44" data-side="left"><p class="eyebrow">Right now</p><p class="big">11.5<small> lakh</small></p><p class="lead">cases are waiting in India&rsquo;s family courts.</p><p class="src">Law Minister in Parliament, May 2022 data</p></div>
+
+  <div class="cap turn" data-p="0.78" data-pspan="0.06"><p class="eyebrow">The help was always there</p><h2>What if it came <em>first?</em></h2></div>
+  <div class="cap turn" data-p="0.9" data-pspan="0.06"><h2>Two lives, held together<br>by the right help, <em>early.</em></h2></div>
+  <div class="cap final" data-p="1" data-pspan="0.06" data-hold><p class="lead">The gold at the centre of our logo is that help.</p></div>
 </div>
 
 <main id="wrap">
   <section id="story" aria-label="The story"></section>
 
   <div id="content">
-    <section class="block" id="what">
-      <p class="eyebrow">What ShaadiOS really does</p>
-      <h2>Three quiet tools that change the story.</h2>
-      <div class="uses">
-        <article class="use">
-          <div class="ic">📒</div>
-          <h3>The relationship log book</h3>
-          <p>Log good days, hard days and what actually happened, in one tap. Over time it becomes a private, dated timeline of your relationship, and our AI turns it into plain-language summaries you can read together.</p>
-        </article>
-        <article class="use">
-          <div class="ic">🪜</div>
-          <h3>The help ladder</h3>
-          <p>Get the right help long before lawyers: a conversation, then a mediator or counsellor, mental-health support, and advocates or emergency services only if needed.</p>
-          <ol class="ladder"><li>Talk together</li><li>Mediator</li><li>Counsellor</li><li>Mental health</li><li>Advocate</li><li>Emergency</li></ol>
-        </article>
-        <article class="use">
-          <div class="ic">🧒</div>
-          <h3>Co-parenting, organised</h3>
-          <p>School pickups, custody schedules, vaccinations and expenses on one shared calendar. Export everything as a clear, factual report whenever you need it.</p>
-        </article>
-      </div>
-      <p class="fine">AI features give general guidance and summaries, not legal, medical or therapeutic advice.</p>
+    <section class="block intro">
+      <p class="eyebrow">ShaadiOS</p>
+      <h2>Care for it early. Decide clearly if you must.</h2>
+      <p class="lead dark">Relationship, family and mental-health tools for Indian couples and parents, with mediators and counsellors available long before anyone needs a courtroom.</p>
     </section>
 
-    <section class="block tint" id="screens">
+    <section class="block" id="tools">
+      <div class="tool">
+        <img src="img/married.jpg" alt="An Indian couple in festive clothes" loading="lazy">
+        <div><p class="eyebrow">Remember</p><h3>Keep the good visible.</h3>
+          <p>A shared calendar for the dates that matter, ideas for small surprises, and a quiet log of the effort each of you puts in, so it doesn&rsquo;t go unnoticed.</p></div>
+      </div>
+      <div class="tool flip">
+        <img src="img/understand.jpg" alt="A couple looking at a tablet together" loading="lazy">
+        <div><p class="eyebrow">Understand</p><h3>See it from their side.</h3>
+          <p>Social feeds tend to show you more of what you already feel. ShaadiOS uses AI to do the opposite: it gently shares content that helps each of you understand what the other is going through, and closes the gaps that misunderstanding leaves.</p></div>
+      </div>
+      <div class="tool">
+        <img src="img/counsel.jpg" alt="A couple talking with a counsellor" loading="lazy">
+        <div><p class="eyebrow">Get help early</p><h3>Talk to someone before it hardens.</h3>
+          <p>Book a mediator or relationship counsellor while things can still be repaired, with outcomes you can act on and the wider family kept intact.</p></div>
+      </div>
+      <div class="tool flip">
+        <img src="img/family.jpg" alt="An Indian family together outdoors" loading="lazy">
+        <div><p class="eyebrow">Parent together</p><h3>One calendar for the children.</h3>
+          <p>School runs, classes, vaccinations and reminders, shared between both parents. If you live apart, schedules follow your own agreement or a court&rsquo;s order, with every handover kept on record.</p></div>
+      </div>
+      <div class="tool">
+        <img src="img/clarity.jpg" alt="Two people talking across a table" loading="lazy">
+        <div><p class="eyebrow">Clarity</p><h3>Facts, when decisions are hard.</h3>
+          <p>A private, dated record of what happened, in your own words, from the very start. When a hard decision has to be made, you won&rsquo;t be relying on memory alone.</p></div>
+      </div>
+    </section>
+
+    <section class="block tint" id="help">
+      <div class="two">
+        <div>
+          <p class="eyebrow">Find help, in one place</p>
+          <h2>Like booking a doctor. For your relationship.</h2>
+          <p class="lead dark">There&rsquo;s no single place today to find the right relationship professional. ShaadiOS brings them together: compare, explore your options, and book a consultation.</p>
+          <ul class="chips"><li>Mediators</li><li>Relationship counsellors</li><li>Therapists &amp; mental health</li><li>Family advocates</li><li>Child specialists</li></ul>
+        </div>
+        <img class="side-img" src="img/mediation.jpg" alt="A couple in a mediation session" loading="lazy">
+      </div>
+      <ol class="ladder"><li>Talk together</li><li>Mediator</li><li>Counsellor</li><li>Mental health</li><li>Advocate</li><li>Emergency</li></ol>
+      <p class="fine">The earlier the step, the more there is to save. ShaadiOS connects you with independent professionals; it is not itself a law firm or a medical provider.</p>
+    </section>
+
+    <section class="block" id="screens">
       <p class="eyebrow">A look inside the app</p>
       <h2>It changes with your chapter.</h2>
       <div class="screens">
@@ -90,7 +115,7 @@
       <p><a class="more" href="https://shaadios.app/features">See every feature →</a></p>
     </section>
 
-    <section class="block" id="world">
+    <section class="block tint" id="world">
       <div class="two">
         <div>
           <p class="eyebrow">In India and abroad</p>
@@ -100,12 +125,12 @@
         <div>
           <p class="eyebrow">Private by design</p>
           <h2>Yours, not ours.</h2>
-          <p class="lead dark">No ads, no data selling. Face ID lock, encrypted storage, and a journal you can keep private from your partner.</p>
+          <p class="lead dark">No ads, no data selling. Face ID lock, encrypted storage, and entries you can keep private.</p>
         </div>
       </div>
     </section>
 
-    <section class="block tint" id="join">
+    <section class="block" id="join">
       <p class="eyebrow">Launching soon</p>
       <h2>Be among the first.</h2>
       <form class="waitlist" name="waitlist" method="POST" action="https://script.google.com/macros/s/AKfycbybhKTXFi7Ju0TZFBFlDC4nnWaLPBV82GdY9VlpF7AeraF3_fqKkfc2HArds2QwUuum/exec" data-waitlist>
@@ -140,7 +165,7 @@
         <a href="https://x.com/ShaadiOS" target="_blank" rel="noopener me" aria-label="ShaadiOS on X" style="--i:url(icons/x.svg)"></a>
       </div>
       <nav class="legal"><a href="https://shaadios.app/privacy">Privacy</a><a href="https://shaadios.app/terms">Terms</a><a href="https://shaadios.app/refund">Refunds</a><a href="https://shaadios.app/contact">Contact</a><a href="https://shaadios.app/delete-account">Delete account</a></nav>
-      <p class="help">In danger? Call 112 &middot; Women Helpline 181 &middot; Childline 1098 &middot; Tele-MANAS 14416 &middot; Outside India, your local emergency number. ShaadiOS&trade; is not a law firm, a medical provider or an emergency service.</p>
+      <p class="help">In danger? Call 112 &middot; Women Helpline 181 &middot; Childline 1098 &middot; Tele-MANAS 14416 &middot; Outside India, your local emergency number. ShaadiOS&trade; is not a law firm, a medical provider or an emergency service. AI features give general guidance, not legal, medical or therapeutic advice.</p>
       <p class="copy-r">&copy; 2026 ShaadiOS&trade;. All rights reserved. Photos: Unsplash; people shown are models.</p>
     </footer>
   </div>

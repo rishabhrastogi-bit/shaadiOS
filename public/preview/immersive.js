@@ -1,13 +1,15 @@
-// "Inside the ring": platinum rings lock, the camera flies through one ring into a dark tunnel of
-// moments. Photos drain from warm colour to grey as the relationship drifts; the tunnel ends in a
-// glowing ring that opens into warm light, where the rings lock again. Scroll drives the camera.
+// "Help, before it's too late": platinum rings lock; the camera travels the road most marriages take
+// (promise -> argument -> silence -> family -> lawyer -> court), photos draining from colour to grey.
+// Help (a gold light) waits at the very end. Then: what if it came first? The help flies to the rings,
+// they move into the logo's arrangement and colours, the gold settles in the centre, and the scene
+// becomes the ShaadiOS logo. Scroll drives everything.
 // ?p=0.5 freezes the story at a point; ?p=1.5 shows the content half a screen below the story (previews).
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const narrow = innerWidth < 860, small = Math.min(innerWidth, innerHeight) < 700;
-const NIGHT = new THREE.Color(0x0B0A0C), CREAM = new THREE.Color(0xF6F0EA);
+const NIGHT = new THREE.Color(0x0B0A0C), CREAM = new THREE.Color(0xF6F0EA), WHITE = new THREE.Color(0xFFFDF8);
 
 // ---------- renderer, scene, camera
 const canvas = document.getElementById('scene');
@@ -37,7 +39,7 @@ function ringPair() {
 }
 const start = ringPair();                         // the opening pair (camera flies through ring a)
 const finale = ringPair();                        // the pair waiting in the light at the end
-finale.g.position.set(0, narrow ? -1.5 : -1.15, -79); finale.a.position.x = -0.6; finale.b.position.x = 0.6;
+finale.g.position.set(0, 0, -58); finale.a.position.x = -0.6; finale.b.position.x = 0.6;
 const A_HOME = new THREE.Vector3(-0.6, 0, 0), B_HOME = new THREE.Vector3(0.6, 0, 0);
 
 const glint = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTexture(true), transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
@@ -46,14 +48,14 @@ scene.add(glint);
 // ---------- the tunnel: thin platinum hoops, gold dust, photo stations
 const hoopGeo = new THREE.TorusGeometry(3.4, 0.018, 12, 220);
 const hoops = [];
-for (let i = 0; i < 11; i++) {
+for (let i = 0; i < 7; i++) {
   const m = new THREE.Mesh(hoopGeo, new THREE.MeshStandardMaterial({ color: 0xdcd6cf, metalness: 1, roughness: 0.3, emissive: 0x6b5a45, emissiveIntensity: 0.4 }));
   m.position.set(0, 0, -4.5 - 7 * i); m.rotation.z = i * 0.3; scene.add(m); hoops.push(m);
 }
 const portal = new THREE.Mesh(new THREE.TorusGeometry(3.4, 0.09, 24, 260), new THREE.MeshBasicMaterial({ color: 0xFFE6C4 }));
-portal.position.set(0, 0, -71.5); scene.add(portal);
+portal.position.set(0, 0, -50.5); scene.add(portal);
 const portalGlow = new THREE.Sprite(new THREE.SpriteMaterial({ map: glowTexture(false), color: 0xFFE2BC, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
-portalGlow.position.set(0, 0, -72); portalGlow.scale.set(14, 14, 1); scene.add(portalGlow);
+portalGlow.position.set(0, 0, -51); portalGlow.scale.set(14, 14, 1); scene.add(portalGlow);
 
 const N = small ? 700 : 1400, pos = new Float32Array(N * 3);
 for (let i = 0; i < N; i++) {
@@ -66,16 +68,21 @@ scene.add(dust);
 
 // photo stations, z every 7 units; colour drains as the relationship drifts
 const STATIONS = [
-  { img: 'promise',      side: -1, sat: 1.00 },
-  { img: 'married',      side: +1, sat: 0.85 },
-  { img: 'apart',        side: -1, sat: 0.62 },
-  { img: 'overwhelmed',  side: +1, sat: 0.45 },
-  { img: 'thinking',     side: -1, sat: 0.30 },
-  null,                                              // statistic
-  { img: 'alone',        side: +1, sat: 0.16 },
-  null,                                              // statistic
-  { img: 'coparent-dad', side: -1, sat: 0.08 },
+  { img: 'promise',  side: -1, sat: 1.00 },
+  { img: 'argument', side: +1, sat: 0.78 },
+  { img: 'apart',    side: -1, sat: 0.55 },
+  { img: 'elders',   side: +1, sat: 0.38 },
+  { img: 'notice',   side: -1, sat: 0.22 },
+  { img: 'court',    side: +1, sat: 0.12 },
 ];
+
+// the help: a gold light waiting at the end of the road
+const helpMat = new THREE.MeshPhysicalMaterial({ color: 0xC9A24B, metalness: 0.9, roughness: 0.22, emissive: 0xC9A24B, emissiveIntensity: 0.9, transparent: true });
+const help = new THREE.Mesh(new THREE.SphereGeometry(0.3, 48, 48), helpMat); scene.add(help);
+const helpGlow = new THREE.Sprite(new THREE.SpriteMaterial({ map: null, color: 0xFFD98A, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending }));
+scene.add(helpGlow);
+const ROSE = new THREE.Color(0xD98A94), SAGE = new THREE.Color(0x9CAF88), PLAT = new THREE.Color(0xE6E4E1);
+finale.a.material.transparent = finale.b.material.transparent = true;
 const photoVert = `varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }`;
 const photoFrag = `
   uniform sampler2D map; uniform float sat, opacity, aspect, warmth; varying vec2 vUv;
@@ -143,13 +150,16 @@ addEventListener('scroll', readScroll, { passive: true });
 addEventListener('resize', () => { camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth, innerHeight); readScroll(); });
 
 // ---------- captions (fixed overlay, faded by camera distance)
-const caps = [...document.querySelectorAll('.cap')].map((el) => ({ el, z: +el.dataset.z, span: +(el.dataset.span || 3), hero: el.classList.contains('hero') }));
+const caps = [...document.querySelectorAll('.cap')].map((el) => ({ el, z: el.dataset.z !== undefined ? +el.dataset.z : null, span: +(el.dataset.span || 3),
+  p: el.dataset.p !== undefined ? +el.dataset.p : null, pspan: +(el.dataset.pspan || 0.05), hold: el.hasAttribute('data-hold'), hero: el.classList.contains('hero') }));
 const logo = document.querySelector('.brand img'), captions = document.querySelector('.captions');
 let frozenBeyond = false;
 
-// ---------- timeline: camera z runs 7 -> -73.5 over the story
-const Z0 = 7, Z1 = -73.5, look = new THREE.Vector3(), bg = new THREE.Color(), off = new THREE.Vector3();
-const camZ = (p) => lerp(Z0, Z1, p);
+// ---------- timeline: camera travels the road (7 -> -51.5) by p = 0.72; the ending plays after that
+const Z0 = 7, Z1 = -51.5, ROAD = 0.72, look = new THREE.Vector3(), bg = new THREE.Color(), off = new THREE.Vector3();
+const camZ = (p) => lerp(Z0, Z1, clamp(p / ROAD));
+helpGlow.material.map = glowTexture(false);
+const reveal = document.querySelector('.logo-reveal');
 function update(p, t) {
   const z = camZ(p), intro = ease(clamp(t / (reduce ? 0.001 : 2.8)));
 
@@ -170,6 +180,7 @@ function update(p, t) {
   const cx = lerp(lerp(0.3, A_HOME.x, lineUp), 0, settle), cy = lerp(lerp(0.35, 0.42, lineUp), 0, settle);
   camera.position.set(cx + Math.sin(t * 0.3) * 0.03, cy + Math.cos(t * 0.25) * 0.03, z);
   look.set(cx, cy, z - 10);
+  if (z < -50) look.set(0, 0, -58);
   if (lineUp < 1) look.lerp(new THREE.Vector3(0, start.g.position.y, 0), 1 - lineUp);
   camera.lookAt(look);
   lamp.position.set(0, 0.6, z - 2);
@@ -184,16 +195,36 @@ function update(p, t) {
   dust.rotation.z = t * 0.02;
 
   // the light at the end: the portal brightens as we approach, then night melts into cream
-  const near = smooth(-60, -71, z), dawn = smooth(-71, -72.6, z);
-  portalGlow.material.opacity = 0.25 + near * 0.75;
-  portalGlow.scale.setScalar(10 + near * 10);
+  const near = smooth(-40, -50.5, z), dawn = smooth(-50.4, -51.4, z);
+  portalGlow.material.opacity = (0.25 + near * 0.5) * smooth(-48.5, -44, z);
+  portalGlow.scale.setScalar(10 + near * 4);
   const pass0 = Math.exp(-Math.pow(z / 0.7, 2));
-  renderer.toneMappingExposure = 1.0 + pass0 * 0.8 + near * 0.3;
-  bg.copy(NIGHT).lerp(CREAM, dawn); renderer.setClearColor(bg); scene.fog.color.copy(bg);
+  renderer.toneMappingExposure = 1.0 + pass0 * 0.8 + near * 0.15;
+  const flash = Math.exp(-Math.pow((z + 50.9) / 0.45, 2));
+  bg.copy(NIGHT).lerp(CREAM, dawn).lerp(WHITE, flash); renderer.setClearColor(bg); scene.fog.color.copy(bg);
   scene.fog.far = lerp(24, 60, dawn);
   vignette.style.opacity = (1 - dawn).toFixed(3);
   portal.visible = portalGlow.visible = dawn < 0.99;
-  finale.g.rotation.y = 0.35 + Math.sin(t * 0.3) * 0.12; finale.g.rotation.x = 0.12;
+  // the ending: help comes to the rings, they become the logo
+  const arrive = smooth(0.73, 0.84, p), morph = smooth(0.82, 0.92, p), logoIn = smooth(0.93, 0.985, p);
+  const sway = (1 - morph) * (0.35 + Math.sin(t * 0.3) * 0.12);
+  finale.g.rotation.set((1 - morph) * 0.12, sway, 0);
+  finale.b.rotation.x = lerp(Math.PI / 2, 0, morph);
+  finale.a.position.set(lerp(-0.6, -0.56, morph), 0, lerp(0, 0.09, morph));
+  finale.b.position.set(lerp(0.6, 0.56, morph), 0, lerp(0, -0.09, morph));
+  finale.a.material.color.copy(PLAT).lerp(ROSE, morph); finale.b.material.color.copy(PLAT).lerp(SAGE, morph);
+  for (const m of [finale.a.material, finale.b.material]) { m.metalness = lerp(1, 0.25, morph); m.roughness = lerp(0.17, 0.42, morph); }
+  // help: glows at the portal (end of the road), then flies to the centre of the rings
+  const lift = lerp(0, narrow ? 0.9 : 0.62, logoIn), shrink = lerp(1, 0.72, logoIn);
+  finale.g.scale.setScalar(shrink); finale.g.position.y = lift;
+  const passing = z < -45.5 && z > -51.45;                  // hide the help while the camera crosses the portal
+  const hz = lerp(-52.6, -58, arrive), hy = lerp(1.5, lift, arrive) + Math.sin(arrive * Math.PI) * 0.5;
+  if (z > -45.5) help.position.set(0, 0, -50.5); else help.position.set(0, hy, hz);
+  help.scale.setScalar(z > -45.5 ? 1.6 : lerp(1.2, shrink, arrive));
+  helpMat.opacity = (z < -20 && !passing ? 1 : 0);
+  helpGlow.position.copy(help.position); helpGlow.scale.setScalar(lerp(3.5, 1.6, arrive) + Math.sin(t * 2) * 0.15);
+  helpGlow.material.opacity = (z < -20 && !passing ? 0.9 : 0) * (1 - logoIn * 0.6);
+  reveal.style.opacity = logoIn.toFixed(3);
   const light = dawn > 0.5 || bar.classList.contains('solid');
   const want = light ? 'logo-horizontal.svg' : 'logo-horizontal-cream.svg';
   if (!logo.src.endsWith(want)) logo.src = want;
@@ -203,10 +234,11 @@ function update(p, t) {
   const leave = frozenBeyond ? 1 : smooth(storyRange() - innerHeight * 0.1, storyRange() + innerHeight * 0.4, scrollPos);
   captions.style.opacity = (1 - leave).toFixed(3);
   caps.forEach((c) => {
-    let o = 1 - Math.abs(z - c.z) / c.span;
-    if (c.hero && z >= c.z) o = 1;
+    let o, dy;
+    if (c.p !== null) { o = 1 - Math.abs(p - c.p) / c.pspan; if (c.hold && p >= c.p) o = 1; dy = (p - c.p) * -400; }
+    else { o = 1 - Math.abs(z - c.z) / c.span; if (c.hero && z >= c.z) o = 1; dy = (z - c.z) * 10; if (p > ROAD) o = 0; }
     c.el.style.opacity = clamp(o).toFixed(3);
-    c.el.style.setProperty('--dy', ((z - c.z) * 10).toFixed(1) + 'px');
+    c.el.style.setProperty('--dy', dy.toFixed(1) + 'px');
   });
 }
 
