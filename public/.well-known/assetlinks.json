@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.shaadios",
+      "sha256_cert_fingerprints": [
+        "E9:1E:AA:11:25:31:96:B3:41:5E:56:77:62:D3:06:0D:DB:8D:D3:26:C2:81:BF:11:69:2D:8F:8F:72:BB:E5:0E"
+      ]
+    }
+  }
+]

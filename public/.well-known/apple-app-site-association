@@ -1,0 +1,17 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "P3W9J5S738.app.shaadios"
+        ],
+        "components": [
+          {
+            "/": "/i/*",
+            "comment": "Partner invite links"
+          }
+        ]
+      }
+    ]
+  }
+}

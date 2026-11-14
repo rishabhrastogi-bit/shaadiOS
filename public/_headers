@@ -5,3 +5,8 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains
 /preview/*
   X-Robots-Tag: noindex, nofollow
+/i/*
+  X-Robots-Tag: noindex, nofollow
+  Referrer-Policy: no-referrer
+/.well-known/apple-app-site-association
+  Content-Type: application/json
