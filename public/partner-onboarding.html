@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Partner onboarding — ShaadiOS</title>
+<meta name="description" content="ShaadiOS Partner onboarding.">
+<meta property="og:title" content="Partner onboarding — ShaadiOS"><meta property="og:description" content="ShaadiOS Partner onboarding.">
+<meta property="og:image" content="https://shaadios.app/img/logo/logo-stacked.png"><meta property="og:type" content="website"><meta property="og:site_name" content="ShaadiOS"><meta property="og:image:width" content="2000"><meta property="og:image:height" content="1317"><meta property="og:image:alt" content="ShaadiOS logo: two interlocking rings in rose and sage"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Partner onboarding — ShaadiOS"><meta name="twitter:description" content="ShaadiOS Partner onboarding."><meta name="twitter:image" content="https://shaadios.app/img/logo/logo-stacked.png">
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/img/logo/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/story.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ShaadiOS","url":"https://shaadios.app/","logo":"https://shaadios.app/img/logo/logo-stacked.png","email":"support@shaadios.app","sameAs":["https://www.instagram.com/shaadios.app/","https://www.facebook.com/profile.php?id=1288207277718615","https://www.threads.com/@shaadios.app","https://www.linkedin.com/company/shaadios-app/","https://x.com/ShaadiOS"]}</script>
+</head><body>
+<header class="site"><div class="wrap">
+<a href="/" aria-label="ShaadiOS home"><picture><source srcset="/img/logo/logo-horizontal-cream.svg" media="(prefers-color-scheme: dark)"><img src="/img/logo/logo-horizontal.svg" alt="ShaadiOS" width="173" height="40"></picture></a>
+<nav><a href="/#tools">The tools</a><a href="/features">Features</a><a href="/#privacy">Privacy</a><a href="/#faq">FAQ</a><a class="cta" href="/#waitlist">Join the waitlist</a></nav>
+</div></header>
+<main class="wrap legal partners onboard">
+<style>
+.partners form{display:grid;gap:16px;margin-top:28px}
+.partners fieldset{min-width:0;border:1px solid var(--line);border-radius:18px;padding:18px 20px;margin:0;display:grid;gap:14px;background:var(--card)}
+.partners legend{font-weight:700;padding:0 6px}
+.partners label{display:block;font-weight:500}
+.partners label>input:not([type=checkbox]):not([type=radio]),.partners label>select,.partners label>textarea{display:block;margin-top:6px}
+.partners label.check{display:flex;gap:10px;align-items:flex-start;font-weight:400}
+.partners label.check input{margin-top:4px;flex:none}
+.partners input[type=text],.partners input[type=email],.partners input[type=tel],.partners input[type=number],.partners input[type=date],.partners select,.partners textarea{font:inherit;padding:11px 13px;border:1px solid var(--line);border-radius:12px;background:#fff;color:#2a2320;width:100%;box-sizing:border-box}
+.partners textarea{min-height:90px;resize:vertical}
+.partners .row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.partners .opts{display:flex;gap:18px;flex-wrap:wrap}
+.partners .hint{font-size:.85rem;color:var(--muted);font-weight:400}
+.partners .err{color:#B3261E;font-weight:500}
+.partners [hidden]{display:none!important}
+.onboard .sum{background:#FFF8EF;border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:.95rem}
+.onboard ol.terms{margin:0;padding-left:20px;display:grid;gap:8px;font-size:.95rem}
+.onboard .bad{border-color:#B3261E!important;background:#FFF5F4!important}
+@media (max-width:640px){.partners .row{grid-template-columns:1fr}}
+</style>
+<h1>ShaadiOS<sup class="tm">&trade;</sup> Partner onboarding</h1>
+<div id="ob-loading"><p class="lead">Opening your form…</p></div>
+<div id="ob-problem" hidden><p class="lead" id="ob-problem-text"></p><p>Questions? Email <a href="mailto:buddy@shaadios.app">buddy@shaadios.app</a>.</p></div>
+<div id="ob-intro" hidden>
+<p class="lead">Welcome, <strong id="ob-name"></strong>. Thank you for working with ShaadiOS. This form records what we need for our partnership: your details, rates, availability and the key terms. It takes about 15 minutes.</p>
+<div class="notice"><strong>Draft terms.</strong> Your answers become the schedule of the ShaadiOS Partner Agreement. We&rsquo;ll then send you the full agreement and a non-disclosure agreement to sign. If anything differs, the signed agreement applies.</div>
+</div>
+
+<form id="ob-form" novalidate hidden>
+<p class="hp"><label>Leave empty <input name="company_fax" tabindex="-1" autocomplete="off"></label></p>
+
+<fieldset><legend>1. About you</legend>
+<div class="opts">
+<label class="check"><input type="radio" name="applicant" value="individual" checked> <span>I work on my own</span></label>
+<label class="check"><input type="radio" name="applicant" value="organisation"> <span>An organisation or clinic</span></label>
+</div>
+<div class="row">
+<label>Legal name <span class="hint">As on PAN / registration</span><input type="text" name="legal_name" required maxlength="160"></label>
+<label>Name shown in ShaadiOS <input type="text" name="display_name" required maxlength="120"></label>
+</div>
+<div class="row">
+<label>Contact person <input type="text" name="contact_name" required maxlength="120" autocomplete="name"></label>
+<label>Email <input type="email" name="email" required maxlength="200" autocomplete="email"></label>
+</div>
+<div class="row">
+<label>Phone <input type="tel" name="phone" required maxlength="20" autocomplete="tel" placeholder="+91 98xxx xxxxx"></label>
+<label>PAN <input type="text" name="pan" required maxlength="10" placeholder="ABCDE1234F" style="text-transform:uppercase"></label>
+</div>
+<label>Registered address <textarea name="address" required maxlength="400" style="min-height:70px"></textarea></label>
+<label>GSTIN <span class="hint">(only if you&rsquo;re registered for GST)</span><input type="text" name="gstin" maxlength="15" placeholder="07ABCDE1234F1Z5" style="text-transform:uppercase"></label>
+</fieldset>
+
+<fieldset><legend>2. Your practice</legend>
+<label>Qualifications <span class="hint">Degrees and training, e.g. MA Psychology, Gottman Level 2, 40-hour mediation course</span><textarea name="qualifications" required maxlength="1000"></textarea></label>
+<div class="row">
+<label>Registration <span class="hint">(RCI, medical council or Bar Council number, if any)</span><input type="text" name="registration" maxlength="300"></label>
+<label>Years of practice <input type="number" name="experience_years" required min="0" max="70"></label>
+</div>
+<label>How you work <span class="hint">(optional) Methods, e.g. Gottman, EFT, CBT</span><input type="text" name="approaches" maxlength="500"></label>
+<label>Languages you hold sessions in <input type="text" name="languages" required maxlength="200" placeholder="e.g. English, Hindi"></label>
+<div><span class="hint">Who you see</span><div class="opts">
+<label class="check"><input type="checkbox" name="f_individual"> <span>Individuals</span></label>
+<label class="check"><input type="checkbox" name="f_couples"> <span>Couples</span></label>
+<label class="check"><input type="checkbox" name="f_family"> <span>Families</span></label>
+<label class="check"><input type="checkbox" name="f_children"> <span>Children</span></label>
+</div></div>
+<div><span class="hint">How</span><div class="opts">
+<label class="check"><input type="checkbox" name="online" checked> <span>Online, in the ShaadiOS video room</span></label>
+<label class="check"><input type="checkbox" name="in_person"> <span>In person</span></label>
+</div></div>
+<label data-inperson hidden>Where you see people in person <input type="text" name="location" maxlength="200" placeholder="Area and city"></label>
+</fieldset>
+
+<fieldset><legend>3. Your rates</legend>
+<p class="hint">Your own fees, before GST. ShaadiOS collects them from the client and pays you, as set out in the terms below.</p>
+<div class="row">
+<label>Session length <select name="session_minutes" required><option value="45">45 minutes</option><option value="50" selected>50 minutes</option><option value="60">60 minutes</option><option value="90">90 minutes</option></select></label>
+<label>Fee per session (&#8377;) <input type="number" name="rate_session" required min="100" max="50000" step="1"></label>
+</div>
+<div class="row">
+<label>Couples session (&#8377;) <span class="hint">(if different)</span><input type="number" name="rate_couples" min="100" max="50000" step="1"></label>
+<label>Hourly rate (&#8377;) <span class="hint">(optional, for longer sessions)</span><input type="number" name="rate_hour" min="100" max="50000" step="1"></label>
+</div>
+<label>First session (&#8377;) <span class="hint">(optional, leave empty if the same; 0 if free)</span><input type="number" name="rate_first" min="0" max="50000" step="1"></label>
+<label class="check"><input type="checkbox" name="gst_registered"> <span>I charge GST on my fees</span></label>
+<p class="sum" id="ob-sum"></p>
+</fieldset>
+
+<fieldset><legend>4. When you&rsquo;re available</legend>
+<p class="hint">Your usual weekly times for ShaadiOS clients (India time). Leave a day empty if you&rsquo;re not available.</p>
+<div class="row"><label>Monday <input type="text" name="av_mon" maxlength="80" placeholder="e.g. 10:00–13:00, 17:00–20:00"></label><label>Tuesday <input type="text" name="av_tue" maxlength="80" placeholder="e.g. 10:00–13:00, 17:00–20:00"></label><label>Wednesday <input type="text" name="av_wed" maxlength="80" placeholder="e.g. 10:00–13:00, 17:00–20:00"></label><label>Thursday <input type="text" name="av_thu" maxlength="80" placeholder="e.g. 10:00–13:00, 17:00–20:00"></label><label>Friday <input type="text" name="av_fri" maxlength="80" placeholder="e.g. 10:00–13:00, 17:00–20:00"></label><label>Saturday <input type="text" name="av_sat" maxlength="80" placeholder="e.g. 10:00–13:00, 17:00–20:00"></label><label>Sunday <input type="text" name="av_sun" maxlength="80" placeholder="e.g. 10:00–13:00, 17:00–20:00"></label></div>
+<div class="row">
+<label>Hours a week for ShaadiOS clients <input type="number" name="weekly_hours" required min="1" max="60"></label>
+<label>Available from <span class="hint">(optional)</span><input type="date" name="start_date"></label>
+</div>
+</fieldset>
+
+<fieldset><legend>5. Response times</legend>
+<p class="hint">What you commit to for every ShaadiOS booking request.</p>
+<label>I confirm or decline a request within <select name="confirm_within_hours" required><option value="4">4 hours</option><option value="12">12 hours</option><option value="24" selected>24 hours</option><option value="48">48 hours</option></select></label>
+<label>I offer a first session within <select name="first_session_within_days" required><option value="2">2 days</option><option value="3">3 days</option><option value="5">5 days</option><option value="7" selected>7 days</option><option value="10">10 days</option><option value="14">14 days</option></select></label>
+<label>Clients can cancel free up to <select name="cancel_notice_hours" required><option value="12">12 hours before</option><option value="24" selected>24 hours before</option><option value="48">48 hours before</option></select></label>
+</fieldset>
+
+<fieldset><legend>6. Payouts</legend>
+<p class="hint">The bank account ShaadiOS pays you into. Only the ShaadiOS team can see it.</p>
+<label>Account holder name <input type="text" name="account_holder" required maxlength="120"></label>
+<div class="row">
+<label>Account number <input type="text" name="account_number" required inputmode="numeric" maxlength="18" autocomplete="off"></label>
+<label>Account number again <input type="text" name="account_number2" required inputmode="numeric" maxlength="18" autocomplete="off"></label>
+</div>
+<label>IFSC <input type="text" name="ifsc" required maxlength="11" placeholder="HDFC0001234" style="text-transform:uppercase"></label>
+</fieldset>
+
+<fieldset><legend>7. Terms</legend>
+<ol class="terms">
+<li><strong>Payment.</strong> ShaadiOS collects your session fee from the client, plus a ShaadiOS booking fee of <span data-fee></span> that the client pays (waived during early access).</li>
+<li><strong>Commission.</strong> ShaadiOS keeps <strong><span data-pct></span>%</strong> of each session fee (before GST).</li>
+<li><strong>Payouts.</strong> Monthly, by the 10th, for sessions held the month before, into the account above: your fees minus the commission and any refunds, and any tax deducted as the law requires.</li>
+<li><strong>GST.</strong> If you charge GST, it&rsquo;s added to your fee and shown to the client.</li>
+<li><strong>Response times.</strong> You keep to the response times in section 5.</li>
+<li><strong>Anonymity.</strong> Clients may book under a first name they choose. You won&rsquo;t try to find out who they are, and you contact them only through ShaadiOS.</li>
+<li><strong>Confidentiality.</strong> You keep everything about ShaadiOS clients, and ShaadiOS&rsquo;s business, confidential. You&rsquo;ll also sign a non-disclosure agreement.</li>
+<li><strong>Safety.</strong> If a client may be at risk of harm, you follow your professional duties and tell ShaadiOS straight away.</li>
+<li><strong>No recording.</strong> Sessions are never recorded by anyone.</li>
+<li><strong>Clients stay with ShaadiOS.</strong> You won&rsquo;t ask ShaadiOS clients to book or pay you outside ShaadiOS.</li>
+<li><strong>Data.</strong> You handle client information under India&rsquo;s Digital Personal Data Protection Act, 2023 and your professional rules. Your session notes stay with you.</li>
+<li><strong>Badge and ending.</strong> You carry the &ldquo;ShaadiOS Partner&rdquo; badge while the agreement is in force. Either of us can end it with 30 days&rsquo; notice.</li>
+</ol>
+<label class="check"><input type="checkbox" name="c_accurate"> <span>The details in this form are true, and I&rsquo;m allowed to share them.</span></label>
+<label class="check"><input type="checkbox" name="c_terms"> <span>I agree to the payment, commission and payout terms (1&ndash;5).</span></label>
+<label class="check"><input type="checkbox" name="c_anonymous"> <span>I&rsquo;ll respect clients&rsquo; anonymity (6).</span></label>
+<label class="check"><input type="checkbox" name="c_confidential"> <span>I&rsquo;ll keep client and ShaadiOS information confidential, and sign the NDA (7).</span></label>
+<label class="check"><input type="checkbox" name="c_safeguarding"> <span>I&rsquo;ll tell ShaadiOS straight away if a client may be at risk of harm (8).</span></label>
+<label class="check"><input type="checkbox" name="c_no_recording"> <span>I won&rsquo;t record sessions (9).</span></label>
+<label class="check"><input type="checkbox" name="c_no_solicit"> <span>I won&rsquo;t ask ShaadiOS clients to book or pay me outside ShaadiOS (10).</span></label>
+<label class="check"><input type="checkbox" name="c_data"> <span>I&rsquo;ll handle client information lawfully (11).</span></label>
+<label class="check"><input type="checkbox" name="c_privacy"> <span>I&rsquo;ve read the <a href="/privacy">privacy policy</a>, and ShaadiOS may use these details for our partnership and payouts.</span></label>
+<label>Type your full name to sign <input type="text" name="signed_name" required maxlength="120"></label>
+<p class="hint">Signed on <span id="ob-today"></span>. Your answers are saved with the date and time.</p>
+</fieldset>
+
+<p class="err" id="ob-error" role="alert" hidden></p>
+<button class="btn" type="submit">Send to ShaadiOS</button>
+</form>
+
+<div id="ob-done" hidden>
+<h2>Thank you. We&rsquo;ve got it.</h2>
+<p>The ShaadiOS team will review your form, may call you, and will then send the full Partner Agreement and NDA to sign. Your ShaadiOS Partner badge and in-app bookings start after both are signed.</p>
+<a class="btn" href="/">Back to home</a>
+</div>
+<p class="small" style="margin-top:32px">Questions? Email <a href="mailto:buddy@shaadios.app">buddy@shaadios.app</a>.</p>
+</main>
+<script>
+(function () {
+  var URL_ = 'https://lnjmigsyflgvzfbhpiow.supabase.co/functions/v1/partner-onboard', DAYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+  var token = (new URLSearchParams(location.hash.slice(1))).get('t') || '';
+  history.replaceState(null, '', location.pathname);
+  var f = document.getElementById('ob-form'), err = document.getElementById('ob-error'), terms = {};
+  function show(id) { ['ob-loading', 'ob-problem'].forEach(function (x) { document.getElementById(x).hidden = x !== id; }); }
+  function problem(t) { document.getElementById('ob-problem-text').textContent = t; show('ob-problem'); }
+  function call(body) {
+    return fetch(URL_, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .catch(function () { throw new Error('Couldn’t reach ShaadiOS. Check your internet connection and try again.'); })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok) throw new Error(j.error || 'Something went wrong. Please try again.'); return j; }); });
+  }
+  function rupees(n) { return '\u20b9' + Math.round(n).toLocaleString('en-IN'); }
+  function v(n) { var el = f.elements[n]; return el ? (el.value || '').trim() : ''; }
+  function on(n) { return !!(f.elements[n] && f.elements[n].checked); }
+  function sum() {
+    var fee = Number(v('rate_session')) || 0, pct = terms.commission_pct || 0;
+    document.getElementById('ob-sum').textContent = !fee ? 'Add your fee to see what you receive.'
+      : 'For a ' + rupees(fee) + ' session: the client pays ' + rupees(fee) + (on('gst_registered') ? ' + GST' : '') + ' plus the ShaadiOS booking fee, and you receive '
+        + rupees(fee * (1 - pct / 100)) + (on('gst_registered') ? ' + GST' : '') + ' (after ' + pct + '% commission, before any tax deducted).';
+    document.querySelector('[data-inperson]').hidden = !on('in_person');
+  }
+  if (!/^[a-f0-9]{48}$/.test(token)) return problem('This link isn\u2019t complete. Use the link ShaadiOS sent you, or ask for a new one.');
+  call({ action: 'info', token: token }).then(function (j) {
+    terms = j;
+    document.getElementById('ob-name').textContent = j.name;
+    document.querySelectorAll('[data-pct]').forEach(function (e) { e.textContent = String(j.commission_pct); });
+    document.querySelectorAll('[data-fee]').forEach(function (e) { e.textContent = rupees(j.booking_fee_paise / 100); });
+    f.elements.display_name.value = j.name; f.elements.email.value = j.email;
+    document.getElementById('ob-today').textContent = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+    document.getElementById('ob-loading').hidden = true; document.getElementById('ob-intro').hidden = false; f.hidden = false; sum();
+  }).catch(function (x) { problem(x.message); });
+  f.addEventListener('input', sum); f.addEventListener('change', sum);
+
+  f.addEventListener('submit', function (e) {
+    e.preventDefault(); err.hidden = true;
+    f.querySelectorAll('.bad').forEach(function (x) { x.classList.remove('bad'); });
+    var formats = ['individual', 'couples', 'family', 'children'].filter(function (k) { return on('f_' + k); });
+    var availability = {};
+    DAYS.forEach(function (d) { if (v('av_' + d)) availability[d] = v('av_' + d); });
+    var acct = v('account_number').replace(/\s/g, '');
+    var checks = [
+      ['legal_name', v('legal_name').length >= 2, 'Add your legal name.'],
+      ['display_name', v('display_name').length >= 2, 'Add the name to show in ShaadiOS.'],
+      ['contact_name', v('contact_name').length >= 2, 'Add a contact person.'],
+      ['email', /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v('email')), 'Add a valid email address.'],
+      ['phone', /^[0-9 +()-]{8,20}$/.test(v('phone')), 'Add a phone number.'],
+      ['pan', /^[A-Z]{5}[0-9]{4}[A-Z]$/.test(v('pan').toUpperCase()), 'Check the PAN: 5 letters, 4 numbers, 1 letter.'],
+      ['address', v('address').length >= 10, 'Add your registered address.'],
+      ['gstin', !v('gstin') || /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z][0-9A-Z]Z[0-9A-Z]$/.test(v('gstin').toUpperCase()), 'Check the GSTIN (15 characters), or leave it empty.'],
+      ['qualifications', v('qualifications').length >= 5, 'Add your qualifications.'],
+      ['experience_years', v('experience_years') !== '' && +v('experience_years') >= 0, 'Add your years of practice.'],
+      ['languages', v('languages').length >= 2, 'Add the languages you work in.'],
+      ['f_individual', formats.length > 0, 'Choose who you see.'],
+      ['online', on('online') || on('in_person'), 'Choose online, in person, or both.'],
+      ['rate_session', +v('rate_session') >= 100, 'Add your fee per session.'],
+      ['av_mon', Object.keys(availability).length > 0, 'Add at least one day you\u2019re available.'],
+      ['weekly_hours', +v('weekly_hours') >= 1, 'Add the hours a week for ShaadiOS clients.'],
+      ['account_holder', v('account_holder').length >= 2, 'Add the account holder\u2019s name.'],
+      ['account_number', /^[0-9]{6,18}$/.test(acct), 'Check the account number (6 to 18 digits).'],
+      ['account_number2', acct === v('account_number2').replace(/\s/g, ''), 'The account numbers don\u2019t match.'],
+      ['ifsc', /^[A-Z]{4}0[A-Z0-9]{6}$/.test(v('ifsc').toUpperCase()), 'Check the IFSC, e.g. HDFC0001234.'],
+      ['c_privacy', ['accurate', 'terms', 'anonymous', 'confidential', 'safeguarding', 'no_recording', 'no_solicit', 'data', 'privacy'].every(function (k) { return on('c_' + k); }), 'Please tick every box in \u201cTerms\u201d.'],
+      ['signed_name', v('signed_name').length >= 2, 'Type your full name to sign.']
+    ];
+    var bad = checks.filter(function (c) { return !c[1]; });
+    if (bad.length) {
+      bad.forEach(function (c) { var el = f.elements[c[0]]; if (el) (el.type === 'checkbox' ? el.closest('label') : el).classList.add('bad'); });
+      err.textContent = bad[0][2]; err.hidden = false;
+      var first = f.elements[bad[0][0]]; if (first && first.focus) first.focus();
+      return;
+    }
+    var paise = function (n) { return v(n) === '' ? '' : Math.round(Number(v(n)) * 100); };
+    var form = {
+      company_fax: v('company_fax'), applicant: f.querySelector('input[name=applicant]:checked').value,
+      legal_name: v('legal_name'), display_name: v('display_name'), contact_name: v('contact_name'), email: v('email'), phone: v('phone'),
+      address: v('address'), gstin: v('gstin').toUpperCase(), pan: v('pan').toUpperCase(),
+      qualifications: v('qualifications'), registration: v('registration'), experience_years: +v('experience_years'), approaches: v('approaches'),
+      languages: v('languages'), formats: formats, online: on('online'), in_person: on('in_person'), location: on('in_person') ? v('location') : '',
+      session_minutes: +v('session_minutes'), rate_session_paise: paise('rate_session'), rate_couples_paise: paise('rate_couples'),
+      rate_hour_paise: paise('rate_hour'), first_session_paise: paise('rate_first'), gst_registered: on('gst_registered'),
+      availability: availability, weekly_hours: +v('weekly_hours'), confirm_within_hours: +v('confirm_within_hours'),
+      first_session_within_days: +v('first_session_within_days'), cancel_notice_hours: +v('cancel_notice_hours'), start_date: v('start_date'),
+      account_holder: v('account_holder'), account_number: acct, ifsc: v('ifsc').toUpperCase(), signed_name: v('signed_name'),
+      consents: { accurate: true, terms: true, anonymous: true, confidential: true, safeguarding: true, no_recording: true, no_solicit: true, data: true, privacy: true }
+    };
+    var btn = f.querySelector('button[type=submit]'); btn.disabled = true; btn.textContent = 'Sending\u2026';
+    call({ action: 'submit', token: token, form: form })
+      .then(function () { f.hidden = true; document.getElementById('ob-intro').hidden = true; document.getElementById('ob-done').hidden = false; window.scrollTo(0, 0); })
+      .catch(function (x) { err.textContent = x.message; err.hidden = false; btn.disabled = false; btn.textContent = 'Send to ShaadiOS'; });
+  });
+})();
+</script>
+<footer><div class="wrap cols">
+<div><picture><source srcset="/img/logo/logo-stacked-cream.svg" media="(prefers-color-scheme: dark)"><img src="/img/logo/logo-stacked.svg" alt="ShaadiOS" width="108" height="70"></picture>
+<p>One app for every chapter of a relationship.</p>
+<p class="small">ShaadiOS is not a law firm, a medical provider or a substitute for therapy. In an emergency call 112.</p></div>
+<div><strong>Explore</strong><br><a href="/#tools">The tools</a><a href="/features">Features</a><a href="/contact">Contact</a><a href="/partners">For professionals</a><a href="mailto:support@shaadios.app">support@shaadios.app</a></div>
+<div><strong>Legal</strong><br><a href="/privacy">Privacy policy</a><a href="/terms">Terms of service</a><a href="/refund">Refund &amp; cancellation</a><a href="/delete-account">Delete your account</a></div>
+<div><strong>Follow us</strong><br><div class="social"><a href="https://www.instagram.com/shaadios.app/" target="_blank" rel="noopener me" aria-label="ShaadiOS on Instagram" title="Instagram"><svg aria-hidden="true" focusable="false" fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></a><a href="https://www.facebook.com/profile.php?id=1288207277718615" target="_blank" rel="noopener me" aria-label="ShaadiOS on Facebook" title="Facebook"><svg aria-hidden="true" focusable="false" fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg></a><a href="https://www.threads.com/@shaadios.app" target="_blank" rel="noopener me" aria-label="ShaadiOS on Threads" title="Threads"><svg aria-hidden="true" focusable="false" fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.263 11.097c-.03-3.486-1.92-5.586-5.111-5.586-2.13 0-3.922.963-4.863 2.499l2.062 1.438c.535-.843 1.272-1.543 2.628-1.543 1.528 0 2.318.85 2.544 2.431a15 15 0 0 0-2.236-.173c-4.125 0-6.068 1.867-6.068 4.336s1.943 3.99 4.804 3.99c3.139 0 5.013-2.115 5.781-4.735.798.361 1.348 1.204 1.348 2.47 0 3.387-3.907 5.232-7.22 5.232-4.885 0-8.077-3.207-8.077-8.424 0-6.392 4.223-10.487 9.9-10.487 3.808 0 5.69 1.671 6.97 3.914l2.108-1.475C21.44 2.078 18.331 0 13.663 0 6.227 0 1.168 5.277 1.168 12.934c0 7 4.953 11.066 10.856 11.066 4.878 0 9.809-2.846 9.809-7.716 0-2.545-1.46-4.231-3.569-5.187m-6.33 4.855c-1.077 0-2.026-.512-2.026-1.453 0-1.483 1.822-1.934 3.606-1.934.678 0 1.34.045 1.927.173-.422 1.927-1.671 3.215-3.508 3.214Z"/></svg></a><a href="https://www.linkedin.com/company/shaadios-app/" target="_blank" rel="noopener me" aria-label="ShaadiOS on LinkedIn" title="LinkedIn"><svg aria-hidden="true" focusable="false" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><mask id="li-cut-4"><rect width="24" height="24" fill="#fff"/><circle cx="6.3" cy="6.4" r="1.65" fill="#000"/><rect x="4.9" y="9.2" width="2.8" height="9.8" fill="#000"/><path fill="#000" d="M9.6 9.2h2.7v1.4c.5-.9 1.7-1.7 3.4-1.7 2.9 0 3.6 1.9 3.6 4.4V19h-2.8v-5.2c0-1.3-.3-2.4-1.7-2.4-1.5 0-2.4 1-2.4 2.5V19H9.6z"/></mask></defs><rect width="24" height="24" rx="3.5" mask="url(#li-cut-4)"/></svg>
+</a><a href="https://x.com/ShaadiOS" target="_blank" rel="noopener me" aria-label="ShaadiOS on X" title="X"><svg aria-hidden="true" focusable="false" fill="currentColor" role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M14.234 10.162 22.977 0h-2.072l-7.591 8.824L7.251 0H.258l9.168 13.343L.258 24H2.33l8.016-9.318L16.749 24h6.993zm-2.837 3.299-.929-1.329L3.076 1.56h3.182l5.965 8.532.929 1.329 7.754 11.09h-3.182z"/></svg></a></div></div>
+</div>
+<div class="wrap small" style="margin-top:24px">&copy; 2026 ShaadiOS&trade;. All rights reserved. ShaadiOS&trade; is a trademark (application pending).</div>
+</footer><script src="/script.js" defer></script></body></html>

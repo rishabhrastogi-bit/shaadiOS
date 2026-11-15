@@ -8,6 +8,10 @@
 /i/*
   X-Robots-Tag: noindex, nofollow
   Referrer-Policy: no-referrer
+/partner-onboarding*
+  X-Robots-Tag: noindex, nofollow
+  Referrer-Policy: no-referrer
+  Cache-Control: no-store
 /session/*
   X-Robots-Tag: noindex, nofollow
   Referrer-Policy: no-referrer

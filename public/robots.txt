@@ -2,4 +2,5 @@ User-agent: *
 Allow: /
 Disallow: /preview/
 Disallow: /session/
+Disallow: /partner-onboarding
 Sitemap: https://shaadios.app/sitemap.xml
