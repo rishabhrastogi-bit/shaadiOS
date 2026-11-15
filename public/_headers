@@ -8,5 +8,10 @@
 /i/*
   X-Robots-Tag: noindex, nofollow
   Referrer-Policy: no-referrer
+/session/*
+  X-Robots-Tag: noindex, nofollow
+  Referrer-Policy: no-referrer
+  Permissions-Policy: camera=(self), microphone=(self), display-capture=()
+  Cache-Control: no-store
 /.well-known/apple-app-site-association
   Content-Type: application/json
