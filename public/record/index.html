@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer">
+<title>Read-only record · ShaadiOS</title>
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" href="/img/logo/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FAF0E4;--card:#fff;--text:#3B2A22;--muted:#7E6858;--accent:#C44A34;--border:#E6D2BC}
+*{box-sizing:border-box}html,body{margin:0}
+body{font-family:'DM Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.5}
+[hidden]{display:none!important}
+.wrap{max-width:880px;margin:0 auto;padding:28px 16px 48px}
+.card{background:var(--card);border-radius:20px;padding:24px 20px;box-shadow:0 6px 24px rgba(59,42,34,.08)}
+.gate{max-width:420px;margin:8vh auto 0;text-align:center}
+.logo{height:32px;margin-bottom:16px}
+h1{font-size:22px;margin:0 0 8px}h2{font-size:16px;margin:28px 0 8px}
+.muted{color:var(--muted);font-size:14px}
+input{font:inherit;font-size:28px;letter-spacing:8px;text-align:center;width:100%;max-width:240px;padding:10px;border:1.5px solid var(--border);border-radius:12px;margin:16px 0 12px;background:#fff;color:var(--text)}
+button{font:inherit;font-weight:700;background:var(--accent);color:#fff;border:0;border-radius:12px;padding:12px 22px;cursor:pointer}
+button.ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent);padding:8px 14px;font-size:14px}
+.err{color:var(--accent);min-height:1.5em;font-size:14px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;color:var(--muted);margin:6px 0 0}
+.boxes{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:16px}
+.box{background:var(--bg);border-radius:14px;padding:12px}.box b{display:block;font-size:22px}.box span{font-size:13px;color:var(--muted)}
+.tbl{width:100%;border-collapse:collapse;font-size:14px;background:#fff;border-radius:14px;overflow:hidden}
+.tbl td{padding:9px 12px;border-top:1px solid #F1E6D8;vertical-align:top}.tbl tr:first-child td{border-top:0}
+.tbl td.w{white-space:nowrap;color:var(--muted);font-weight:500;width:1%}
+.tbl small{display:block;color:var(--muted)}
+.none{color:var(--muted);font-size:14px;margin:0}
+.note{font-size:13px;color:var(--muted);margin-top:28px;border-top:1px solid var(--border);padding-top:14px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+@media (max-width:560px){.tbl td.w{white-space:normal;width:34%}}
+@media print{body{background:#fff}.noprint{display:none!important}.card{box-shadow:none;padding:0}.wrap{padding:0}}
+</style></head><body>
+<div class="wrap">
+<div class="card gate" id="gate">
+<img class="logo" src="/img/logo/logo-horizontal.svg" alt="ShaadiOS">
+<h1>Read-only record</h1>
+<p class="muted" id="intro">Shared with you through ShaadiOS. Enter the 6-digit PIN you were sent separately.</p>
+<form id="f"><input id="pin" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]{6}" aria-label="6-digit PIN" required>
+<br><button type="submit" id="go">Open record</button></form>
+<p class="err" id="err" role="alert"></p>
+</div>
+<div class="card" id="rec" hidden>
+<div class="top"><img class="logo" src="/img/logo/logo-horizontal.svg" alt="ShaadiOS" style="margin:0"><button class="ghost noprint" onclick="print()">Print or save as PDF</button></div>
+<h1 id="title" style="margin-top:14px">Co-parenting record</h1>
+<p class="muted" id="hdr"></p>
+<div class="meta" id="meta"></div>
+<div class="boxes" id="boxes"></div>
+<div id="secs"></div>
+<p class="note">This is a copy made by one parent in the ShaadiOS app, as of the time shown above. It lists entries exactly as they were saved in the app; ShaadiOS does not check or verify them. The parent can see when this link is opened and can withdraw it at any time. Please don&rsquo;t forward the link or PIN.</p>
+</div>
+</div>
+<script>
+(function () {
+  var SUPA = 'https://lnjmigsyflgvzfbhpiow.supabase.co', KEY = 'sb_publishable_xNnRqHQbISlp5U6ho6PciQ_iNV5O2gv';
+  var t = (location.hash.match(/t=([a-f0-9]{48})/) || [])[1] || '';
+  var $ = function (id) { return document.getElementById(id); };
+  var el = function (tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+  var fmt = function (iso) { try { return new Date(iso).toLocaleString('en-IN', { day: 'numeric', month: 'short', year: 'numeric', hour: 'numeric', minute: '2-digit' }); } catch (e) { return ''; } };
+  var MSG = {
+    not_found: 'This link isn\u2019t valid. Check you have the whole link, or ask the parent for a new one.',
+    withdrawn: 'This record has been withdrawn by the parent who shared it.',
+    expired: 'This link has expired. Ask the parent who shared it for a new one.',
+    locked: 'Too many wrong PINs, so this link is locked. Ask the parent for a new link and PIN.'
+  };
+  if (!t) { $('intro').textContent = MSG.not_found; $('f').hidden = true; return; }
+  $('f').addEventListener('submit', function (ev) {
+    ev.preventDefault();
+    var pin = $('pin').value.replace(/\D/g, '');
+    if (pin.length !== 6) { $('err').textContent = 'The PIN has 6 digits.'; return; }
+    $('go').disabled = true; $('err').textContent = '';
+    fetch(SUPA + '/rest/v1/rpc/pro_record_open', { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: KEY }, body: JSON.stringify({ p_token: t, p_pin: pin }) })
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        $('go').disabled = false;
+        if (!d || d.error) {
+          if (d && d.error === 'wrong_pin') { $('err').textContent = 'That PIN doesn\u2019t match. ' + d.left + (d.left === 1 ? ' try' : ' tries') + ' left.'; return; }
+          $('err').textContent = MSG[d && d.error] || 'Something went wrong. Try again.';
+          if (d && d.error !== 'wrong_pin') $('f').hidden = true;
+          return;
+        }
+        show(d);
+      })
+      .catch(function () { $('go').disabled = false; $('err').textContent = 'Couldn\u2019t connect. Check your internet and try again.'; });
+  });
+  function show(d) {
+    var r = d.record || {};
+    $('gate').hidden = true; $('rec').hidden = false;
+    $('hdr').textContent = r.header || '';
+    var m = $('meta');
+    m.appendChild(el('span', null, 'Period: ' + (r.period || '')));
+    m.appendChild(el('span', null, 'Copy made ' + fmt(d.updated_at)));
+    m.appendChild(el('span', null, 'Link open until ' + fmt(d.expires_at)));
+    (r.boxes || []).forEach(function (b) { var x = el('div', 'box'); x.appendChild(el('b', null, b[1])); x.appendChild(el('span', null, b[0] + (b[2] ? ' \u00b7 ' + b[2] : ''))); $('boxes').appendChild(x); });
+    (r.sections || []).forEach(function (s) {
+      var wrap = $('secs');
+      wrap.appendChild(el('h2', null, s.title + ' \u00b7 ' + (s.rows || []).length));
+      if (!(s.rows || []).length) { wrap.appendChild(el('p', 'none', 'Nothing in this period.')); return; }
+      var tb = el('table', 'tbl');
+      s.rows.forEach(function (row) {
+        var tr = el('tr'); tr.appendChild(el('td', 'w', row.when));
+        var td = el('td', null, row.what);
+        if (row.logged) td.appendChild(el('small', null, 'Logged ' + row.logged));
+        if (row.ref) td.appendChild(el('small', null, row.ref));
+        tr.appendChild(td); tb.appendChild(tr);
+      });
+      wrap.appendChild(tb);
+    });
+  }
+})();
+</script>
+</body></html>

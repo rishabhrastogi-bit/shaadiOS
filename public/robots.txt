@@ -3,4 +3,5 @@ Allow: /
 Disallow: /preview/
 Disallow: /session/
 Disallow: /partner-onboarding
+Disallow: /record/
 Sitemap: https://shaadios.app/sitemap.xml
