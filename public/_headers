@@ -23,5 +23,9 @@
   Cache-Control: no-store
 /img/reads/*
   Cache-Control: public, max-age=604800
+/img/festivals/*
+  Cache-Control: public, max-age=604800
+/img/abstract/*
+  Cache-Control: public, max-age=604800
 /.well-known/apple-app-site-association
   Content-Type: application/json
